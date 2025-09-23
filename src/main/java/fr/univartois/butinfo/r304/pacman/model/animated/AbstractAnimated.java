@@ -19,17 +19,20 @@ package fr.univartois.butinfo.r304.pacman.model.animated;
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 /**
- * La classe {@link AbstractAnimated} fournit une implantation de base pour tous les objets
- * animés dans le jeu.
+ * La classe {@link AbstractAnimated} fournit une implémentation de base pour tous les
+ * objets animés dans le jeu.
  *
  * @author Romain Wallon
  *
@@ -43,24 +46,19 @@ public abstract class AbstractAnimated implements IAnimated {
     private static final int MARGIN = 5;
 
     /**
-     * Le jeu dans lequel cet objet évolue.
+     * Le jeu dans lequel cet objet animé évolue.
      */
     protected final PacmanGame game;
 
     /**
-     * La position en x de cet objet.
+     * La position en x de cet objet animé.
      */
     protected final DoubleProperty xPosition;
 
     /**
-     * La position en y de cet objet.
+     * La position en y de cet objet animé.
      */
     protected final DoubleProperty yPosition;
-
-    /**
-     * Si cet objet a été consommé.
-     */
-    protected final BooleanProperty consumed;
 
     /**
      * La vitesse horizontale actuelle de cet objet (en pixels/s).
@@ -73,31 +71,42 @@ public abstract class AbstractAnimated implements IAnimated {
     protected double verticalSpeed;
 
     /**
-     * L'instance de {@link Sprite} représentant cet objet.
+     * Si cet objet animé a été détruit.
+     */
+    protected final BooleanProperty destroyed;
+
+    /**
+     * L'instance de {@link Sprite} représentant cet objet animé.
      */
     protected final ObjectProperty<Sprite> sprite;
 
     /**
-     * Crée une nouvelle instance de AbstractMovable.
      *
-     * @param game Le jeu dans lequel l'objet évolue.
-     * @param xPosition La position en x initiale de l'objet.
-     * @param yPosition La position en y initiale de l'objet.
-     * @param sprite L'instance de {@link Sprite} représentant l'objet.
+     */
+    protected final ObjectBinding<Image> image;
+
+    /**
+     * Crée une nouvelle instance de AbstractAnimated.
+     *
+     * @param game Le jeu dans lequel l'objet animé évolue.
+     * @param xPosition La position en x initiale de l'objet animé.
+     * @param yPosition La position en y initiale de l'objet animé.
+     * @param sprite L'instance de {@link Sprite} représentant l'objet animé.
      */
     protected AbstractAnimated(PacmanGame game, double xPosition,
             double yPosition, Sprite sprite) {
         this.game = game;
         this.xPosition = new SimpleDoubleProperty(xPosition);
         this.yPosition = new SimpleDoubleProperty(yPosition);
-        this.consumed = new SimpleBooleanProperty(false);
+        this.destroyed = new SimpleBooleanProperty(false);
         this.sprite = new SimpleObjectProperty<>(sprite);
+        this.image = Bindings.createObjectBinding(() -> this.sprite.get().imageProperty().get(), this.sprite);
     }
 
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getWidth()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#getWidth()
      */
     @Override
     public int getWidth() {
@@ -107,7 +116,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getHeight()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#getHeight()
      */
     @Override
     public int getHeight() {
@@ -117,7 +126,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#setX(int)
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#setX(double)
      */
     @Override
     public void setX(double xPosition) {
@@ -127,7 +136,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getX()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#getX()
      */
     @Override
     public int getX() {
@@ -137,7 +146,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getXProperty()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#xProperty()
      */
     @Override
     public DoubleProperty xProperty() {
@@ -147,7 +156,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#setY(double)
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#setY(double)
      */
     @Override
     public void setY(double yPosition) {
@@ -157,7 +166,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getY()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#getY()
      */
     @Override
     public int getY() {
@@ -167,7 +176,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getYProperty()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#yProperty()
      */
     @Override
     public DoubleProperty yProperty() {
@@ -177,17 +186,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#destroyedProperty()
-     */
-    @Override
-    public BooleanProperty destroyedProperty() {
-        return consumed;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#setHorizontalSpeed(double)
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#setHorizontalSpeed(double)
      */
     @Override
     public void setHorizontalSpeed(double speed) {
@@ -197,7 +196,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getHorizontalSpeed()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#getHorizontalSpeed()
      */
     @Override
     public double getHorizontalSpeed() {
@@ -207,7 +206,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#setVerticalSpeed(double)
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#setVerticalSpeed(double)
      */
     @Override
     public void setVerticalSpeed(double speed) {
@@ -217,7 +216,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getVerticalSpeed()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#getVerticalSpeed()
      */
     @Override
     public double getVerticalSpeed() {
@@ -227,9 +226,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see
-     * fr.univartois.butinfo.r304.bomberman.model.IMovable#setSprite(fr.univartois.butinfo
-     * .r304.bomberman.view.Sprite)
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#setSprite(fr.univartois.butinfo.r304.pacman.view.Sprite)
      */
     @Override
     public void setSprite(Sprite sprite) {
@@ -239,7 +236,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getSprite()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#getSprite()
      */
     @Override
     public Sprite getSprite() {
@@ -249,7 +246,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#getSpriteProperty()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#spriteProperty()
      */
     @Override
     public ObjectProperty<Sprite> spriteProperty() {
@@ -259,7 +256,67 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#move(long)
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#imageProperty()
+     */
+    @Override
+    public ObjectBinding<Image> imageProperty() {
+        return image;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#setDestroyed(boolean)
+     */
+    @Override
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed.set(destroyed);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#isDestroyed()
+     */
+    @Override
+    public boolean isDestroyed() {
+        return destroyed.get();
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#destroyedProperty()
+     */
+    @Override
+    public BooleanProperty destroyedProperty() {
+        return destroyed;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCreation()
+     */
+    @Override
+    public void onCreation() {
+        // Par défaut, cette méthode ne fait rien.
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onSpawn()
+     */
+    @Override
+    public void onSpawn() {
+        // Par défaut, cette méthode ne fait rien.
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onStep(long)
      */
     @Override
     public boolean onStep(long delta) {
@@ -326,9 +383,7 @@ public abstract class AbstractAnimated implements IAnimated {
     /*
      * (non-Javadoc)
      *
-     * @see
-     * fr.univartois.butinfo.r304.bomberman.model.IMovable#isCollidingWith(fr.univartois.
-     * butinfo.r304.bomberman.model.IMovable)
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#isCollidingWith(fr.univartois.butinfo.r304.pacman.model.IAnimated)
      */
     @Override
     public boolean isCollidingWith(IAnimated other) {
@@ -339,13 +394,34 @@ public abstract class AbstractAnimated implements IAnimated {
         }
 
         Rectangle rectangle = new Rectangle(getX(), getY(), getWidth(), getHeight());
-        return rectangle.intersects(other.getX(), other.getY(), other.getWidth(), other.getHeight());
+        return rectangle.intersects(other.getX(), other.getY(), other.getWidth(),
+                other.getHeight());
     }
 
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.bomberman.model.IMovable#self()
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onDespawn()
+     */
+    @Override
+    public void onDespawn() {
+        // Par défaut, cette méthode ne fait rien.
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onDestruction()
+     */
+    @Override
+    public void onDestruction() {
+        // Par défaut, cette méthode ne fait rien.
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#self()
      */
     @Override
     public IAnimated self() {
