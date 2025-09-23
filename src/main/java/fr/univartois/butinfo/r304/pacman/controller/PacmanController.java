@@ -143,7 +143,7 @@ public final class PacmanController implements IPacmanController {
      * Ajoute les écouteurs de touches pour le jeu.
      */
     private void addKeyListeners() {
-        // L'appui (bref) sur une touche peut avoir plusieurs effets.
+        // L'appui (bref) sur une touche permet dans un premier temps de lancer le jeu.
         stage.addEventFilter(KeyEvent.KEY_TYPED, e -> {
             if (!started) {
                 // La partie démarre à la première touche appuyée.

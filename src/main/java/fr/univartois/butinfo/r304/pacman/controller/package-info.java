@@ -1,5 +1,5 @@
 /**
- * Le paquetage {@code fr.univartois.butinfo.r304.bomberman.controller} fournit les classes
+ * Le paquetage {@code fr.univartois.butinfo.r304.pacman.controller} fournit les classes
  * du contrôleur du jeu Pac-Man.
  *
  * @author Romain Wallon
