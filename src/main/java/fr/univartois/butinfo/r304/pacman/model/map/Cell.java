@@ -17,8 +17,6 @@
 package fr.univartois.butinfo.r304.pacman.model.map;
 
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
@@ -55,8 +53,7 @@ public final class Cell {
     /**
      * La propriété contenant l'image représentant cette cellule sur la carte.
      */
-    private final ObjectBinding<Image> imageProperty =
-            Bindings.createObjectBinding(() -> spriteProperty.get().imageProperty().get(), spriteProperty);
+    private final ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
 
     /**
      * Crée une nouvelle instance de Cell.
@@ -77,6 +74,7 @@ public final class Cell {
      */
     public Cell(Sprite sprite) {
         this.spriteProperty.set(sprite);
+        this.imageProperty.bind(sprite.imageProperty());
     }
 
     /**
@@ -87,6 +85,7 @@ public final class Cell {
     public Cell(Wall wall) {
         this.wallProperty.set(wall);
         this.spriteProperty.set(wall.getSprite());
+        this.imageProperty.bind(wall.getSprite().imageProperty());
     }
 
     /**
@@ -177,7 +176,7 @@ public final class Cell {
      *
      * @return La propriété correspondant à l'image représentant cette cellule sur la carte.
      */
-    public ObjectBinding<Image> imageProperty() {
+    public ObjectProperty<Image> imageProperty() {
         return imageProperty;
     }
 
@@ -189,6 +188,7 @@ public final class Cell {
     public void replaceBy(Cell cell) {
         spriteProperty.set(cell.getSprite());
         wallProperty.set(cell.getWall());
+        imageProperty.bind(cell.getSprite().imageProperty());
     }
 
 }
