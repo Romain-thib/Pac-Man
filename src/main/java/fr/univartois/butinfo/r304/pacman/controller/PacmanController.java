@@ -64,6 +64,12 @@ public final class PacmanController implements IPacmanController {
     private Pane animatedPane;
 
     /**
+     * Le label affichant un message à l'utilisateur.
+     */
+    @FXML
+    private Label message;
+
+    /**
      * Le label affichant le score du joueur.
      */
     @FXML
@@ -76,27 +82,11 @@ public final class PacmanController implements IPacmanController {
     private Label life;
 
     /**
-     * Le label affichant un message à l'utilisateur.
-     */
-    @FXML
-    private Label message;
-
-    /**
      * Un booléen permettant de savoir si la partie a démarré.
      * Il permet de temporiser le démarrage du jeu, en attendant que l'utilisateur appuie
      * sur une touche de son clavier.
      */
     private boolean started = false;
-
-    /**
-     * Associe à ce contrôleur la fenêtre affichant le jeu.
-     *
-     * @param stage La fenêtre affichant le jeu.
-     */
-    public void setStage(Stage stage) {
-        this.stage = stage;
-        addKeyListeners();
-    }
 
     /*
      * (non-Javadoc)
@@ -110,33 +100,14 @@ public final class PacmanController implements IPacmanController {
         this.game = game;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * fr.univartois.butinfo.r304.pacman.model.IPacmanController#prepare(fr.univartois.
-     * butinfo.r304.pacman.model.map.GameMap)
-     */
-    @Override
-    public void prepare(GameMap map) {
-        createBackground(map);
-    }
-
     /**
-     * Crée l'arrière-plan du jeu.
+     * Associe à ce contrôleur la fenêtre affichant le jeu.
      *
-     * @param map La carte du jeu à afficher.
+     * @param stage La fenêtre affichant le jeu.
      */
-    private void createBackground(GameMap map) {
-        backgroundPane.getChildren().clear();
-        for (int row = 0; row < map.getHeight(); row++) {
-            for (int column = 0; column < map.getWidth(); column++) {
-                Cell cell = map.getAt(row, column);
-                ImageView view = new ImageView();
-                view.imageProperty().bind(cell.imageProperty());
-                backgroundPane.add(view, column, row);
-            }
-        }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+        addKeyListeners();
     }
 
     /**
@@ -170,6 +141,35 @@ public final class PacmanController implements IPacmanController {
                 }
             }
         });
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * fr.univartois.butinfo.r304.pacman.model.IPacmanController#prepare(fr.univartois.
+     * butinfo.r304.pacman.model.map.GameMap)
+     */
+    @Override
+    public void prepare(GameMap map) {
+        createBackground(map);
+    }
+
+    /**
+     * Crée l'arrière-plan du jeu.
+     *
+     * @param map La carte du jeu à afficher.
+     */
+    private void createBackground(GameMap map) {
+        backgroundPane.getChildren().clear();
+        for (int row = 0; row < map.getHeight(); row++) {
+            for (int column = 0; column < map.getWidth(); column++) {
+                Cell cell = map.getAt(row, column);
+                ImageView view = new ImageView();
+                view.imageProperty().bind(cell.imageProperty());
+                backgroundPane.add(view, column, row);
+            }
+        }
     }
 
     /*
