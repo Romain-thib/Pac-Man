@@ -319,10 +319,14 @@ PacmanController o-- "1" PacmanGame
 
 | Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------- | --------------------------------------------- |
-| Représentation de Pac-Man                  |            |                                               |
-| Représentation des fantômes                |            |                                               |
+| Gestion des collisions spécifiques         |            |                                               |
 | Représentation des pac-gommes              |            |                                               |
+| Représentation de Pac-Man                  |            |                                               |
+| Intégration de Pac-Man dans la partie      |            |                                               |
+| Représentation des fantômes                |            |                                               |
+| Intégration des fantômes dans la partie    |            |                                               |
 | Création de la carte du jeu                |            |                                               |
+| Ajout des pac-gommes sur la carte          |            |                                               |
 
 ### Jalon n°2 - TP n°4
 
