@@ -1,7 +1,8 @@
 /**
  * Ce fichier fait partie du projet projet-2025-2026.
- *
+ * 
  * (c) 2025 shun.lembrez
+ * 
  * Tous droits réservés.
  */
 
@@ -10,6 +11,7 @@ package fr.univartois.butinfo.r304.pacman.model.animated;
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+
 
 /**
  * Le type Ghost
@@ -60,12 +62,59 @@ public class Ghost extends AbstractAnimated{
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.IAnimated)
+     * @see
+     * fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.IAnimated)
      */
     @Override
     public void onCollisionWith(IAnimated other) {
-        // TODO Auto-generated method stub.   
+        other.onCollisionWith(this);
+    }
+
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.PacMan)
+     */
+    @Override
+    public void onCollisionWith(PacMan other) {
+        // Volontairement vide pour l'instant car on a pas encore l'état de pac-man 
+        // si il a mange mega gum 
+    }
+
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.Ghost)
+     */
+    @Override
+    public void onCollisionWith(Ghost other) {
+        // Volontairement vide car les fantômes ne réagissent pas entre eux
+    }
+
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.PacGum)
+     */
+    @Override
+    public void onCollisionWith(PacGum other) {
+        // Volontairement vide car les fantômes ne réagissent pas aux pac-gums
+        
     }
     
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.animated.AbstractAnimated#onStep(long)
+     */
+    @Override
+    public boolean onStep(long delta) {
+        // TODO Auto-generated method stub.
+        return super.onStep(delta);
+    }
+
 }
 
