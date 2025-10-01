@@ -20,11 +20,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
 import fr.univartois.butinfo.r304.pacman.model.map.Cell;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * La classe {@link PacmanGame} gère une partie du jeu Pac-Man.
@@ -68,8 +70,7 @@ public final class PacmanGame {
     /**
      * Le personnage du joueur.
      */
-    // TODO Adaptez le type de cet attribut pour correspondre à votre implémentation.
-    private IAnimated player;
+    private PacMan player;
 
     /**
      * Le nombre de fantômes initialement dans le jeu.
@@ -189,9 +190,7 @@ public final class PacmanGame {
     private void createAnimated() {
         // On commence par enlever tous les éléments mobiles encore présents.
         clearAnimated();
-
-        // TODO On crée le joueur sur la carte.
-        player = null;
+        player = new PacMan(this, 0,0, spriteStore.getSprite("closed","half-open","open","half-open"));
         animatedObjects.add(player);
         spawnAnimated(player);
 
@@ -209,9 +208,8 @@ public final class PacmanGame {
      * Initialise les statistiques de cette partie.
      */
     private void initStatistics() {
-        // TODO Lier les propriétés du joueur avec celles du contrôleur.
-        controller.bindLife(null);
-        controller.bindScore(null);
+        controller.bindLife(player.getHpProperty());
+        controller.bindScore(player.getScoreProperty());
     }
 
     /**
