@@ -8,6 +8,8 @@
 
 package fr.univartois.butinfo.r304.pacman.model.animated;
 
+import java.util.Random;
+
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
@@ -26,6 +28,11 @@ public class Ghost extends AbstractAnimated{
      * L'attribut color pour les fantômes
      */
     GhostColor color;
+    
+    /**
+     * L'attribut temps pour la gestion du déplacement des fantômes
+     */
+    private long temps = 2000;
     
     /**
      * Crée une nouvelle instance de Ghost.
@@ -60,7 +67,9 @@ public class Ghost extends AbstractAnimated{
 
 
     /*
-     * (non-Javadoc)
+     * Gestion des collisions avec les autres objets animés.
+     * 
+     * @param other de type {@link IAnimated}
      *
      * @see
      * fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.IAnimated)
@@ -72,19 +81,24 @@ public class Ghost extends AbstractAnimated{
 
 
     /*
-     * (non-Javadoc)
+     * Gestion des collisions avec les autres objets animés.
+     * 
+     * @param other de type {@link PacMan}
      *
      * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.PacMan)
      */
     @Override
     public void onCollisionWith(PacMan other) {
         // Volontairement vide pour l'instant car on a pas encore l'état de pac-man 
-        // si il a mange mega gum 
+        // si il a mange mega gum
+        // a faire plus tard
     }
 
 
     /*
-     * (non-Javadoc)
+     * Gestion des collisions avec les autres objets animés.
+     * 
+     * @param other de type {@link Ghost}
      *
      * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.Ghost)
      */
@@ -95,25 +109,63 @@ public class Ghost extends AbstractAnimated{
 
 
     /*
-     * (non-Javadoc)
+     * Gestion des collisions avec les autres objets animés.
+     * 
+     * @param other de type {@link PacGum}
      *
      * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.PacGum)
      */
     @Override
     public void onCollisionWith(PacGum other) {
         // Volontairement vide car les fantômes ne réagissent pas aux pac-gums
-        
     }
     
+    
     /*
-     * (non-Javadoc)
+     * @param delta le temps écoulé depuis la dernière mise à jour en millisecondes
      *
      * @see fr.univartois.butinfo.r304.pacman.model.animated.AbstractAnimated#onStep(long)
      */
     @Override
     public boolean onStep(long delta) {
-        // TODO Auto-generated method stub.
+        // Le fantôme change de direction toutes les 2 secondes 
+        if (temps <= 0) {
+            changeDirection(delta);
+            temps = 2000;
+        } else {
+            temps -= delta;
+        }
         return super.onStep(delta);
+    }
+
+
+    /**
+     * @param delta le temps écoulé depuis la dernière mise à jour en millisecondes
+     */
+    private void changeDirection(long delta) {
+        Random r = new Random();
+        int random = r.nextInt(4);
+        switch (random) {
+            case 0:
+                setHorizontalSpeed(-delta);
+                setVerticalSpeed(0);
+                break;
+            case 1:
+                setHorizontalSpeed(delta);
+                setVerticalSpeed(0);
+                break;
+            case 2:
+                setVerticalSpeed(-delta);
+                setHorizontalSpeed(0);
+                break;
+            case 3:
+                setVerticalSpeed(delta);
+                setHorizontalSpeed(0);
+                break;
+            default:
+                break;
+        }
+        
     }
 
 }
