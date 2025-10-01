@@ -19,3 +19,4 @@ bin
 
 # Divers.
 .DS_Store
+.nfs*
