@@ -26,6 +26,7 @@ import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * La classe {@link PacmanGame} gère une partie du jeu Pac-Man.
@@ -189,9 +190,7 @@ public final class PacmanGame {
     private void createAnimated() {
         // On commence par enlever tous les éléments mobiles encore présents.
         clearAnimated();
-
-        // TODO On crée le joueur sur la carte.
-        player = null;
+        player = new PacMan(this, 0,0, spriteStore.getSprite("closed","half-open","open","half-open"));
         animatedObjects.add(player);
         spawnAnimated(player);
 
@@ -209,7 +208,6 @@ public final class PacmanGame {
      * Initialise les statistiques de cette partie.
      */
     private void initStatistics() {
-        // TODO Lier les propriétés du joueur avec celles du contrôleur.
         controller.bindLife(null);
         controller.bindScore(null);
     }

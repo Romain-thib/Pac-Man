@@ -11,6 +11,7 @@ import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * Le type PacMan
@@ -37,11 +38,10 @@ public class PacMan extends AbstractAnimated{
      * @param hp : nombre de points de vie
      * @param score : score du joueur
      */
-    public PacMan(PacmanGame game, double xPosition, double yPosition, Sprite sprite, IntegerProperty hp,
-            IntegerProperty score) {
+    public PacMan(PacmanGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
-        hp.set(3);
-        score.set(0);
+        hp = new SimpleIntegerProperty(3);
+        score = new SimpleIntegerProperty(0);
     }
     
     /**
@@ -49,7 +49,7 @@ public class PacMan extends AbstractAnimated{
      *
      * @return L'attribut hp de cette instance de PacMan.
      */
-    public IntegerProperty getHp() {
+    public IntegerProperty getHpProperty() {
         return hp;
     }
     
@@ -58,7 +58,7 @@ public class PacMan extends AbstractAnimated{
      *
      * @return L'attribut score de cette instance de PacMan.
      */
-    public IntegerProperty getScore() {
+    public IntegerProperty getScoreProperty() {
         return score;
     }
 
