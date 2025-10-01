@@ -208,8 +208,8 @@ public final class PacmanGame {
      * Initialise les statistiques de cette partie.
      */
     private void initStatistics() {
-        controller.bindLife(null);
-        controller.bindScore(null);
+        controller.bindLife(player.getHpProperty());
+        controller.bindScore(player.getScoreProperty());
     }
 
     /**
