@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
+import fr.univartois.butinfo.r304.pacman.model.animated.GhostColor;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
 import fr.univartois.butinfo.r304.pacman.model.map.Cell;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
@@ -195,12 +197,17 @@ public final class PacmanGame {
         spawnAnimated(player);
 
         // On crée ensuite les fantômes sur la carte.
+        GhostColor[] colors = GhostColor.values();
         for (int i = 0; i < nbGhosts; i++) {
-            // TODO Créez un fantôme en utilisant votre implémentation.
-            IAnimated ghost = null;
-            ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
-            animatedObjects.add(ghost);
-            spawnAnimated(ghost);
+        	GhostColor color = colors[i % colors.length];
+
+        	Sprite ghostSprite = spriteStore.getSprite("ghosts/" + color.name().toLowerCase() + "/1");
+        	Ghost ghost = new Ghost(this, 0, 0, ghostSprite);
+        	ghost.setColor(color);
+
+        	ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
+        	animatedObjects.add(ghost);
+        	spawnAnimated(ghost);
         }
     }
 
