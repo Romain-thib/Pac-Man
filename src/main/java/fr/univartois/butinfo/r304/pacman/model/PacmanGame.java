@@ -200,8 +200,8 @@ public final class PacmanGame {
         // On commence par enlever tous les éléments mobiles encore présents.
         clearAnimated();
 
-        // TODO On crée le joueur sur la carte.
-        player = null;
+        // On crée le joueur sur la carte.
+        player = new PacMan(this, 0, 0, spriteStore.getSprite("closed", "half-open", "open", "half-open"));
         animatedObjects.add(player);
         spawnAnimated(player);
 
@@ -212,6 +212,19 @@ public final class PacmanGame {
             ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
             animatedObjects.add(ghost);
             spawnAnimated(ghost);
+        }
+        
+        List<Cell> emptyCells = gameMap.getEmptyCells();
+        nbGums = emptyCells.size(); // mettre à jour le nombre de pac-gommes
+        for (int i = 0; i < emptyCells.size(); i++) {
+            Cell cell = emptyCells.get(i);
+            PacGum gum = new PacGum(
+                this,
+                cell.getColumn() * spriteStore.getSpriteSize(),
+                cell.getRow() * spriteStore.getSpriteSize(),
+                spriteStore.getSprite("gum") // sprite de la pac-gomme
+            );
+            addAnimated(gum);
         }
     }
 
