@@ -38,7 +38,7 @@ public class Ghost extends AbstractAnimated{
     /**
      * L'attribut SPEED pour gerer la vitesse des famtôme quand il change de direction
      */
-    private static final double SPEED = 0.8;
+    private static final double SPEED = 75;
 
     
     /**

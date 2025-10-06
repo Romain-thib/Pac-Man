@@ -89,15 +89,15 @@ public abstract class AbstractAnimated implements IAnimated {
      * @param game Le jeu dans lequel l'objet animé évolue.
      * @param xPosition La position en x initiale de l'objet animé.
      * @param yPosition La position en y initiale de l'objet animé.
-     * @param sprite L'instance de {@link Sprite} représentant l'objet animé.
+     * @param sprites L'instance de {@link Sprite} représentant l'objet animé.
      */
     protected AbstractAnimated(PacmanGame game, double xPosition,
-            double yPosition, Sprite sprite) {
+            double yPosition, Sprite sprites) {
         this.game = game;
         this.xPosition = new SimpleDoubleProperty(xPosition);
         this.yPosition = new SimpleDoubleProperty(yPosition);
         this.destroyed = new SimpleBooleanProperty(false);
-        this.sprite = new SimpleObjectProperty<>(sprite);
+        this.sprite = new SimpleObjectProperty<>(sprites);
         this.image = new SimpleObjectProperty<>();
         this.image.bind(this.sprite.get().imageProperty());
     }

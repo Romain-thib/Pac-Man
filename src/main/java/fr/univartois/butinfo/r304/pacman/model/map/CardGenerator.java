@@ -31,7 +31,11 @@ public class CardGenerator {
      */
     public GameMap generate(int height, int width) {
         GameMap map = new GameMap(height, width);
-
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                map.setAt(i, j, createPathCell());
+            }
+        }
         generateBorderWalls(map);
 
         generateHorizontalWall(map);
@@ -69,7 +73,7 @@ public class CardGenerator {
         int height = map.getHeight();
         int width = map.getWidth();
 
-        int margin = 1;
+        int margin = 2;
 
         int centerCol = width / 2;
         int leftCenterGap = centerCol - margin / 2;
@@ -98,6 +102,15 @@ public class CardGenerator {
     private Cell createWallCell() {
         Wall wall = new Wall(spriteStore.getSprite("wall"));
         return new Cell(wall);
+    }
+    
+    /**
+     * Crée une nouvelle cellule contenant un mur.
+     *
+     * @return Une cellule mur.
+     */
+    private Cell createPathCell() {
+        return new Cell(spriteStore.getSprite("path"));
     }
 }
 

@@ -204,7 +204,7 @@ public final class PacmanGame {
         clearAnimated();
 
         // On crée le joueur sur la carte.
-        player = new PacMan(this, 0, 0, spriteStore.getSprite("closed", "half-open", "open", "half-open"));
+        player = new PacMan(this, 0, 0, spriteStore.getSprite("pacman/closed", "pacman/half-open", "pacman/open", "pacman/half-open"));
         animatedObjects.add(player);
         spawnAnimated(player);
 
@@ -213,7 +213,7 @@ public final class PacmanGame {
         for (int i = 0; i < nbGhosts; i++) {
         	GhostColor color = colors[i % colors.length];
 
-        	Sprite ghostSprite = spriteStore.getSprite("ghosts/" + color.name().toLowerCase() + "/1");
+        	Sprite ghostSprite = spriteStore.getSprite("ghosts/" + color.name().toLowerCase() + "/1","ghosts/" + color.name().toLowerCase() + "/2");
         	Ghost ghost = new Ghost(this, 0, 0, ghostSprite);
         	ghost.setColor(color);
 
@@ -230,7 +230,7 @@ public final class PacmanGame {
                 this,
                 cell.getColumn() * spriteStore.getSpriteSize(),
                 cell.getRow() * spriteStore.getSpriteSize(),
-                spriteStore.getSprite("gum") // sprite de la pac-gomme
+                spriteStore.getSprite("pacgum") // sprite de la pac-gomme
             );
             addAnimated(gum);
         }
