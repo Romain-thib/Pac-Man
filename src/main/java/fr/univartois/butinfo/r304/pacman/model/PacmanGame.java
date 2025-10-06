@@ -20,6 +20,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
+import fr.univartois.butinfo.r304.pacman.model.animated.GhostColor;
+import fr.univartois.butinfo.r304.pacman.model.animated.PacGum;
+import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
+import fr.univartois.butinfo.r304.pacman.model.map.CardGenerator;
 import fr.univartois.butinfo.r304.pacman.model.map.Cell;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
@@ -68,8 +73,7 @@ public final class PacmanGame {
     /**
      * Le personnage du joueur.
      */
-    // TODO Adaptez le type de cet attribut pour correspondre à votre implémentation.
-    private IAnimated player;
+    private PacMan player;
 
     /**
      * Le nombre de fantômes initialement dans le jeu.
@@ -169,8 +173,17 @@ public final class PacmanGame {
      * @return La carte du jeu ayant été créée.
      */
     private GameMap createMap() {
-        // TODO Utilisez le générateur de cartes que vous avez écrit pour créer une carte.
-        return null;
+        int cellSize = spriteStore.getSpriteSize();
+
+        // Convertir les dimensions de la carte en nombre de cellules
+        int numRows = height / cellSize;
+        int numCols = width / cellSize;
+
+        CardGenerator generator = new CardGenerator();
+
+        GameMap map = generator.generate(numRows, numCols);
+
+        return map;
     }
 
     /**
@@ -190,18 +203,36 @@ public final class PacmanGame {
         // On commence par enlever tous les éléments mobiles encore présents.
         clearAnimated();
 
-        // TODO On crée le joueur sur la carte.
-        player = null;
+        // On crée le joueur sur la carte.
+        player = new PacMan(this, 0, 0, spriteStore.getSprite("pacman/closed", "pacman/half-open", "pacman/open", "pacman/half-open"));
         animatedObjects.add(player);
         spawnAnimated(player);
 
         // On crée ensuite les fantômes sur la carte.
+        GhostColor[] colors = GhostColor.values();
         for (int i = 0; i < nbGhosts; i++) {
-            // TODO Créez un fantôme en utilisant votre implémentation.
-            IAnimated ghost = null;
-            ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
-            animatedObjects.add(ghost);
-            spawnAnimated(ghost);
+        	GhostColor color = colors[i % colors.length];
+
+        	Sprite ghostSprite = spriteStore.getSprite("ghosts/" + color.name().toLowerCase() + "/1","ghosts/" + color.name().toLowerCase() + "/2");
+        	Ghost ghost = new Ghost(this, 0, 0, ghostSprite);
+        	ghost.setColor(color);
+
+        	ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
+        	animatedObjects.add(ghost);
+        	spawnAnimated(ghost);
+        }
+        
+        List<Cell> emptyCells = gameMap.getEmptyCells();
+        nbGums = emptyCells.size(); // mettre à jour le nombre de pac-gommes
+        for (int i = 0; i < emptyCells.size(); i++) {
+            Cell cell = emptyCells.get(i);
+            PacGum gum = new PacGum(
+                this,
+                cell.getColumn() * spriteStore.getSpriteSize(),
+                cell.getRow() * spriteStore.getSpriteSize(),
+                spriteStore.getSprite("pacgum") // sprite de la pac-gomme
+            );
+            addAnimated(gum);
         }
     }
 
@@ -209,9 +240,8 @@ public final class PacmanGame {
      * Initialise les statistiques de cette partie.
      */
     private void initStatistics() {
-        // TODO Lier les propriétés du joueur avec celles du contrôleur.
-        controller.bindLife(null);
-        controller.bindScore(null);
+        controller.bindLife(player.getHpProperty());
+        controller.bindScore(player.getScoreProperty());
     }
 
     /**

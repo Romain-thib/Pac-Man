@@ -1,5 +1,9 @@
 # *Pac-Man* en JavaFX
 
+## Chef de projet : 
+
+Timothée Gros
+
 ## Description
 
 Ce projet fournit une implémentation de base du jeu *Pac-Man* en *JavaFX*.
@@ -319,14 +323,14 @@ PacmanController o-- "1" PacmanGame
 
 | Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------- | --------------------------------------------- |
-| Gestion des collisions spécifiques         |            |                                               |
-| Représentation des pac-gommes              |            |                                               |
-| Représentation de Pac-Man                  |            |                                               |
-| Intégration de Pac-Man dans la partie      |            |                                               |
-| Représentation des fantômes                |            |                                               |
-| Intégration des fantômes dans la partie    |            |                                               |
-| Création de la carte du jeu                |            |                                               |
-| Ajout des pac-gommes sur la carte          |            |                                               |
+| Gestion des collisions spécifiques         |Oui         | Simon Cohet                                   |
+| Représentation des pac-gommes              |Oui         | Simon cohet                                   |
+| Représentation de Pac-Man                  |Oui         | Timothée Gros                                 |
+| Intégration de Pac-Man dans la partie      |Oui         | Timothée Gros                                 |
+| Représentation des fantômes                |Oui         | Shun Lembrez                                  |
+| Intégration des fantômes dans la partie    |Oui         | Shun Lembrez                                  |
+| Création de la carte du jeu                |Oui         | Romain Thibaut                                |
+| Ajout des pac-gommes sur la carte          |Oui         | Romain Thibaut                                |
 
 ### Jalon n°2 - TP n°4
 
