@@ -28,7 +28,7 @@ public class PacGum extends AbstractAnimated {
      * @param yPosition
      * @param sprite 
      */
-    protected PacGum(PacmanGame game, double xPosition, double yPosition, Sprite sprite) {
+    public PacGum(PacmanGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
     }
 

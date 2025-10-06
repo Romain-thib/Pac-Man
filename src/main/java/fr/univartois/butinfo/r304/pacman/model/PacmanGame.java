@@ -22,13 +22,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.GhostColor;
+import fr.univartois.butinfo.r304.pacman.model.animated.PacGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
+import fr.univartois.butinfo.r304.pacman.model.map.CardGenerator;
 import fr.univartois.butinfo.r304.pacman.model.map.Cell;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import javafx.animation.AnimationTimer;
-import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * La classe {@link PacmanGame} gère une partie du jeu Pac-Man.
