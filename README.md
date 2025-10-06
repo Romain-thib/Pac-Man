@@ -20,6 +20,8 @@ Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
 dans le développement de votre projet :
 
 - [Lancement du projet](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/TP03)
+- [Des patrons de conception dans *Pac-Man* (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/TP04)
+- [Des patrons de conception dans *Pac-Man* (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/TP05)
 
 ## Diagramme de classes
 
@@ -333,5 +335,26 @@ PacmanController o-- "1" PacmanGame
 | Ajout des pac-gommes sur la carte          |Oui         | Romain Thibaut                                |
 
 ### Jalon n°2 - TP n°4
+
+| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Variantes de génération de labyrinthe      |                        |            |                                               |
+| Complétion d'un labyrinthe existant        |                        |            |                                               |
+| Variantes de déplacement pour les fantômes |                        |            |                                               |
+
+### Jalon n°3 - TP n°5
+
+| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Pac-Man vulnérable                         |                        |            |                                               |
+| Pac-Man invulnérable                       |                        |            |                                               |
+| Fantômes vulnérables                       |                        |            |                                               |
+| Fantômes fuyants                           |                        |            |                                               |
+| Fantômes presque invulnérables             |                        |            |                                               |
+| Fantômes invulnérables                     |                        |            |                                               |
+| Réutilisation des fantômes existants       |                        |            |                                               |
+| Ajout des méga-gommes                      |                        |            |                                               |
+
+### Jalon n°4 - TP n°6
 
 *À venir...*
