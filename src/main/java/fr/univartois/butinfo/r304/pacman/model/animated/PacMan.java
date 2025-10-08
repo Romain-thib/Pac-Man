@@ -101,6 +101,7 @@ public class PacMan extends AbstractAnimated{
     @Override
     public void onCollisionWith(PacGum other) {
         score.set(score.get()+10); 
+        game.pacGumEaten(other);
     }  
 }
 
