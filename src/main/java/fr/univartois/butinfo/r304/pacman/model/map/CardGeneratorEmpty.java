@@ -1,7 +1,7 @@
 /**
  * Ce fichier fait partie du projet projet-2025-2026.
  *
- * (c) 2025 romain.thibaut
+ * (c) 2025 timothee.gros
  * Tous droits réservés.
  */
 
@@ -12,15 +12,14 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
 /**
- * Le type CardGenerator
+ * Le type CardGeneratorEmpty
  *
- * @author romain.thibaut
+ * @author timothee.gros
  *
  * @version 0.1.0
  */
 @StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.IMPLEMENTATION)
-public class CardGenerator implements ICardGenerator {
-
+public class CardGeneratorEmpty implements ICardGenerator {
     /**
      * L'attribut spriteStore
      */
@@ -40,9 +39,6 @@ public class CardGenerator implements ICardGenerator {
             }
         }
         generateBorderWalls(map);
-
-        generateHorizontalWall(map);
-
         return map;
     }
 
@@ -62,32 +58,6 @@ public class CardGenerator implements ICardGenerator {
                 if (isBorder) {
                     map.setAt(row, col, createWallCell());
                 }
-            }
-        }
-    }
-
-    /**
-     * Génère quelques murs au centre de la carte (exemple en forme de croix).
-     *
-     * @param map La carte sur laquelle placer les murs.
-     */
-    private void generateHorizontalWall(GameMap map) {
-        int height = map.getHeight();
-        int width = map.getWidth();
-
-        int margin = 2;
-
-        int centerCol = width / 2;
-        int leftCenterGap = centerCol - margin / 2;
-        int rightCenterGap = centerCol + margin / 2 - 1;
-
-        for (int row = 2; row < height - 2; row += margin) {
-            for (int col = margin + 1; col < width - margin - 1; col++) {
-                if (col >= leftCenterGap && col <= rightCenterGap) {
-                    continue;
-                }
-
-                map.setAt(row, col, createWallCell());
             }
         }
     }
