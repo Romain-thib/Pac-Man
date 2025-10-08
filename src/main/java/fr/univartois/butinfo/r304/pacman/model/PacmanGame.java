@@ -30,6 +30,8 @@ import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 import javafx.animation.AnimationTimer;
 
 /**
@@ -39,6 +41,7 @@ import javafx.animation.AnimationTimer;
  *
  * @version 0.1.0
  */
+@StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.CONTEXT)
 public final class PacmanGame {
 
     /**
@@ -105,6 +108,11 @@ public final class PacmanGame {
      * Le contrôleur du jeu.
      */
     private IPacmanController controller;
+    
+    /**
+     * Le générateur de cartes
+     */
+    private ICardGenerator generator;
 
     /**
      * Crée une nouvelle instance de PacmanGame.
@@ -159,6 +167,15 @@ public final class PacmanGame {
     public int getHeight() {
         return height;
     }
+    
+    /**
+     * Modifie l'attribut generator de cette instance de PacmanGame.
+     *
+     * @param generator La nouvelle valeur de l'attribut generator pour cette instance de PacmanGame.
+     */
+    public void setGenerator(ICardGenerator generator) {
+        this.generator = generator;
+    }
 
     /**
      * Prépare une partie de Pac-Man avant qu'elle ne démarre.
@@ -179,12 +196,8 @@ public final class PacmanGame {
         // Convertir les dimensions de la carte en nombre de cellules
         int numRows = height / cellSize;
         int numCols = width / cellSize;
-
-        ICardGenerator generator = new CardGenerator();
-
-        GameMap map = generator.generate(numRows, numCols);
-
-        return map;
+        
+        return generator.generate(numRows, numCols);
     }
 
     /**
