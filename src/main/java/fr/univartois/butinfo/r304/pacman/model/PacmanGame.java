@@ -158,6 +158,15 @@ public final class PacmanGame {
     public int getHeight() {
         return height;
     }
+    
+    /**
+     * Donne le personnage du joueur.
+     *
+     * @return Le personnage du joueur.
+     */
+    public PacMan getPlayer() {
+        return player;
+    }
 
     /**
      * Prépare une partie de Pac-Man avant qu'elle ne démarre.

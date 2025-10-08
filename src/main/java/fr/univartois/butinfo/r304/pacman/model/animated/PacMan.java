@@ -61,7 +61,7 @@ public class PacMan extends AbstractAnimated{
     public IntegerProperty getScoreProperty() {
         return score;
     }
-
+    
     /*
      * (non-Javadoc)
      *

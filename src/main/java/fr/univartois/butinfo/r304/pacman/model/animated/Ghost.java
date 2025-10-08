@@ -8,8 +8,6 @@
 
 package fr.univartois.butinfo.r304.pacman.model.animated;
 
-import java.util.Random;
-
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
@@ -37,27 +35,29 @@ public class Ghost extends AbstractAnimated{
      */
     private GhostColor color;
     
-    /**
-     * L'attribut temps pour la gestion du déplacement des fantômes
-     */
-    private long temps = 2000;
     
-    
-    /**
-     * L'attribut SPEED pour gerer la vitesse des famtôme quand il change de direction
-     */
-    private static final double SPEED = 75;
+   
 
     
     /**
      * Crée une nouvelle instance de Ghost.
-     * @param game de type {@link PacmanGame}
-     * @param xPosition de type {@link Double}
-     * @param yPosition de type {@link Double}
-     * @param sprite de type {@link Sprite}
+     * 
+     * @param game l'instance du jeu
+     * @param xPosition la position sur l'axe horizontal du fantôme
+     * @param yPosition la position sur l'axe vertical du famtôme
+     * @param sprites les sprites du fantôme
      */
     public Ghost(PacmanGame game, double xPosition, double yPosition, Sprite sprites) {
         super(game, xPosition, yPosition, sprites);
+        if(this.color == GhostColor.RED) {
+            this.strategyGhost = new ChaseStrategyGhost();
+        }
+        else if ((this.color == GhostColor.PINK) || (this.color == GhostColor.BLUE) ){
+            this.strategyGhost = new SurroundStrategyGhost();
+        }
+        else {
+            this.strategyGhost = new DumbStrategyGhost();
+        }
     }
 
 
@@ -79,7 +79,7 @@ public class Ghost extends AbstractAnimated{
     public void setColor(GhostColor color) {
         this.color = color;
     }
-
+    
 
     /*
      * Gestion des collisions avec les autres objets animés.
@@ -143,45 +143,8 @@ public class Ghost extends AbstractAnimated{
      */
     @Override
     public boolean onStep(long delta) {
-        
-        // Le fantôme change de direction toutes les 2 secondes 
-        if (temps <= 0) {
-            changeDirection(delta);
-            temps = 2000;
-        } else {
-            temps -= delta;
-        }
+        strategyGhost.moveStrategy(this,delta,game);
         return super.onStep(delta);
-    }
-
-
-    /**
-     * @param delta le temps écoulé depuis la dernière mise à jour en millisecondes
-     */
-    private void changeDirection(long delta) {
-        Random r = new Random();
-        int random = r.nextInt(4);
-        switch (random) {
-            case 0:
-                setHorizontalSpeed(-SPEED);
-                setVerticalSpeed(0);
-                break;
-            case 1:
-                setHorizontalSpeed(SPEED);
-                setVerticalSpeed(0);
-                break;
-            case 2:
-                setVerticalSpeed(-SPEED);
-                setHorizontalSpeed(0);
-                break;
-            case 3:
-                setVerticalSpeed(SPEED);
-                setHorizontalSpeed(0);
-                break;
-            default:
-                break;
-        }
-        
     }
 
 }

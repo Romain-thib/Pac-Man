@@ -7,6 +7,7 @@
 
 package fr.univartois.butinfo.r304.pacman.model.animated;
 
+import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
@@ -22,9 +23,10 @@ public interface IStrategyGhost {
     
     /**
      * La méthode moveStrategy pour le déplacement des fantômes
-     * 
-     * @param ghost de type {@link Ghost}
+     * @param ghost le famtôme a déplacée
+     * @param delta la valeur selon le lequel on actualise le deplacement 
+     * @param game instance correpondant a la game
      */
-    void moveStrategy(Ghost ghost);
+    void moveStrategy(Ghost ghost, long delta, PacmanGame game);
 }
 

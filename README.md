@@ -285,7 +285,7 @@ abstract class AbstractAnimated implements IAnimated {
     + self() : IAnimated
     + hashCode() : int
     + equals(obj : Object) : boolean
-}
+}    
 
 AbstractAnimated o-- "1" PacmanGame
 AbstractAnimated o-- "1" Sprite
