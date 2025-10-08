@@ -13,6 +13,8 @@ import java.util.Random;
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
 
 /**
@@ -22,7 +24,13 @@ import fr.univartois.butinfo.r304.pacman.view.Sprite;
  *
  * @version 0.1.0
  */
+@StrategyDesignPattern(strategy = IStrategyGhost.class, participant = StrategyParticipant.CONTEXT)
 public class Ghost extends AbstractAnimated{
+    
+    /**
+     * L'attribut strategyGhost pour la gestion des stratégies des fantômes
+     */
+    private IStrategyGhost strategyGhost;
     
     /**
      * L'attribut color pour les fantômes
@@ -135,6 +143,7 @@ public class Ghost extends AbstractAnimated{
      */
     @Override
     public boolean onStep(long delta) {
+        
         // Le fantôme change de direction toutes les 2 secondes 
         if (temps <= 0) {
             changeDirection(delta);
