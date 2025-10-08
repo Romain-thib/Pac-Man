@@ -34,9 +34,7 @@ public class Ghost extends AbstractAnimated{
      * L'attribut color pour les fantômes
      */
     private GhostColor color;
-    
-    
-   
+      
 
     
     /**
@@ -46,9 +44,11 @@ public class Ghost extends AbstractAnimated{
      * @param xPosition la position sur l'axe horizontal du fantôme
      * @param yPosition la position sur l'axe vertical du famtôme
      * @param sprites les sprites du fantôme
+     * @param color couleur du famtôme (RED, PINK, BLUE, ORANGE)
      */
-    public Ghost(PacmanGame game, double xPosition, double yPosition, Sprite sprites) {
+    public Ghost(PacmanGame game, double xPosition, double yPosition, Sprite sprites, GhostColor color) {
         super(game, xPosition, yPosition, sprites);
+        this.color = color;
         if(this.color == GhostColor.RED) {
             this.strategyGhost = new ChaseStrategyGhost();
         }

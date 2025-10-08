@@ -236,9 +236,8 @@ public final class PacmanGame {
         	GhostColor color = colors[i % colors.length];
 
         	Sprite ghostSprite = spriteStore.getSprite("ghosts/" + color.name().toLowerCase() + "/1","ghosts/" + color.name().toLowerCase() + "/2");
-        	Ghost ghost = new Ghost(this, 0, 0, ghostSprite);
-        	ghost.setColor(color);
-
+        	Ghost ghost = new Ghost(this, 0, 0, ghostSprite, color);
+        	
         	ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
         	animatedObjects.add(ghost);
         	spawnAnimated(ghost);

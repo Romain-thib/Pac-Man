@@ -46,6 +46,7 @@ public class DumbStrategyGhost implements IStrategyGhost {
         // le fantôme change de direction tout les 2 secondes
         if (temps <= 0) {
             changeDirection(ghost);
+            temps = 2000;
         } else {
             temps -= delta;
         }

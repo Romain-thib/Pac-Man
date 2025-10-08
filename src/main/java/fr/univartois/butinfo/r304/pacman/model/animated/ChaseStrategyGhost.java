@@ -48,23 +48,25 @@ public class ChaseStrategyGhost implements IStrategyGhost{
         
         PacMan pacman = game.getPlayer();
         
-        if(pacman.getX() >= ghost.getX() && game.getCellAt(ghost.getX()+1, ghost.getY()).isEmpty()) {
+        if(pacman.getX() > ghost.getX() && game.getCellAt(ghost.getX()+1, ghost.getY()).isEmpty()) {
             ghost.setVerticalSpeed(0);
             ghost.setHorizontalSpeed(SPEED);
         }
-        else if (game.getCellAt(ghost.getX()-1, ghost.getY()).isEmpty()){
+        else if (pacman.getX() < ghost.getX() && game.getCellAt(ghost.getX()-1, ghost.getY()).isEmpty()){
             ghost.setVerticalSpeed(0);
             ghost.setHorizontalSpeed(-SPEED);
         }
-       if(pacman.getY() >= ghost.getY() && game.getCellAt(ghost.getX(), ghost.getY()+1).isEmpty()) {
-            ghost.setVerticalSpeed(SPEED);
-            ghost.setHorizontalSpeed(0);
+        else {
+            if(pacman.getY() > ghost.getY() && game.getCellAt(ghost.getX(), ghost.getY()+1).isEmpty()) {
+                ghost.setVerticalSpeed(SPEED);
+                ghost.setHorizontalSpeed(0);
+            }
+            else if (pacman.getY() < ghost.getY() && game.getCellAt(ghost.getX(), ghost.getY()-1).isEmpty()){
+                ghost.setVerticalSpeed(-SPEED);
+                ghost.setHorizontalSpeed(0);
+            }
         }
-        else if (game.getCellAt(ghost.getX(), ghost.getY()-1).isEmpty()){
-            ghost.setVerticalSpeed(-SPEED);
-            ghost.setHorizontalSpeed(0);
-        }
-        
+
     }    
 
 }
