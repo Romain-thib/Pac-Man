@@ -127,6 +127,10 @@ class Wall {
     + getSprite() : Sprite
 }
 
+interface ICardGenerator {
+	+ generate(height : int, width : int) : GameMap
+}
+
 class CardGenerator implements ICardGenerator {
     - {static} spriteStore : SpriteStore
 
@@ -146,10 +150,26 @@ class CardGeneratorEmpty implements ICardGenerator {
     - createPathCell() : Cell
 }
 
-interface ICardGenerator {
+class CardGeneratorDecorated implements ICardGenerator {
+	- {static} spriteStore : SpriteStore
+	- generator : ICardGenerator
 
-	+ generate(height : int, width : int) : GameMap
+	+ CardGeneratorDecorated(generator : ICardGenerator)
+   	+ generate(height : int, width : int) : GameMap
+	- generateInsideWalls(map : GameMap) : void
+	- createWallCell() : Cell
+   	- createPathCell() : Cell
+}
 
+class CardGeneratorFixed implements ICardGenerator {
+	- {static} spriteStore : SpriteStore
+	- generator : ICardGenerator
+	- walls : int[][]
+
+	+ CardGeneratorDecorated(generator : ICardGenerator)
+   	+ generate(height : int, width : int) : GameMap
+	- generateInsideWalls(map : GameMap) : void
+	- createWallCell() : Cell
 }
 
 GameMap *-- "*" Cell
