@@ -28,7 +28,7 @@ public class ClassicStateGhost implements IStateGhost{
      */
     @Override
     public void moveState(Ghost ghost, long delta, double speedOfGhostState, PacmanGame game) {
-        ghost.setStrategyGhost(new ChaseStrategyGhost());
+        ghost.setStrategyGhost(new ChaseRandomCompositeStrategyGhost());
     }
 
     /*
