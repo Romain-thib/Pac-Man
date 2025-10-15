@@ -182,6 +182,12 @@ Wall o-- "1" Sprite
 CardGenerator o-- "1" SpriteStore
 CardGenerator --> GameMap : << crée >>
 CardGenerator --> Cell : << crée >>
+CardGeneratorEmpty --> GameMap : << crée >>
+CardGeneratorEmpty --> Cell : << crée >>
+CardGeneratorDecorated --> GameMap : << crée >>
+CardGeneratorDecorated --> Cell : << crée >>
+CardGeneratorFixed --> GameMap : << crée >>
+CardGeneratorFixed --> Cell : << crée >>
 
 ' -------------------- '
 ' Gestion de la partie '
