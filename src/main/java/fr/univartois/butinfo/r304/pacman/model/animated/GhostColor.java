@@ -37,6 +37,7 @@ public enum GhostColor {
     
     /**
      * Crée une nouvelle instance de GhostColor.
+     * 
      * @param strategy la stratégie de déplacement du fantôme
      */
     private GhostColor(IStrategyGhost strategy) {

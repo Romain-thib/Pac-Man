@@ -53,7 +53,7 @@ public class DumbStrategyGhost implements IStrategyGhost {
     }
 
     /**
-     * 
+     * méthode qui permet de changer de direction le fantôme de facon aléatoire
      * 
      * @param ghost le famtome en question 
      */

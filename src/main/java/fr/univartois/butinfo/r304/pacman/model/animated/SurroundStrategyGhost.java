@@ -37,13 +37,21 @@ public class SurroundStrategyGhost implements IStrategyGhost{
      */
     private IStateGhost stateGhost;
     
+    /**
+     * Constructeur qui permet d'initialisée la vitesse et l'état du fantôme
+     * 
+     * @param speedOfGhost 
+     */
     public SurroundStrategyGhost(int speedOfGhost) {
         this.speedOfGhost = speedOfGhost;
         this.stateGhost = new DistantStateGhost();
     }
 
-
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStrategyGhost#moveStrategy(fr.univartois.butinfo.r304.pacman.model.animated.Ghost)
+     */
     @Override
     public void moveStrategy(Ghost ghost, long delta, PacmanGame game) {
         stateGhost.moveState(ghost, delta, speedOfGhost, game);

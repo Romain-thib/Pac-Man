@@ -23,6 +23,7 @@ public interface IStrategyGhost {
     
     /**
      * La méthode moveStrategy pour le déplacement des fantômes
+     * 
      * @param ghost le famtôme a déplacée
      * @param delta la valeur selon le lequel on actualise le deplacement 
      * @param game instance correpondant a la game

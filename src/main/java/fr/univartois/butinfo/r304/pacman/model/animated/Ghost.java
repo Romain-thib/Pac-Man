@@ -63,15 +63,6 @@ public class Ghost extends AbstractAnimated{
         return color;
     }
     
-    /**
-     * Modifie l'attribut strategyGhost de cette instance de Ghost.
-     * 
-     * @param strategy
-     */
-    public void setStrategyGhost(IStrategyGhost strategy) {
-        this.strategyGhost = strategy;
-    }
-    
     
     /**
      * Modifie l'attribut color de cette instance de Ghost.
@@ -80,6 +71,15 @@ public class Ghost extends AbstractAnimated{
      */
     public void setColor(GhostColor color) {
         this.color = color;
+    }
+    
+    /**
+     * Modifie l'attribut strategyGhost de cette instance de Ghost.
+     * 
+     * @param strategy
+     */
+    public void setStrategyGhost(IStrategyGhost strategy) {
+        this.strategyGhost = strategy;
     }
     
 

@@ -39,7 +39,7 @@ public class ChaseStrategyGhost implements IStrategyGhost{
     }
     
     /**
-     * 
+     * méthode qui permet de changer de direction le famtôme de façon a le pourchasser
      * 
      * @param ghost le famtôme a déplacée
      * @param game l'instance de la game actuel
