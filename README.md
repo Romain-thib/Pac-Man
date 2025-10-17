@@ -1,27 +1,27 @@
-# *Pac-Man* en JavaFX
+# _Pac-Man_ en JavaFX
 
-## Chef de projet : 
+## Chef de projet :
 
 Timothée Gros
 
 ## Description
 
-Ce projet fournit une implémentation de base du jeu *Pac-Man* en *JavaFX*.
+Ce projet fournit une implémentation de base du jeu _Pac-Man_ en _JavaFX_.
 Pour pouvoir développer votre propre implémentation de ce projet, vous devez
 en créer une **divergence** en cliquant sur le bouton `Fork` en haut à droite
 de cette page.
 
 Lorsque ce sera fait, vous pourrez inviter les membres de votre groupe en tant
-que *Developer* pour vous permettre de travailler ensemble sur ce projet.
+que _Developer_ pour vous permettre de travailler ensemble sur ce projet.
 
 ## Consignes
 
 Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
 dans le développement de votre projet :
 
-- [Lancement du projet](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/TP03)
-- [Des patrons de conception dans *Pac-Man* (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/TP04)
-- [Des patrons de conception dans *Pac-Man* (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/TP05)
+- [Lancement du projet](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP03)
+- [Des patrons de conception dans *Pac-Man* (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP04)
+- [Des patrons de conception dans *Pac-Man* (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP05)
 
 ## Diagramme de classes
 
@@ -127,12 +127,61 @@ class Wall {
     + getSprite() : Sprite
 }
 
+interface ICardGenerator {
+	+ generate(height : int, width : int) : GameMap
+}
+
+class CardGenerator implements ICardGenerator {
+    - {static} spriteStore : SpriteStore
+
+    + generate(height : int, width : int) : GameMap
+    - generateBorderWalls(map : GameMap) : void
+    - generateHorizontalWall(map : GameMap) : void
+    - createWallCell() : Cell
+    - createPathCell() : Cell
+}
+
+class CardGeneratorEmpty implements ICardGenerator {
+    - {static} spriteStore : SpriteStore
+
+    + generate(height : int, width : int) : GameMap
+    - generateBorderWalls(map : GameMap) : void
+    - createWallCell() : Cell
+    - createPathCell() : Cell
+}
+
+class CardGeneratorDecorated implements ICardGenerator {
+	- {static} spriteStore : SpriteStore
+	- generator : ICardGenerator
+
+	+ CardGeneratorDecorated(generator : ICardGenerator)
+   	+ generate(height : int, width : int) : GameMap
+	- generateInsideWalls(map : GameMap) : void
+	- createWallCell() : Cell
+   	- createPathCell() : Cell
+}
+
+class CardGeneratorFixed implements ICardGenerator {
+	- {static} spriteStore : SpriteStore
+	- generator : ICardGenerator
+	- walls : int[][]
+
+	+ CardGeneratorDecorated(generator : ICardGenerator)
+   	+ generate(height : int, width : int) : GameMap
+	- generateInsideWalls(map : GameMap) : void
+	- createWallCell() : Cell
+}
+
 GameMap *-- "*" Cell
 
 Cell o-- "1" Wall
 Cell o-- "1" Sprite
 
 Wall o-- "1" Sprite
+
+CardGenerator o-- "1" SpriteStore
+ICardGenerator --> GameMap : << crée >>
+ICardGenerator --> Cell : << crée >>
 
 ' -------------------- '
 ' Gestion de la partie '
@@ -145,7 +194,7 @@ class PacmanGame {
     - height : int
     - spriteStore : ISpriteStore
     - gameMap : GameMap
-    - player : IAnimated
+    - player : PacMan
     - nbGhosts : int
     - nbGums : int
     - movingObjects : List<IAnimated>
@@ -205,6 +254,9 @@ interface IAnimated {
     + {abstract} onStep(timeDelta : long) : boolean
     + {abstract} isCollidingWith(other : IAnimated) : boolean
     + {abstract} onCollisionWith(other : IAnimated) : void
+    + {abstract} onCollisionWith(other : PacMan) : void
+    + {abstract} onCollisionWith(other : Ghost) : void
+    + {abstract} onCollisionWith(other : PacGum) : void
     + {abstract} onDespawn() : void
     + {abstract} onDestruction() : void
     + {abstract} self() : IAnimated
@@ -237,6 +289,7 @@ PacmanGame o-- "1" GameMap
 PacmanGame o-- "*" IAnimated
 PacmanGame o-- "1" GameAnimation
 PacmanGame o-- "1" IPacmanController
+PacmanGame o-- "1" PacMan
 
 GameAnimation o-- "*" IAnimated
 
@@ -285,10 +338,113 @@ abstract class AbstractAnimated implements IAnimated {
     + self() : IAnimated
     + hashCode() : int
     + equals(obj : Object) : boolean
-}
+}    
 
 AbstractAnimated o-- "1" PacmanGame
 AbstractAnimated o-- "1" Sprite
+
+class PacMan extends AbstractAnimated {
+    - hp : IntegerProperty
+    - score : IntegerProperty
+
+    + PacMan(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
+    + getHpProperty() : IntegerProperty
+    + getScoreProperty() : IntegerProperty
+    + onCollisionWith(other : IAnimated) : void
+    + onCollisionWith(other : PacMan) : void
+    + onCollisionWith(other : Ghost) : void
+    + onCollisionWith(other : PacGum) : void
+}
+
+
+class PacGum extends AbstractAnimated {
+    + PacGum(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
+    + onCollisionWith(other : IAnimated) : void
+    + onCollisionWith(other : PacMan) : void
+    + onCollisionWith(other : Ghost) : void
+    + onCollisionWith(other : PacGum) : void
+}
+
+
+enum GhostColor {
+  RED
+  PINK
+  BLUE
+  ORANGE
+  - moveStrategy : IStrategyGhost
+  - GhostColor(strategy : IStrategyGhost)
+  + getMoveStrategy() : IStrategyGhost
+}
+
+class Ghost extends AbstractAnimated {
+    - strategyGhost : IStrategyGhost
+    - color : GhostColor
+
+    + Ghost(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
+    + getColor() : GhostColor
+    + setColor(color : GhostColor) : void
+    + setStrategyGhost(strategy : IStrategyGhost) : void
+    + onCollisionWith(other : IAnimated) : void
+    + onCollisionWith(other : PacMan) : void
+    + onCollisionWith(other : Ghost) : void
+    + onCollisionWith(other : PacGum) : void
+    + onStep(delta : long) : boolean
+}
+
+interface IStrategyGhost {
+    + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
+}
+
+interface IStateGhost {
+    + moveState(ghost : Ghost, delta : long, speedOfGhostState : double, game : PacmanGame) : void
+    + nextState() : IStateGhost
+}
+
+class ChaseStrategyGhost implements IStrategyGhost {
+    - {static} SPEED : double
+    + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
+    - changeDirection(ghost : Ghost, game : PacmanGame) : void
+}
+
+class DumbStrategyGhost implements IStrategyGhost {
+    - {static} SPEED : double
+    - temps : double
+    + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
+    - changeDirection(ghost : Ghost) : void
+}
+
+class SurroundStrategyGhost implements IStrategyGhost {
+    - {static} SPEED : double
+    - speedOfGhost : double
+    - stateGhost : IStateGhost
+    + SurroundStrategyGhost(speedOfGhost : int)
+    + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
+}
+
+class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
+    - listeStrategys : IStrategyGhost[]
+    - temps : double
+    - current : int
+    + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
+}
+
+class DistantStateGhost implements IStateGhost {
+    - temps : double
+    + moveState(ghost : Ghost, delta : long, speedOfGhostState : double, game : PacmanGame) : void
+    + nextState() : IStateGhost
+}
+
+class ClassicStateGhost implements IStateGhost {
+    + moveState(ghost : Ghost, delta : long, speedOfGhostState : double, game : PacmanGame) : void
+    + nextState() : IStateGhost
+}
+
+Ghost o-- "1" GhostColor
+Ghost o-- "1" IStrategyGhost
+SurroundStrategyGhost o-- "1" IStateGhost
+ChaseRandomCompositeStrategyGhost o-- "2..*" IStrategyGhost
+GhostColor o-- "1" IStrategyGhost
+
 
 ' ----------------- '
 ' Contrôleur JavaFX '
@@ -323,38 +479,39 @@ PacmanController o-- "1" PacmanGame
 
 ### Jalon n°1 - TP n°3
 
-| Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
-| ------------------------------------------ | ---------- | --------------------------------------------- |
-| Gestion des collisions spécifiques         |Oui         | Simon Cohet                                   |
-| Représentation des pac-gommes              |Oui         | Simon cohet                                   |
-| Représentation de Pac-Man                  |Oui         | Timothée Gros                                 |
-| Intégration de Pac-Man dans la partie      |Oui         | Timothée Gros                                 |
-| Représentation des fantômes                |Oui         | Shun Lembrez                                  |
-| Intégration des fantômes dans la partie    |Oui         | Shun Lembrez                                  |
-| Création de la carte du jeu                |Oui         | Romain Thibaut                                |
-| Ajout des pac-gommes sur la carte          |Oui         | Romain Thibaut                                |
+| Fonctionnalité                          | Terminée ? | Auteur(s)      |
+| --------------------------------------- | ---------- | -------------- |
+| Gestion des collisions spécifiques      | Oui        | Simon Cohet    |
+| Représentation des pac-gommes           | Oui        | Simon cohet    |
+| Représentation de Pac-Man               | Oui        | Timothée Gros  |
+| Intégration de Pac-Man dans la partie   | Oui        | Timothée Gros  |
+| Représentation des fantômes             | Oui        | Shun Lembrez   |
+| Intégration des fantômes dans la partie | Oui        | Shun Lembrez   |
+| Création de la carte du jeu             | Oui        | Romain Thibaut |
+| Ajout des pac-gommes sur la carte       | Oui        | Romain Thibaut |
 
 ### Jalon n°2 - TP n°4
 
-| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
-| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
-| Variantes de génération de labyrinthe      |                        |            |                                               |
-| Complétion d'un labyrinthe existant        |                        |            |                                               |
-| Variantes de déplacement pour les fantômes |                        |            |                                               |
+| Fonctionnalité                             | Patron de Conception ?    | Terminée ? | Auteur(s) |
+| ------------------------------------------ | ------------------------- | ---------- | --------- |
+| Variantes de génération de labyrinthe      | stratégie                 | oui        | Timothée  |
+| Complétion d'un labyrinthe existant        | décorateur                | oui        | Simon     |
+| Variantes de déplacement pour les fantômes | stratégie, état, composite| oui        | Shun      |
+| Remplissage du readme pour le jalon 1      |                           | oui        | Romain    |
 
 ### Jalon n°3 - TP n°5
 
-| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
-| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
-| Pac-Man vulnérable                         |                        |            |                                               |
-| Pac-Man invulnérable                       |                        |            |                                               |
-| Fantômes vulnérables                       |                        |            |                                               |
-| Fantômes fuyants                           |                        |            |                                               |
-| Fantômes presque invulnérables             |                        |            |                                               |
-| Fantômes invulnérables                     |                        |            |                                               |
-| Réutilisation des fantômes existants       |                        |            |                                               |
-| Ajout des méga-gommes                      |                        |            |                                               |
+| Fonctionnalité                       | Patron de Conception ? | Terminée ? | Auteur(s) |
+| ------------------------------------ | ---------------------- | ---------- | --------- |
+| Pac-Man vulnérable                   |                        |            |           |
+| Pac-Man invulnérable                 |                        |            |           |
+| Fantômes vulnérables                 |                        |            |           |
+| Fantômes fuyants                     |                        |            |           |
+| Fantômes presque invulnérables       |                        |            |           |
+| Fantômes invulnérables               |                        |            |           |
+| Réutilisation des fantômes existants |                        |            |           |
+| Ajout des méga-gommes                |                        |            |           |
 
 ### Jalon n°4 - TP n°6
 
-*À venir...*
+_À venir..._

@@ -19,15 +19,38 @@ public enum GhostColor {
     /**
      * L'attribut RED...
      */
-    RED,/**
+    RED(new ChaseStrategyGhost()),/**
      * L'attribut PINK...
      */
-    PINK,/**
+    PINK(new SurroundStrategyGhost(75)),/**
      * L'attribut BLUE...
      */
-    BLUE,/**
+    BLUE(new SurroundStrategyGhost(-75)),/**
      * L'attribut ORANGE...
      */
-    ORANGE
+    ORANGE(new DumbStrategyGhost());
+    
+    /**
+     * L'attribut moveStrategy...
+     */
+    private IStrategyGhost moveStrategy;
+    
+    /**
+     * Crée une nouvelle instance de GhostColor.
+     * 
+     * @param strategy la stratégie de déplacement du fantôme
+     */
+    private GhostColor(IStrategyGhost strategy) {
+        this.moveStrategy = strategy;
+    }
+    
+    /**
+     * Donne l'attribut moveStrategy de cette instance de GhostColor.
+     *
+     * @return L'attribut moveStrategy de cette instance de GhostColor.
+     */
+    public IStrategyGhost getMoveStrategy() {
+        return moveStrategy;
+    }
 }
 

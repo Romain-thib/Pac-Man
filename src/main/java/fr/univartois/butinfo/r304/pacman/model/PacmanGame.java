@@ -24,11 +24,13 @@ import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.GhostColor;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
-import fr.univartois.butinfo.r304.pacman.model.map.CardGenerator;
 import fr.univartois.butinfo.r304.pacman.model.map.Cell;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
+import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 import javafx.animation.AnimationTimer;
 
 /**
@@ -38,6 +40,7 @@ import javafx.animation.AnimationTimer;
  *
  * @version 0.1.0
  */
+@StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.CONTEXT)
 public final class PacmanGame {
 
     /**
@@ -104,6 +107,11 @@ public final class PacmanGame {
      * Le contrôleur du jeu.
      */
     private IPacmanController controller;
+    
+    /**
+     * Le générateur de cartes
+     */
+    private ICardGenerator generator;
 
     /**
      * Crée une nouvelle instance de PacmanGame.
@@ -158,6 +166,24 @@ public final class PacmanGame {
     public int getHeight() {
         return height;
     }
+    
+    /**
+     * Donne le personnage du joueur.
+     *
+     * @return Le personnage du joueur.
+     */
+    public PacMan getPlayer() {
+        return player;
+     }
+       
+    /**
+     * Modifie l'attribut generator de cette instance de PacmanGame.
+     *
+     * @param generator La nouvelle valeur de l'attribut generator pour cette instance de PacmanGame.
+     */
+    public void setGenerator(ICardGenerator generator) {
+        this.generator = generator;
+    }
 
     /**
      * Prépare une partie de Pac-Man avant qu'elle ne démarre.
@@ -178,12 +204,8 @@ public final class PacmanGame {
         // Convertir les dimensions de la carte en nombre de cellules
         int numRows = height / cellSize;
         int numCols = width / cellSize;
-
-        CardGenerator generator = new CardGenerator();
-
-        GameMap map = generator.generate(numRows, numCols);
-
-        return map;
+        
+        return generator.generate(numRows, numCols);
     }
 
     /**
@@ -214,9 +236,8 @@ public final class PacmanGame {
         	GhostColor color = colors[i % colors.length];
 
         	Sprite ghostSprite = spriteStore.getSprite("ghosts/" + color.name().toLowerCase() + "/1","ghosts/" + color.name().toLowerCase() + "/2");
-        	Ghost ghost = new Ghost(this, 0, 0, ghostSprite);
-        	ghost.setColor(color);
-
+        	Ghost ghost = new Ghost(this, 0, 0, ghostSprite, color);
+        	
         	ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
         	animatedObjects.add(ghost);
         	spawnAnimated(ghost);
