@@ -492,12 +492,12 @@ PacmanController o-- "1" PacmanGame
 
 ### Jalon n°2 - TP n°4
 
-| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s) |
-| ------------------------------------------ | ---------------------- | ---------- | --------- |
-| Variantes de génération de labyrinthe      | stratégie              | oui        | Timothée  |
-| Complétion d'un labyrinthe existant        | décorateur             | oui        | Simon     |
-| Variantes de déplacement pour les fantômes | stratégie, état        | presque    | Shun      |
-| Remplissage du readme pour le jalon 1      |                        | oui        | Romain    |
+| Fonctionnalité                             | Patron de Conception ?    | Terminée ? | Auteur(s) |
+| ------------------------------------------ | ------------------------- | ---------- | --------- |
+| Variantes de génération de labyrinthe      | stratégie                 | oui        | Timothée  |
+| Complétion d'un labyrinthe existant        | décorateur                | oui        | Simon     |
+| Variantes de déplacement pour les fantômes | stratégie, état, composite| oui        | Shun      |
+| Remplissage du readme pour le jalon 1      |                           | oui        | Romain    |
 
 ### Jalon n°3 - TP n°5
 
