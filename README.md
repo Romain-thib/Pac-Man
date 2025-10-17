@@ -127,7 +127,11 @@ class Wall {
     + getSprite() : Sprite
 }
 
-class CardGenerator {
+interface ICardGenerator {
+	+ generate(height : int, width : int) : GameMap
+}
+
+class CardGenerator implements ICardGenerator {
     - {static} spriteStore : SpriteStore
 
     + generate(height : int, width : int) : GameMap
@@ -135,6 +139,37 @@ class CardGenerator {
     - generateHorizontalWall(map : GameMap) : void
     - createWallCell() : Cell
     - createPathCell() : Cell
+}
+
+class CardGeneratorEmpty implements ICardGenerator {
+    - {static} spriteStore : SpriteStore
+
+    + generate(height : int, width : int) : GameMap
+    - generateBorderWalls(map : GameMap) : void
+    - createWallCell() : Cell
+    - createPathCell() : Cell
+}
+
+class CardGeneratorDecorated implements ICardGenerator {
+	- {static} spriteStore : SpriteStore
+	- generator : ICardGenerator
+
+	+ CardGeneratorDecorated(generator : ICardGenerator)
+   	+ generate(height : int, width : int) : GameMap
+	- generateInsideWalls(map : GameMap) : void
+	- createWallCell() : Cell
+   	- createPathCell() : Cell
+}
+
+class CardGeneratorFixed implements ICardGenerator {
+	- {static} spriteStore : SpriteStore
+	- generator : ICardGenerator
+	- walls : int[][]
+
+	+ CardGeneratorDecorated(generator : ICardGenerator)
+   	+ generate(height : int, width : int) : GameMap
+	- generateInsideWalls(map : GameMap) : void
+	- createWallCell() : Cell
 }
 
 GameMap *-- "*" Cell
@@ -145,8 +180,8 @@ Cell o-- "1" Sprite
 Wall o-- "1" Sprite
 
 CardGenerator o-- "1" SpriteStore
-CardGenerator --> GameMap : << crée >>
-CardGenerator --> Cell : << crée >>
+ICardGenerator --> GameMap : << crée >>
+ICardGenerator --> Cell : << crée >>
 
 ' -------------------- '
 ' Gestion de la partie '
@@ -308,11 +343,11 @@ abstract class AbstractAnimated implements IAnimated {
 AbstractAnimated o-- "1" PacmanGame
 AbstractAnimated o-- "1" Sprite
 
-class Pacman extends AbstractAnimated {
+class PacMan extends AbstractAnimated {
     - hp : IntegerProperty
     - score : IntegerProperty
 
-    + Pacman(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
+    + PacMan(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
     + getHpProperty() : IntegerProperty
     + getScoreProperty() : IntegerProperty
     + onCollisionWith(other : IAnimated) : void
