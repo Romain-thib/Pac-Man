@@ -397,17 +397,17 @@ public abstract class AbstractAnimated implements IAnimated {
      * @return Si la nouvelle position de l'objet est sur un mur.
      */
     private boolean isOnWall(int x, int y) {
-        if (game.getCellAt(x, y).getWall() != null) {
+        if (game.getCellAt(x + MARGIN, y + MARGIN).getWall() != null) {
             // Le coin supérieur gauche de l'objet a atteint un mur.
             return true;
         }
 
-        if (game.getCellAt(x, y + getHeight() - MARGIN).getWall() != null) {
+        if (game.getCellAt(x + MARGIN, y + getHeight() - MARGIN).getWall() != null) {
             // Le coin inférieur gauche de l'objet a atteint un mur.
             return true;
         }
 
-        if (game.getCellAt(x + getWidth() - MARGIN, y).getWall() != null) {
+        if (game.getCellAt(x + getWidth() - MARGIN, y + MARGIN).getWall() != null) {
             // Le coin supérieur droit de l'objet a atteint un mur.
             return true;
         }
