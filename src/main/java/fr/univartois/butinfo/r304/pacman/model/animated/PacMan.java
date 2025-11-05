@@ -29,6 +29,12 @@ public class PacMan extends AbstractAnimated{
      * L'attribut score.
      */
     private IntegerProperty score;
+    
+    /**
+     * L'attribut vulnerabilities.
+     */
+    private IStatePacman vulnerabilities;
+    
     /**
      * Crée une nouvelle instance de PacMan.
      * @param game : instance de jeu 
@@ -87,7 +93,8 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public void onCollisionWith(Ghost other) {
-        hp.set(hp.get()-1);
+        vulnerabilities = vulnerabilities.onCollisionWith(this);
+        // hp.set(hp.get()-1); A enlever ? A modifie
         if (hp.get() <= 0) {
             game.playerIsDead();
         }
@@ -102,6 +109,26 @@ public class PacMan extends AbstractAnimated{
     public void onCollisionWith(PacGum other) {
         score.set(score.get()+10); 
         game.pacGumEaten(other);
-    }  
+    }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.animated.AbstractAnimated#onStep(long)
+     */
+    @Override
+    public boolean onStep(long delta) {
+        vulnerabilities = vulnerabilities.changeStatePacman(delta);
+        return super.onStep(delta);
+    }
+    
+    // Getters et Setters, possibilité de les changé car ce sont des IntegerProperty
+    //public void setHp(IntegerProperty hp) {
+        //this.hp = hp;
+    //}
+    
+    // public IntegerProperty getHp() {
+        //return hp;
+    //}
 }
 
