@@ -17,9 +17,10 @@ package fr.univartois.butinfo.r304.pacman.model.animated;
 public interface IStatePacman {
    
     /**
-     * @param other Savoir si pacman est en collision avec un fantome
+     * @param pacman Savoir si pacman est en collision avec un fantome
+     * @return IStatePacman pour gérer sa vulnerabilité
      */
-    public void onCollisionWith(Ghost other);
+    public IStatePacman onCollisionWith(PacMan pacman);
     
     /**
      * @param time Le temps que pacman ne peut pas rentrer en collision avec des fantômes 
