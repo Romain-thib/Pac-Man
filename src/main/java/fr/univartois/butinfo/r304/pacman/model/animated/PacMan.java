@@ -35,8 +35,6 @@ public class PacMan extends AbstractAnimated{
      * @param xPosition : position sur l'axe horizontal
      * @param yPosition : position sur l'axe vertical
      * @param sprite : apparence du personnage
-     * @param hp : nombre de points de vie
-     * @param score : score du joueur
      */
     public PacMan(PacmanGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
@@ -61,7 +59,7 @@ public class PacMan extends AbstractAnimated{
     public IntegerProperty getScoreProperty() {
         return score;
     }
-
+    
     /*
      * (non-Javadoc)
      *
@@ -103,6 +101,7 @@ public class PacMan extends AbstractAnimated{
     @Override
     public void onCollisionWith(PacGum other) {
         score.set(score.get()+10); 
+        game.pacGumEaten(other);
     }  
 }
 
