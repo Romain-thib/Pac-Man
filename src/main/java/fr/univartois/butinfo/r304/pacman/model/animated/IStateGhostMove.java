@@ -18,8 +18,8 @@ import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
  *
  * @version 0.1.0
  */
-@StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.INTERFACE)
-public interface IStateGhost {
+@StateDesignPattern(state = IStateGhostMove.class, participant = StateParticipant.INTERFACE)
+public interface IStateGhostMove {
 
     /**
      * La méthode moveState pour le déplacement des fantômes
@@ -34,7 +34,7 @@ public interface IStateGhost {
     /**
      * @return l'état suivant
      */
-    IStateGhost nextState();
+    IStateGhostMove nextState();
 
 }
 
