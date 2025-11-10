@@ -22,6 +22,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.GhostColor;
+import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
 import fr.univartois.butinfo.r304.pacman.model.map.Cell;
@@ -107,7 +108,7 @@ public final class PacmanGame {
      * Le contrôleur du jeu.
      */
     private IPacmanController controller;
-    
+
     /**
      * Le générateur de cartes
      */
@@ -166,7 +167,7 @@ public final class PacmanGame {
     public int getHeight() {
         return height;
     }
-    
+
     /**
      * Donne le personnage du joueur.
      *
@@ -174,12 +175,13 @@ public final class PacmanGame {
      */
     public PacMan getPlayer() {
         return player;
-     }
-       
+    }
+
     /**
      * Modifie l'attribut generator de cette instance de PacmanGame.
      *
-     * @param generator La nouvelle valeur de l'attribut generator pour cette instance de PacmanGame.
+     * @param generator La nouvelle valeur de l'attribut generator pour cette instance de
+     *        PacmanGame.
      */
     public void setGenerator(ICardGenerator generator) {
         this.generator = generator;
@@ -204,7 +206,7 @@ public final class PacmanGame {
         // Convertir les dimensions de la carte en nombre de cellules
         int numRows = height / cellSize;
         int numCols = width / cellSize;
-        
+
         return generator.generate(numRows, numCols);
     }
 
@@ -226,34 +228,49 @@ public final class PacmanGame {
         clearAnimated();
 
         // On crée le joueur sur la carte.
-        player = new PacMan(this, 0, 0, spriteStore.getSprite("pacman/closed", "pacman/half-open", "pacman/open", "pacman/half-open"));
+        player = new PacMan(this, 0, 0, spriteStore.getSprite("pacman/closed", "pacman/half-open",
+                "pacman/open", "pacman/half-open"));
         animatedObjects.add(player);
         spawnAnimated(player);
 
         // On crée ensuite les fantômes sur la carte.
         GhostColor[] colors = GhostColor.values();
         for (int i = 0; i < nbGhosts; i++) {
-        	GhostColor color = colors[i % colors.length];
+            GhostColor color = colors[i % colors.length];
 
-        	Sprite ghostSprite = spriteStore.getSprite("ghosts/" + color.name().toLowerCase() + "/1","ghosts/" + color.name().toLowerCase() + "/2");
-        	Ghost ghost = new Ghost(this, 0, 0, ghostSprite, color);
-        	
-        	ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
-        	animatedObjects.add(ghost);
-        	spawnAnimated(ghost);
+            Sprite ghostSprite = spriteStore.getSprite(
+                    "ghosts/" + color.name().toLowerCase() + "/1",
+                    "ghosts/" + color.name().toLowerCase() + "/2");
+            Ghost ghost = new Ghost(this, 0, 0, ghostSprite, color);
+
+            ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
+            animatedObjects.add(ghost);
+            spawnAnimated(ghost);
         }
-        
+
         List<Cell> emptyCells = gameMap.getEmptyCells();
         nbGums = emptyCells.size(); // mettre à jour le nombre de pac-gommes
         for (int i = 0; i < emptyCells.size(); i++) {
             Cell cell = emptyCells.get(i);
-            PacGum gum = new PacGum(
-                this,
-                cell.getColumn() * spriteStore.getSpriteSize(),
-                cell.getRow() * spriteStore.getSpriteSize(),
-                spriteStore.getSprite("pacgum") // sprite de la pac-gomme
-            );
-            addAnimated(gum);
+            int r = RANDOM.nextInt(100);
+            if (r <= 1) {
+               MegaGum megagum = new MegaGum(
+                       this, 
+                       cell.getColumn() * spriteStore.getSpriteSize(),
+                       cell.getRow() * spriteStore.getSpriteSize(),
+                       spriteStore.getSprite("megagum")
+               );
+               addAnimated(megagum);
+            } else {
+                PacGum gum = new PacGum(
+                        this,
+                        cell.getColumn() * spriteStore.getSpriteSize(),
+                        cell.getRow() * spriteStore.getSpriteSize(),
+                        spriteStore.getSprite("pacgum") // sprite de la pac-gomme
+                );
+                addAnimated(gum);
+            }
+
         }
     }
 
@@ -407,6 +424,20 @@ public final class PacmanGame {
     public void pacGumEaten(IAnimated gum) {
         nbGums--;
         removeAnimated(gum);
+
+        if (nbGums <= 0) {
+            gameOver("YOU WIN!");
+        }
+    }
+    
+    /**
+     * Indique que le joueur a mangé une mega-gomme.
+     *
+     * @param megagum La mega-gomme qui a été mangée.
+     */
+    public void megaGumEaten(IAnimated megagum) {
+        nbGums--;
+        removeAnimated(megagum);
 
         if (nbGums <= 0) {
             gameOver("YOU WIN!");

@@ -149,5 +149,16 @@ public class Ghost extends AbstractAnimated{
         return super.onStep(delta);
     }
 
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.MegaGum)
+     */
+    @Override
+    public void onCollisionWith(MegaGum other) {
+        //
+    }
+
 }
 
