@@ -33,7 +33,7 @@ public class PacMan extends AbstractAnimated{
     /**
      * L'attribut vulnerabilities.
      */
-    private IStatePacman vulnerabilities;
+    private IStatePacman vulnerabilities = new PacmanVulnerable();
     
     /**
      * Crée une nouvelle instance de PacMan.
@@ -93,8 +93,7 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public void onCollisionWith(Ghost other) {
-        vulnerabilities = vulnerabilities.onCollisionWith(this);
-        // hp.set(hp.get()-1); A enlever ? A modifie
+        vulnerabilities = vulnerabilities.onCollisionWithGhost(this);
         if (hp.get() <= 0) {
             game.playerIsDead();
         }
