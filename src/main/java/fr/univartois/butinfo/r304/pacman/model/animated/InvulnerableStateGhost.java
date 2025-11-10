@@ -10,6 +10,8 @@ package fr.univartois.butinfo.r304.pacman.model.animated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
+import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
  * La classe InvulnerableStateGhost, l'etat ou le fantôme est invulnerable 
@@ -18,6 +20,7 @@ import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
  *
  * @version 0.1.0
  */
+@StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.IMPLEMENTATION)
 public class InvulnerableStateGhost implements IStateGhost{
     
     /**
