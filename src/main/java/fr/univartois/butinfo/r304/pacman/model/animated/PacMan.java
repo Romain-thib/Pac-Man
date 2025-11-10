@@ -123,12 +123,18 @@ public class PacMan extends AbstractAnimated{
     }
     
     // Getters et Setters, possibilité de les changé car ce sont des IntegerProperty
-    //public void setHp(IntegerProperty hp) {
-        //this.hp = hp;
-    //}
+    /**
+     * @param hp Le nombre de points de vie à définir
+     */
+    public void setHp(int hp) {
+        this.hp.set(hp);
+    }
     
-    // public IntegerProperty getHp() {
-        //return hp;
-    //}
+    /**
+     * @return L'attribut hp de cette instance de PacMan.
+     */
+    public IntegerProperty getHp() {
+        return hp;
+    }
 }
 
