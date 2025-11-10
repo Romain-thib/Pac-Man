@@ -8,6 +8,7 @@
 package fr.univartois.butinfo.r304.pacman.model.animated;
 
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
+import fr.univartois.dpprocessor.designpatterns.composite.CompositeDesignPattern;
 
 /**
  * Le type ChaseRandomComponentGhost
@@ -16,6 +17,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
  *
  * @version 0.1.0
  */
+@CompositeDesignPattern(IStrategyGhost.class)
 public class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
     
     /**

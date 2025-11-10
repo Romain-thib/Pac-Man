@@ -18,8 +18,8 @@ import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
  *
  * @version 0.1.0
  */
-@StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.INTERFACE)
-public interface IStateGhost {
+@StateDesignPattern(state = IStateGhostMove.class, participant = StateParticipant.INTERFACE)
+public interface IStateGhostMove {
 
     /**
      * La méthode moveState pour le déplacement des fantômes
@@ -32,22 +32,9 @@ public interface IStateGhost {
     void moveState(Ghost ghost, long delta, double speedOfGhostState, PacmanGame game);
     
     /**
-     *  La methode pour gerer les collisions entre pacman et les fantômes
-     * @param ghost le fantôme 
-     * @param game instance correpondant a la game qui permet d'accéder a pacman
-     */
-    void handleCollisionWithPacman(Ghost ghost,PacmanGame game);
-        
-    
-    /**
-     * La méthode qui permet d'obtenir le sprite du fantôme selon son état
-     */
-    void getSpriteGhost();
-    
-    /**
      * @return l'état suivant
      */
-    IStateGhost nextState();
+    IStateGhostMove nextState();
 
 }
 

@@ -18,8 +18,8 @@ import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
  *
  * @version 0.1.0
  */
-@StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.IMPLEMENTATION)
-public class DistantStateGhost implements IStateGhost {
+@StateDesignPattern(state = IStateGhostMove.class, participant = StateParticipant.IMPLEMENTATION)
+public class DistantStateGhost implements IStateGhostMove {
 
     
     /**
@@ -50,7 +50,7 @@ public class DistantStateGhost implements IStateGhost {
      * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#nextState()
      */
     @Override
-    public IStateGhost nextState() {
+    public IStateGhostMove nextState() {
         if (temps <= 0) {
             return new ClassicStateGhost();
         } else {
