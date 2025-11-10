@@ -10,6 +10,8 @@ package fr.univartois.butinfo.r304.pacman.model.animated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
+import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
  * Le type FleeingStateGhost
@@ -18,6 +20,8 @@ import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
  *
  * @version 0.1.0
  */
+
+@StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.IMPLEMENTATION)
 public class FleeingStateGhost implements IStateGhost {
     /**
      * L'attribut temps représente le temps restant avant de redevenir vulnerable
@@ -71,7 +75,7 @@ public class FleeingStateGhost implements IStateGhost {
     @Override
     public IStateGhost nextState() {
         if (time <= 0) {
-            return null; // TODO : Remplacer par état vulnérable
+            return new InvulnerableStateGhost();
         } else {
             return this;
         }
