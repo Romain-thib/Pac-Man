@@ -33,14 +33,19 @@ public class FleeingStateGhost implements IStateGhost {
      */
     private Sprite spritesGhost = null;
     
+    /**
+     * L'attribut SPEED vitesse pour les fantôme fuyant
+     */
+    private static final double SPEED = -80;
+    
     /*
      * (non-Javadoc)
      *
      * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#moveState(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, long, double, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
      */
     @Override
-    public void moveState(Ghost ghost, long delta, double speedOfGhostState, PacmanGame game) {
-        ghost.setStrategyGhost(new ChaseStrategyGhost(-speedOfGhostState));
+    public void moveState(Ghost ghost, PacmanGame game) {
+        ghost.setStrategyGhost(new ChaseStrategyGhost(SPEED));
         time -= 1;
     }
 
@@ -50,8 +55,9 @@ public class FleeingStateGhost implements IStateGhost {
      * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#handleCollisionWithPacman(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
      */
     @Override
-    public void handleCollisionWithPacman(Ghost ghost, PacmanGame game) {
+    public IStateGhost handleCollisionWithPacman(Ghost ghost, PacmanGame game) {
         // Rien, le fantôme fuis et est invulnérable
+        return null;
     }
 
     /*

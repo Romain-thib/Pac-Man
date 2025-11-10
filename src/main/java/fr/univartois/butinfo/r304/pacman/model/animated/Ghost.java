@@ -30,6 +30,12 @@ public class Ghost extends AbstractAnimated{
      */
     private IStrategyGhost strategyGhost;
     
+    
+    /**
+     * L'attribut stateGhost pour gerer les états des fantômes
+     */
+    private IStateGhost stateGhost;
+    
     /**
      * L'attribut color pour les fantômes
      */
@@ -45,11 +51,13 @@ public class Ghost extends AbstractAnimated{
      * @param yPosition la position sur l'axe vertical du famtôme
      * @param sprites les sprites du fantôme
      * @param color couleur du famtôme (RED, PINK, BLUE, ORANGE)
+     * @param stateGhost état du famtôme en question
      */
-    public Ghost(PacmanGame game, double xPosition, double yPosition, Sprite sprites, GhostColor color) {
+    public Ghost(PacmanGame game, double xPosition, double yPosition, Sprite sprites, GhostColor color, IStateGhost stateGhost) {
         super(game, xPosition, yPosition, sprites);
         this.color = color;
         this.strategyGhost = color.getMoveStrategy();
+        this.stateGhost = new InvulnerableStateGhost();
  
     }
 
@@ -76,10 +84,22 @@ public class Ghost extends AbstractAnimated{
     /**
      * Modifie l'attribut strategyGhost de cette instance de Ghost.
      * 
-     * @param strategy
+     * @param strategy permet de set la strategy utilise
      */
     public void setStrategyGhost(IStrategyGhost strategy) {
         this.strategyGhost = strategy;
+    }
+    
+    /**
+     * Modifie l'attribut color de cette instance de Ghost.
+     * 
+     * @param stateGhost attribut correspondant a l'état en cours
+     *
+     */
+    public void setState(IStateGhost stateGhost) {
+        this.stateGhost = stateGhost;
+        stateGhost.getSpriteGhost(this);
+        stateGhost.moveState(this, game);
     }
     
 
@@ -109,6 +129,7 @@ public class Ghost extends AbstractAnimated{
         // Volontairement vide pour l'instant car on a pas encore l'état de pac-man 
         // si il a mange mega gum
         // a faire plus tard
+        stateGhost.handleCollisionWithPacman(this, this.game);
     }
 
 
@@ -146,6 +167,7 @@ public class Ghost extends AbstractAnimated{
     @Override
     public boolean onStep(long delta) {
         strategyGhost.moveStrategy(this,delta,game);
+        stateGhost.nextState();
         return super.onStep(delta);
     }
 
