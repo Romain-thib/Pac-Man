@@ -7,6 +7,8 @@
 
 package fr.univartois.butinfo.r304.pacman.model.animated;
 
+import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
@@ -31,5 +33,11 @@ public interface IStatePacman {
      * @return IStatePacman l'état actuelle de Pacman
      */
     public IStatePacman changeStatePacman(long time);
+    
+    /**
+     * @param spriteStore Les sprites de pacman
+     * @return Sprite l'apparence de pacman selon son état
+     */
+    public Sprite getSprite(SpriteStore spriteStore);
 }
 
