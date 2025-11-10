@@ -8,6 +8,7 @@
 package fr.univartois.butinfo.r304.pacman.model.animated;
 
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
+import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 
 /**
@@ -22,6 +23,11 @@ public class FleeingStateGhost implements IStateGhost {
      * L'attribut temps représente le temps restant avant de redevenir vulnerable
      */
     private double time = 5000;
+    
+    /**
+     * Les sprites du fantômes dans cet état
+     */
+    private Sprite spritesGhost = null;
     
     /*
      * (non-Javadoc)
@@ -51,7 +57,10 @@ public class FleeingStateGhost implements IStateGhost {
      */
     @Override
     public void getSpriteGhost(Ghost ghost) {
-        ghost.setSprite(new SpriteStore().getSprite("ghosts/afraid/1", "ghosts/afraid/2"));
+        if (spritesGhost == null) {
+            spritesGhost = new SpriteStore().getSprite("ghosts/afraid/1", "ghosts/afraid/2");
+        }
+        ghost.setSprite(spritesGhost);
     }
 
     /*
