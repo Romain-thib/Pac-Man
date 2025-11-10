@@ -34,9 +34,9 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
     private Sprite spritesGhost = null;
     
     /**
-     * Définit si le fantôme à été mangé par pacman ou non
+     * L'attribut SPEED vitesse pour les fantôme presque invulnerable
      */
-    private boolean eaten = false;
+    private static final double SPEED = -60;
     
     /*
      * (non-Javadoc)
@@ -44,8 +44,8 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
      * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#moveState(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, long, double, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
      */
     @Override
-    public void moveState(Ghost ghost, long delta, double speedOfGhostState, PacmanGame game) {
-        ghost.setStrategyGhost(new ChaseStrategyGhost(-speedOfGhostState));
+    public void moveState(Ghost ghost, PacmanGame game) {
+        ghost.setStrategyGhost(new ChaseStrategyGhost(SPEED));
         time -= 1;
     }
 
@@ -55,8 +55,8 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
      * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#handleCollisionWithPacman(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
      */
     @Override
-    public void handleCollisionWithPacman(Ghost ghost, PacmanGame game) {
-        eaten = true;
+    public IStateGhost handleCollisionWithPacman(Ghost ghost, PacmanGame game) {
+        return new FleeingStateGhost();
     }
 
     /*
@@ -67,7 +67,9 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
     @Override
     public void getSpriteGhost(Ghost ghost) {
         if (spritesGhost == null) {
-            spritesGhost = new SpriteStore().getSprite("ghosts/hurt/1", "ghosts/hurt/2");
+            spritesGhost = new SpriteStore().getSprite(
+                    "ghosts/hurt/1", "ghosts/hurt/2",
+                    "ghosts/afraid/1", "ghosts/afraid/2");
         }
         ghost.setSprite(spritesGhost);
     }
@@ -79,9 +81,6 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
      */
     @Override
     public IStateGhost nextState() {
-        if (eaten) {
-            return new FleeingStateGhost();
-        }
         if (time <= 0) {
             return new InvulnerableStateGhost();
         } else {
