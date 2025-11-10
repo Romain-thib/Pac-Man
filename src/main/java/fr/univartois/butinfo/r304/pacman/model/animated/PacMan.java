@@ -10,6 +10,7 @@ package fr.univartois.butinfo.r304.pacman.model.animated;
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 import javafx.beans.property.IntegerProperty;
@@ -22,7 +23,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  *
  * @version 0.1.0
  */
-@StateDesignPattern(state = PacMan.class, participant = StateParticipant.CONTEXT)
+@StateDesignPattern(state = IStatePacman.class, participant = StateParticipant.CONTEXT)
 public class PacMan extends AbstractAnimated{
     /**
      * L'attribut hp.
@@ -36,7 +37,12 @@ public class PacMan extends AbstractAnimated{
     /**
      * L'attribut vulnerabilities.
      */
-    private IStatePacman vulnerabilities = new PacmanVulnerable();
+    private IStatePacman vulnerabilities = new PacmanVulnerable();  
+    
+    /**
+     * L'attribut spriteStore pour gérer les sprites de pacman.
+     */
+    private SpriteStore spriteStore; 
     
     /**
      * Crée une nouvelle instance de PacMan.
@@ -49,6 +55,7 @@ public class PacMan extends AbstractAnimated{
         super(game, xPosition, yPosition, sprite);
         hp = new SimpleIntegerProperty(3);
         score = new SimpleIntegerProperty(0);
+        spriteStore = new SpriteStore();
     }
     
     /**
@@ -121,6 +128,7 @@ public class PacMan extends AbstractAnimated{
     @Override
     public boolean onStep(long delta) {
         vulnerabilities = vulnerabilities.changeStatePacman(delta);
+        this.setSprite(vulnerabilities.getSprite(spriteStore));
         return super.onStep(delta);
     }
     
