@@ -20,13 +20,23 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
  */
 @StrategyDesignPattern(strategy = IStrategyGhost.class, participant = StrategyParticipant.IMPLEMENTATION)
 public class ChaseStrategyGhost implements IStrategyGhost{
-      
-    
     /**
-     * L'attribut SPEED pour gerer la vitesse des famtôme quand il change de direction
+     * L'attribut SPEED pour gerer la vitesse des famtômes quand il change de direction
      */
-    private static final double SPEED = 75;
+    private double speed;
 
+    /**
+     * Crée une nouvelle instance de ChaseStrategyGhost. 
+     * @param speed : La vitesse de déplacement, peut être négative pour fuir
+     */
+    public ChaseStrategyGhost(double speed) {
+        this.speed = speed;
+    }
+
+    /**
+     * 
+     */
+    
     /*
      * (non-Javadoc)
      *
@@ -37,7 +47,7 @@ public class ChaseStrategyGhost implements IStrategyGhost{
      // Le fantôme change de direction toutes le temps delta pas utile ici 
         changeDirection(ghost,game);  
     }
-    
+
     /**
      * méthode qui permet de changer de direction le famtôme de façon a le pourchasser
      * 
@@ -50,19 +60,19 @@ public class ChaseStrategyGhost implements IStrategyGhost{
         
         if(pacman.getX() > ghost.getX() && game.getCellAt(ghost.getX()+1, ghost.getY()).isEmpty()) {
             ghost.setVerticalSpeed(0);
-            ghost.setHorizontalSpeed(SPEED);
+            ghost.setHorizontalSpeed(speed);
         }
         else if (pacman.getX() < ghost.getX() && game.getCellAt(ghost.getX()-1, ghost.getY()).isEmpty()){
             ghost.setVerticalSpeed(0);
-            ghost.setHorizontalSpeed(-SPEED);
+            ghost.setHorizontalSpeed(-speed);
         }
         else {
             if(pacman.getY() > ghost.getY() && game.getCellAt(ghost.getX(), ghost.getY()+1).isEmpty()) {
-                ghost.setVerticalSpeed(SPEED);
+                ghost.setVerticalSpeed(speed);
                 ghost.setHorizontalSpeed(0);
             }
             else if (pacman.getY() < ghost.getY() && game.getCellAt(ghost.getX(), ghost.getY()-1).isEmpty()){
-                ghost.setVerticalSpeed(-SPEED);
+                ghost.setVerticalSpeed(-speed);
                 ghost.setHorizontalSpeed(0);
             }
         }

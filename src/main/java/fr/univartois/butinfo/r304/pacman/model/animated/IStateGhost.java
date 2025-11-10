@@ -41,8 +41,9 @@ public interface IStateGhost {
     
     /**
      * La méthode qui permet d'obtenir le sprite du fantôme selon son état
+     * @param ghost Le fantôme auquel appliquer le sprite
      */
-    void getSpriteGhost();
+    void getSpriteGhost(Ghost ghost);
     
     /**
      * @return l'état suivant

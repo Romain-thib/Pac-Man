@@ -22,9 +22,7 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
  */
 @StrategyDesignPattern(strategy = IStrategyGhost.class, participant = StrategyParticipant.IMPLEMENTATION)
 @StateDesignPattern(state = IStateGhostMove.class, participant = StateParticipant.IMPLEMENTATION)
-public class SurroundStrategyGhost implements IStrategyGhost{
-
-
+public class SurroundStrategyGhost implements IStrategyGhost, IStateGhostMove{
     /**
      * L'attribut SPEED pour gerer la vitesse des famtôme quand il change de direction
      */
@@ -59,6 +57,26 @@ public class SurroundStrategyGhost implements IStrategyGhost{
     public void moveStrategy(Ghost ghost, long delta, PacmanGame game) {
         stateGhost.moveState(ghost, delta, speedOfGhost, game);
         this.stateGhost = this.stateGhost.nextState();
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhostMove#moveState(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, long, double, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
+     */
+    @Override
+    public void moveState(Ghost ghost, long delta, double speedOfGhostState, PacmanGame game) {
+        stateGhost.moveState(ghost, delta, speedOfGhostState, game);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhostMove#nextState()
+     */
+    @Override
+    public IStateGhostMove nextState() {
+        return stateGhost.nextState();
     }
 
     

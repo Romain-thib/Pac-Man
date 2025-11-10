@@ -19,7 +19,7 @@ public enum GhostColor {
     /**
      * L'attribut RED...
      */
-    RED(new ChaseStrategyGhost()),/**
+    RED(new ChaseStrategyGhost(75)),/**
      * L'attribut PINK...
      */
     PINK(new SurroundStrategyGhost(75)),/**

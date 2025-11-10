@@ -23,7 +23,7 @@ public class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
     /**
      * Liste des strategie a alternée pour les fantômes
      */
-    private IStrategyGhost[] listeStrategys  = {new ChaseStrategyGhost(), new DumbStrategyGhost()};
+    private IStrategyGhost[] listeStrategys  = {new ChaseStrategyGhost(75), new DumbStrategyGhost()};
 
     /**
      * L'attribut temps pour actualise tout les 5 secondes
