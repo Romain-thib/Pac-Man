@@ -80,7 +80,7 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
             return new FleeingStateGhost();
         }
         if (time <= 0) {
-            return null; // TODO : Remplacer par état invulnérable
+            return new InvulnerableStateGhost();
         } else {
             return this;
         }

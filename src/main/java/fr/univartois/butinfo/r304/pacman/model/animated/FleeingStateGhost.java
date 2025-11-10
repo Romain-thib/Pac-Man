@@ -71,7 +71,7 @@ public class FleeingStateGhost implements IStateGhost {
     @Override
     public IStateGhost nextState() {
         if (time <= 0) {
-            return null; // TODO : Remplacer par état vulnérable
+            return new InvulnerableStateGhost();
         } else {
             return this;
         }
