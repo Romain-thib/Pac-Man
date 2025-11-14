@@ -378,18 +378,21 @@ enum GhostColor {
   + getMoveStrategy() : IStrategyGhost
 }
 
-class Ghost extends AbstractAnimated {
+class Ghost extends AbstractAnimated implements IAnimated {
     - strategyGhost : IStrategyGhost
+    - stateGhost : IStateGhost
     - color : GhostColor
 
-    + Ghost(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
+    + Ghost(game : PacmanGame, xPosition : double, yPosition : double, sprites : Sprite, color : GhostColor)
     + getColor() : GhostColor
     + setColor(color : GhostColor) : void
     + setStrategyGhost(strategy : IStrategyGhost) : void
+    + setState(stateGhost : IStateGhost) : void
     + onCollisionWith(other : IAnimated) : void
     + onCollisionWith(other : PacMan) : void
     + onCollisionWith(other : Ghost) : void
     + onCollisionWith(other : PacGum) : void
+    + onCollisionWith(other : MegaGum) : void
     + onStep(delta : long) : boolean
 }
 
@@ -397,7 +400,7 @@ interface IStrategyGhost {
     + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
 }
 
-interface IStateGhost {
+interface IStateGhostMove {
     + moveState(ghost : Ghost, delta : long, speedOfGhostState : double, game : PacmanGame) : void
     + nextState() : IStateGhost
 }
@@ -439,6 +442,56 @@ class DistantStateGhost implements IStateGhost {
 class ClassicStateGhost implements IStateGhost {
     + moveState(ghost : Ghost, delta : long, speedOfGhostState : double, game : PacmanGame) : void
     + nextState() : IStateGhost
+}
+
+interface IStateGhost {
+    + moveState(ghost : Ghost, game : PacmanGame) : void
+    + handleCollisionWithPacman(ghost : Ghost, game : PacmanGame) : IStateGhost
+    + getSpriteGhost(ghost : Ghost) : void
+    + nextState() : IStateGhost
+    + handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
+}
+
+class FleeingStateGhost implements IStateGhost {
+    - time : double = 5000
+    - spritesGhost : Sprite
+    - SPEED : double = -80
+    + moveState(ghost : Ghost, game : PacmanGame) : void
+    + handleCollisionWithPacman(ghost : Ghost, game : PacmanGame) : IStateGhost
+    + getSpriteGhost(ghost : Ghost) : void
+    + nextState() : IStateGhost
+    + handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
+}
+
+class InvulnerableStateGhost implements IStateGhost {
+    - spritesGhost : Sprite
+    + moveState(ghost : Ghost, game : PacmanGame) : void
+    + handleCollisionWithPacman(ghost : Ghost, game : PacmanGame) : IStateGhost
+    + getSpriteGhost(ghost : Ghost) : void
+    + nextState() : IStateGhost
+    + handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
+}
+
+class NearlyInvulnerableStateGhost implements IStateGhost {
+    - time : double = 5000
+    - spritesGhost : Sprite
+    - SPEED : double = -60
+    + moveState(ghost : Ghost, game : PacmanGame) : void
+    + handleCollisionWithPacman(ghost : Ghost, game : PacmanGame) : IStateGhost
+    + getSpriteGhost(ghost : Ghost) : void
+    + nextState() : IStateGhost
+    + handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
+}
+
+class VulnerableStateGhost implements IStateGhost {
+    - time : double = 15000
+    - spritesGhost : Sprite
+    - SPEED : double = -60
+    + moveState(ghost : Ghost, game : PacmanGame) : void
+    + handleCollisionWithPacman(ghost : Ghost, game : PacmanGame) : IStateGhost
+    + getSpriteGhost(ghost : Ghost) : void
+    + nextState() : IStateGhost
+    + handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
 }
 
 Ghost o-- "1" GhostColor
