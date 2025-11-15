@@ -363,6 +363,11 @@ class PacMan extends AbstractAnimated {
     + onStep(delta : long) : boolean
 }
 
+interface IStatePacman {
+	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
+	+ changeStatePacman(time : long) : IStatePacman
+	+ getSprite(spriteStore : SpriteStore) : Sprite
+}
 
 class PacGum extends AbstractAnimated {
     + PacGum(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
