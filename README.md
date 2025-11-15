@@ -348,16 +348,43 @@ AbstractAnimated o-- "1" Sprite
 class PacMan extends AbstractAnimated {
     - hp : IntegerProperty
     - score : IntegerProperty
+    - vulnerabilities : IStatePacman
+    - spriteStore : SpriteStore
 
     + PacMan(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
     + getHpProperty() : IntegerProperty
     + getScoreProperty() : IntegerProperty
+    + getHp() : IntegerProperty
+    + setHp(hp : int) : void
     + onCollisionWith(other : IAnimated) : void
     + onCollisionWith(other : PacMan) : void
     + onCollisionWith(other : Ghost) : void
     + onCollisionWith(other : PacGum) : void
+    + onStep(delta : long) : boolean
 }
 
+interface IStatePacman {
+	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
+	+ changeStatePacman(time : long) : IStatePacman
+	+ getSprite(spriteStore : SpriteStore) : Sprite
+}
+
+class PacmanInvulnerable implements IStatePacman{
+	- compteur : long
+	- sprite : Sprite
+	
+	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
+	+ changeStatePacman(time : long) : IStatePacman
+	+ getSprite(spriteStore : SpriteStore) : Sprite
+}
+
+class PacmanVulnerable implements IStatePacman{
+	- sprite : Sprite
+	
+	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
+	+ changeStatePacman(time : long) : IStatePacman
+	+ getSprite(spriteStore : SpriteStore) : Sprite
+}
 
 class PacGum extends AbstractAnimated {
     + PacGum(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
