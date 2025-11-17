@@ -183,5 +183,16 @@ public class Ghost extends AbstractAnimated{
         //
     }
 
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.Bonus)
+     */
+    @Override
+    public void onCollisionWith(Bonus other) {
+        // les fantomes n'utilisent pas de bonus
+    }
+
 }
 

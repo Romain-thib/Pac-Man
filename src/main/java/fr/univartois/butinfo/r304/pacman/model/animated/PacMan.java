@@ -157,5 +157,15 @@ public class PacMan extends AbstractAnimated{
         score.set(score.get()+50); 
         game.megaGumEaten(other);
     }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.Bonus)
+     */
+    @Override
+    public void onCollisionWith(Bonus other) {
+        // TODO
+    }
 }
 
