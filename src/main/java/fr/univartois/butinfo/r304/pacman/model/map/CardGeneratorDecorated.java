@@ -28,7 +28,7 @@ public class CardGeneratorDecorated implements ICardGenerator {
     /**
      * L'attribut spriteStore permet de recuprer les sprites
      */
-    private SpriteStore spriteStore = new SpriteStore();
+    private SpriteStore spriteStore = SpriteStore.getInstance();
     
     /**
      * Crée une nouvelle instance de CardGeneratorDecorated.

@@ -24,7 +24,7 @@ public class CardGenerator implements ICardGenerator {
     /**
      * L'attribut spriteStore
      */
-    private final SpriteStore spriteStore = new SpriteStore();
+    private final SpriteStore spriteStore = SpriteStore.getInstance();
 
     /*
      * (non-Javadoc)

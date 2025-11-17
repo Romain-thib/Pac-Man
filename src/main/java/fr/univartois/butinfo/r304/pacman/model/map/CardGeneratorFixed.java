@@ -28,7 +28,7 @@ public class CardGeneratorFixed implements ICardGenerator {
     /**
      * L'attribut spriteStore permet de recuprer les sprites
      */
-    private SpriteStore spriteStore = new SpriteStore();
+    private SpriteStore spriteStore = SpriteStore.getInstance();
     
     /**
      * L'attribut walls correspond aux murs qui seront placé lors

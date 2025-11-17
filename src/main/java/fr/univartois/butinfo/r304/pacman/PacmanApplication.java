@@ -68,7 +68,7 @@ public final class PacmanApplication extends Application {
 
         // On crée ensuite le jeu, que l'on lie au contrôleur.
         PacmanGame game = new PacmanGame(
-                GAME_WIDTH, GAME_HEIGHT, new SpriteStore(), NB_GHOSTS);
+                GAME_WIDTH, GAME_HEIGHT, SpriteStore.getInstance(), NB_GHOSTS);
         game.setGenerator(new CardGeneratorFixed(new CardGeneratorEmpty()));
         controller.setGame(game);
         game.setController(controller);

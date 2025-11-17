@@ -55,7 +55,7 @@ public class PacMan extends AbstractAnimated{
         super(game, xPosition, yPosition, sprite);
         hp = new SimpleIntegerProperty(3);
         score = new SimpleIntegerProperty(0);
-        spriteStore = new SpriteStore();
+        spriteStore = SpriteStore.getInstance();
     }
     
     /**
