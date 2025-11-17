@@ -12,24 +12,24 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type PacGum
+ * Le type Bonus
  *
  * @author simon.cohet
  *
  * @version 0.1.0
  */
-public class PacGum extends AbstractAnimated {
+public abstract class Bonus extends AbstractAnimated {
 
     /**
-     * Crée une nouvelle instance de PacGum.
+     * Crée une nouvelle instance de Bonus.
      * 
-     * @param game 
-     * @param xPosition
-     * @param yPosition
-     * @param sprite 
+     * @param game La partie de pacman
+     * @param xPosition La position en x du bonus
+     * @param yPosition La position en y du bonus
+     * @param sprites les sprites du bonus
      */
-    public PacGum(PacmanGame game, double xPosition, double yPosition, Sprite sprite) {
-        super(game, xPosition, yPosition, sprite);
+    protected Bonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites) {
+        super(game, xPosition, yPosition, sprites);
     }
 
     /*
@@ -65,7 +65,7 @@ public class PacGum extends AbstractAnimated {
      */
     @Override
     public void onCollisionWith(Ghost other) {
-        // Les fantomes ignorent les pacgums
+        // Les bonus ne rentrent pas en collision avec les fantômes
     }
 
     /*
@@ -77,29 +77,35 @@ public class PacGum extends AbstractAnimated {
      */
     @Override
     public void onCollisionWith(PacGum other) {
-        // Les pacgum ne rentrent pas en collisions les unes avec les autres
+        // Les bonus ne rentrent pas en collision avec les pacgums
     }
-    
+
     /*
      * (non-Javadoc)
      *
      * @see
      * fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.
-     * butinfo.r304.pacman.model.animated.PacGum)
+     * butinfo.r304.pacman.model.animated.MegaGum)
      */
     @Override
     public void onCollisionWith(MegaGum other) {
-        // Les pacgums ne rentrent pas en collisions avec les megagums
+        // Les bonus ne rentrent pas en collision avec les megagum
     }
 
-    
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.Bonus)
+     * @see
+     * fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.
+     * butinfo.r304.pacman.model.animated.Bonus)
      */
     @Override
     public void onCollisionWith(Bonus other) {
-        // Les pacgums ne rentrent pas en collisions lavec les bonus.
+        // Les bonus ne rentrent pas en collision avec les bonus
     }
+
+    /**
+     * Gère l'effet des bonus s'ils sont mangés par pac-man.
+     */
+    public abstract void handleBonus();
 }
