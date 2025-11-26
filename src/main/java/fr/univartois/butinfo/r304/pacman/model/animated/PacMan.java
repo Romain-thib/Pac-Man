@@ -37,12 +37,12 @@ public class PacMan extends AbstractAnimated{
     /**
      * Le multiplicateur de score de pacman lorsqu'il mange une pacgum
      */
-    private double score_mult;
+    private double scoreMult;
     
     /**
      * L'attribut vulnerabilities.
      */
-    private IStatePacman vulnerabilities = new PacmanVulnerable();  
+    private IStatePacman state = new ScoreBonusState();  
     
     /**
      * L'attribut spriteStore pour gérer les sprites de pacman.
@@ -61,6 +61,7 @@ public class PacMan extends AbstractAnimated{
         hp = new SimpleIntegerProperty(3);
         score = new SimpleIntegerProperty(0);
         spriteStore = new SpriteStore();
+        scoreMult = 1;
     }
     
     /**
@@ -81,6 +82,24 @@ public class PacMan extends AbstractAnimated{
         return score;
     }
     
+    /**
+     * Modifie l'attribut scoreMult de cette instance de PacMan.
+     *
+     * @param scoreMult La nouvelle valeur de l'attribut scoreMult pour cette instance de PacMan.
+     */
+    public void setScoreMult(double scoreMult) {
+        this.scoreMult = scoreMult;
+    }
+    
+    /**
+     * Modifie l'attribut state de cette instance de PacMan.
+     *
+     * @param state La nouvelle valeur de l'attribut state pour cette instance de PacMan.
+     */
+    public void setState(IStatePacman state) {
+        this.state = state;
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -108,7 +127,7 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public void onCollisionWith(Ghost other) {
-        vulnerabilities = vulnerabilities.onCollisionWithGhost(this);
+        state = state.onCollisionWithGhost(this);
         if (hp.get() <= 0) {
             game.playerIsDead();
         }
@@ -121,7 +140,7 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public void onCollisionWith(PacGum other) {
-        score.set(score.get()+(int)Math.round(10*score_mult)); 
+        score.set(score.get()+(int)Math.round(10*scoreMult)); 
         game.pacGumEaten(other);
     }
     
@@ -132,8 +151,9 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public boolean onStep(long delta) {
-        vulnerabilities = vulnerabilities.changeStatePacman(delta);
-        this.setSprite(vulnerabilities.getSprite(spriteStore));
+        state = state.changeStatePacman(delta);
+        state.handleState(game);
+        this.setSprite(state.getSprite(spriteStore));
         return super.onStep(delta);
     }
     
@@ -159,7 +179,7 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public void onCollisionWith(MegaGum other) {
-        score.set(score.get()+(int)Math.round(50*score_mult)); 
+        score.set(score.get()+(int)Math.round(50*scoreMult)); 
         game.megaGumEaten(other);
     }
     
