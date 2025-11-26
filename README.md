@@ -630,6 +630,16 @@ class SlowGhostBonus extends Bonus{
 	+ handleCollisionWithAnimated(Ghost ghost, IAnimated animated) : void
 }
 
+class BonusComposite implements IAnimated {
+	- bonuses : Bonus[]
+	- bonusSlowGhost : Bonus
+	- rand : Random
+	
+	# BonusComposite(PacmanGame game, double xPosition, double yPosition, Sprite sprites)
+	+ onCollisionWith(IAnimated other) : void
+	+ onCollisionWith(PacMan other) : void
+}
+
 class PacmanSpeedBonus extends Bonus {
 	+ PacmanSpeedBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites)
 }
