@@ -386,11 +386,13 @@ interface IStatePacman {
 class PacmanInvulnerable implements IStatePacman{
 	- compteur : long
 	- sprite : Sprite
+	- duree : long
 	
 	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
 	+ changeStatePacman(time : long) : IStatePacman
 	+ getSprite(spriteStore : SpriteStore) : Sprite
 	+ handleState(game : PacmanGame) : void
+	+ setDuree(duree : long) : void
 }
 
 class PacmanVulnerable implements IStatePacman{
@@ -641,7 +643,13 @@ class BonusComposite implements IAnimated {
 }
 
 class PacmanSpeedBonus extends Bonus {
-	+ PacmanSpeedBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites)
+	+ PacmanSpeedBonus(game : PacmanGame, xPosition double, yPosition double, sprites Sprite)
+	+ handleBonus() : void
+}
+
+class InvulnerableBonus extends Bonus {
+	+ PacmanSpeedBonus(game : PacmanGame, xPosition double, yPosition double, sprites Sprite)
+	+ InvulnerableBonus() : void
 }
 
 Ghost o-- "1" GhostColor

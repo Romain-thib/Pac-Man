@@ -29,6 +29,11 @@ public class PacmanInvulnerable implements IStatePacman{
     private long compteur = 0;
     
     /**
+     * L'atribut duree indique la durée 
+     */
+   private long duree = 3000;
+    
+    /**
      * L'attribut sprite qui gère l'apparence de pacman.
      */
     private Sprite sprite = null;
@@ -42,6 +47,15 @@ public class PacmanInvulnerable implements IStatePacman{
     public IStatePacman onCollisionWithGhost(PacMan pacman) {
         return this;        
     }
+    
+    /**
+     * Modifie l'attribut duree de cette instance de PacmanInvulnerable.
+     *
+     * @param duree La nouvelle valeur de l'attribut duree pour cette instance de PacmanInvulnerable.
+     */
+    public void setDuree(long duree) {
+        this.duree = duree;
+    }
 
     /*
      * (non-Javadoc)
@@ -51,7 +65,7 @@ public class PacmanInvulnerable implements IStatePacman{
     @Override
     public IStatePacman changeStatePacman(long time) {
        compteur += time;
-       if(compteur < 3000) { // 3 secondes d'invulnérabilité
+       if(compteur < duree) { // 3 secondes d'invulnérabilité
            return this;
        }
         return new PacmanVulnerable();
