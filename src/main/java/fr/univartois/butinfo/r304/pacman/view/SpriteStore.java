@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import fr.univartois.dpprocessor.designpatterns.singleton.Instance;
-import fr.univartois.dpprocessor.designpatterns.singleton.SingletonDesignPattern;
 import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 

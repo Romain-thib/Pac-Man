@@ -21,11 +21,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.r304.pacman.model.animated.Bonus;
 import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.GhostColor;
 import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
+import fr.univartois.butinfo.r304.pacman.model.animated.ScoreBonus;
+import fr.univartois.butinfo.r304.pacman.model.animated.SlowGhostBonus;
 import fr.univartois.butinfo.r304.pacman.model.map.Cell;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
@@ -89,7 +92,7 @@ public final class PacmanGame {
      * Le nombre de pac-gommes initialement dans le jeu.
      */
     private int nbGums;
-    
+
     private List<Ghost> ghostList = new ArrayList<>();
 
     /**
@@ -106,6 +109,7 @@ public final class PacmanGame {
      * L'animation du jeu, qui s'assure que les différents objets évoluent.
      */
     private final AnimationTimer animation = new GameAnimation(movingObjects, animatedObjects);
+
     /**
      * Le contrôleur du jeu.
      */
@@ -253,7 +257,7 @@ public final class PacmanGame {
                     "ghosts/" + color.name().toLowerCase() + "/1",
                     "ghosts/" + color.name().toLowerCase() + "/2");
             Ghost ghost = new Ghost(this, 0, 0, ghostSprite, color);
-            ghostList.add(ghost); 
+            ghostList.add(ghost);
 
             ghost.setHorizontalSpeed(DEFAULT_SPEED * 0.8);
             animatedObjects.add(ghost);
@@ -264,15 +268,28 @@ public final class PacmanGame {
         nbGums = emptyCells.size(); // mettre à jour le nombre de pac-gommes
         for (int i = 0; i < emptyCells.size(); i++) {
             Cell cell = emptyCells.get(i);
-            int r = RANDOM.nextInt(100);
-            if (r <= 1) {
-               MegaGum megagum = new MegaGum(
-                       this, 
-                       cell.getColumn() * spriteStore.getSpriteSize(),
-                       cell.getRow() * spriteStore.getSpriteSize(),
-                       spriteStore.getSprite("megagum")
-               );
-               addAnimated(megagum);
+            int r = RANDOM.nextInt(1000);
+            if (r <= 5) {
+                ScoreBonus scorebonus = new ScoreBonus(
+                        this,
+                        cell.getColumn() * spriteStore.getSpriteSize(),
+                        cell.getRow() * spriteStore.getSpriteSize(),
+                        spriteStore.getSprite("bonus/cherries"));
+                addAnimated(scorebonus);
+            } else if (r <= 10) {
+                SlowGhostBonus slowghostbonus = new SlowGhostBonus(
+                        this,
+                        cell.getColumn() * spriteStore.getSpriteSize(),
+                        cell.getRow() * spriteStore.getSpriteSize(),
+                        spriteStore.getSprite("bonus/melon"));
+                addAnimated(slowghostbonus);
+            } else if (r <= 25) {
+                MegaGum megagum = new MegaGum(
+                        this,
+                        cell.getColumn() * spriteStore.getSpriteSize(),
+                        cell.getRow() * spriteStore.getSpriteSize(),
+                        spriteStore.getSprite("megagum"));
+                addAnimated(megagum);
             } else {
                 PacGum gum = new PacGum(
                         this,
@@ -443,7 +460,7 @@ public final class PacmanGame {
             gameOver("YOU WIN!");
         }
     }
-    
+
     /**
      * Indique que le joueur a mangé une mega-gomme.
      *

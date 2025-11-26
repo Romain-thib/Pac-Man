@@ -25,7 +25,7 @@ public class ScoreBonus extends Bonus {
      * @param yPosition : la position y du bonus
      * @param sprites : les sprites du bonus
      */
-    protected ScoreBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites) {
+    public ScoreBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites) {
         super(game, xPosition, yPosition, sprites);
     }
 
