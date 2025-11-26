@@ -42,7 +42,7 @@ public class PacMan extends AbstractAnimated{
     /**
      * L'attribut vulnerabilities.
      */
-    private IStatePacman state = new ScoreBonusState();  
+    private IStatePacman state = new PacmanVulnerable();  
     
     /**
      * L'attribut spriteStore pour gérer les sprites de pacman.
