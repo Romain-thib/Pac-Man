@@ -36,8 +36,10 @@ public class InvulnerableStateGhost implements IStateGhost{
      */
     @Override
     public void moveState(Ghost ghost, PacmanGame game) {
-        // déplacement de bases 
-        ghost.setStrategyGhost(ghost.getColor().getMoveStrategy());
+        // déplacement de bases
+        IStrategyGhost strategy = ghost.getColor().getMoveStrategy();
+        strategy.setSpeed(75);
+        ghost.setStrategyGhost(strategy);
     }
 
     /*

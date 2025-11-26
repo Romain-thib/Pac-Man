@@ -31,7 +31,7 @@ public class BonusComposite implements IAnimated {
     /**
      * L'attribut bonuses qui est une liste de bonus pour pacman
      */
-    private Bonus[] bonuses;
+    private IAnimated[] bonuses;
     
     /**
      * L'attribut bonusSlowGhost qui est un bonus pour ralentir les fantômes
@@ -65,8 +65,9 @@ public class BonusComposite implements IAnimated {
     @Override
     public void onCollisionWith(IAnimated other) {
         int r = rand.nextInt(bonuses.length);
-        other.onCollisionWith(bonuses[r]);
-        other.onCollisionWith(bonusSlowGhost);
+        bonuses[r].onCollisionWith(other);
+        bonusSlowGhost.onCollisionWith(other);
+
     }
 
     /*

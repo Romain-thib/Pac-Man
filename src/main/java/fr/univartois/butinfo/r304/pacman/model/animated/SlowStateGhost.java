@@ -47,10 +47,6 @@ public class SlowStateGhost implements IStateGhost{
      */
     @Override
     public void moveState(Ghost ghost, PacmanGame game) {
-        /**
-         * if(ghost.setStrategyGhost(ghost.getColor().getMoveStrategy()) == ChaseStrategyGhost(75))
-         * 
-         */
         IStrategyGhost strategy = ghost.getColor().getMoveStrategy();
         strategy.setSpeed(SPEED);
         time -= 1;
