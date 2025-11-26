@@ -196,6 +196,7 @@ ICardGenerator --> Cell : << crée >>
 class PacmanGame {
     + {static} RANDOM : Random
     + {static} DEFAULT_SPEED : int
+    - speed : int
     - width : int
     - height : int
     - spriteStore : ISpriteStore
@@ -215,6 +216,7 @@ class PacmanGame {
     + getHeight() : int
     + prepare() : void
     + start() : void
+    + setSpeed() : void
     - createMap() : GameMap
     - createAnimated() : void
     - initStatistics() : void
@@ -416,6 +418,29 @@ class PacmanVulnerable implements IStatePacman{
 	+ handleState(game : PacmanGame) : void
 }
 
+class ScoreBonusState extends PacmanVulnerable {
+	- delta : long
+	
+	+ changeStatePacman(time : long) : IStatePacman
+	+ handleState(game : PacmanGame) : void
+}
+
+class PacmanSpeedState extends PacmanVulnerable {
+	- delta : long
+	
+	+ changeStatePacman(time : long) : IStatePacman
+	+ handleState(game : PacmanGame) : void
+}
+
+class PacmanVulnerable implements IStatePacman{
+	- sprite : Sprite
+	
+	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
+	+ changeStatePacman(time : long) : IStatePacman
+	+ getSprite(spriteStore : SpriteStore) : Sprite
+	+ handleState(game : PacmanGame) : void
+}
+
 class PacGum extends AbstractAnimated {
     + PacGum(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
     + onCollisionWith(other : IAnimated) : void
@@ -585,7 +610,7 @@ class SlowStateGhost implements IStateGhost{
 	+ handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
 }
 
-abstact class Bonus extends AbstractAnimated {
+abstract class Bonus extends AbstractAnimated {
 	# Bonus()game : PacmanGame, xPosition : double, yPosition : double, Sprite sprites)
 	+ onCollisionWith(other : IAnimated) : void
 	+ onCollisionWith(other : PacMan) : void
@@ -601,8 +626,12 @@ class ScoreBonus extends Bonus {
 }
 
 class SlowGhostBonus extends Bonus{
-	# SlowGhostBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites)
+	+ SlowGhostBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites)
 	+ handleCollisionWithAnimated(Ghost ghost, IAnimated animated) : void
+}
+
+class PacmanSpeedBonus extends Bonus {
+	+ PacmanSpeedBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites)
 }
 
 Ghost o-- "1" GhostColor
