@@ -283,7 +283,6 @@ public final class PacmanGame {
                 );
                 addAnimated(gum);
             }
-
         }
     }
 
