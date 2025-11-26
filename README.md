@@ -71,8 +71,10 @@ interface ISpriteStore {
 }
 
 class SpriteStore implements ISpriteStore {
+    - INSTANCE : SpriteStore
     - spriteCache : Map<String, Sprite>
-
+    - SpriteStore() 
+    + getInstance() : SpriteStore
     + getSprite(identifier : String) : Sprite
     + getSprite(frameRate : int, identifiers : List<String>) : Sprite
     - loadImage(name : String) : Image
@@ -134,8 +136,9 @@ interface ICardGenerator {
 }
 
 class CardGenerator implements ICardGenerator {
-    - {static} spriteStore : SpriteStore
-
+    - INSTANCE : CardGenerator
+    - CardGenerator()
+    + getInstance() : CardGenerator
     + generate(height : int, width : int) : GameMap
     - generateBorderWalls(map : GameMap) : void
     - generateHorizontalWall(map : GameMap) : void
@@ -144,8 +147,9 @@ class CardGenerator implements ICardGenerator {
 }
 
 class CardGeneratorEmpty implements ICardGenerator {
-    - {static} spriteStore : SpriteStore
-
+    - INSTANCE : CardGeneratorEmpty
+    - CardGeneratorEmpty()
+    + getInstance() : CardGeneratorEmpty
     + generate(height : int, width : int) : GameMap
     - generateBorderWalls(map : GameMap) : void
     - createWallCell() : Cell
@@ -480,6 +484,9 @@ class DistantStateGhost implements IStateGhost {
 }
 
 class ClassicStateGhost implements IStateGhost {
+    - INSTANCE : ClassicStateGhost
+    - ClassicStateGhost()
+    + getInstance() : ClassicStateGhost
     + moveState(ghost : Ghost, delta : long, speedOfGhostState : double, game : PacmanGame) : void
     + nextState() : IStateGhost
 }
@@ -605,14 +612,14 @@ PacmanController o-- "1" PacmanGame
 | Fantômes presque invulnérables       | état                   |  oui       | simon     |
 | Fantômes invulnérables               | état                   |  oui       | shun      |
 | Réutilisation des fantômes existants |                        |  oui       | shun      |
-| Ajout des méga-gommes                |                        |  oui       | timothée  |
+| Ajout des méga-gommes                |                        |  oui       | Timothée  |
 
 ### Jalon n°4 - TP n°6
 
 | Fonctionnalité                                       | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
 | ---------------------------------------------------- | ---------------------- | ---------- | --------------------------------------------- |
-| Définition d'un seul `SpriteStore`                   |                        |            |                                               |
-| Définition d'une seule instance quand c'est possible |                        |            |                                               |
+| Définition d'un seul `SpriteStore`                 | Singleton              | oui        |  Timothée                                     |
+| Définition d'une seule instance quand c'est possible | Singleton              | oui        |  Timothée                                     |
 | Ajout des bonus (préciser lesquels)                  |                        |            |                                               |
 | Ajout des bonus multiples                            |                        |            |                                               |
 | Gestion des différents niveaux                       |                        |            |                                               |
