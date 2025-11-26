@@ -264,6 +264,7 @@ interface IAnimated {
     + {abstract} onCollisionWith(other : Ghost) : void
     + {abstract} onCollisionWith(other : PacGum) : void
     + {abstract} onCollisionWith(other : MegaGum) : void
+    + {abstract} onCollisionWith(other : Bonus) : void
     + {abstract} onDespawn() : void
     + {abstract} onDestruction() : void
     + {abstract} self() : IAnimated
@@ -353,19 +354,23 @@ AbstractAnimated o-- "1" Sprite
 class PacMan extends AbstractAnimated {
     - hp : IntegerProperty
     - score : IntegerProperty
-    - vulnerabilities : IStatePacman
+    - state : IStatePacman
     - spriteStore : SpriteStore
+    - scoreMult : double
 
     + PacMan(game : PacmanGame, xPosition : double, yPosition : double, sprite : Sprite)
     + getHpProperty() : IntegerProperty
     + getScoreProperty() : IntegerProperty
     + getHp() : IntegerProperty
     + setHp(hp : int) : void
+    + setScoreMult(scoreMult : double) : void
+    + setState(state : IStatePacman): void
     + onCollisionWith(other : IAnimated) : void
     + onCollisionWith(other : PacMan) : void
     + onCollisionWith(other : Ghost) : void
     + onCollisionWith(other : PacGum) : void
     + onCollisionWith(other : MegaGum) : void
+    + onCollisionWith(other : Bonus) : void
     + onStep(delta : long) : boolean
 }
 
@@ -373,6 +378,7 @@ interface IStatePacman {
 	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
 	+ changeStatePacman(time : long) : IStatePacman
 	+ getSprite(spriteStore : SpriteStore) : Sprite
+	+ handleState(game : PacmanGame) : void
 }
 
 class PacmanInvulnerable implements IStatePacman{
@@ -382,6 +388,7 @@ class PacmanInvulnerable implements IStatePacman{
 	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
 	+ changeStatePacman(time : long) : IStatePacman
 	+ getSprite(spriteStore : SpriteStore) : Sprite
+	+ handleState(game : PacmanGame) : void
 }
 
 class PacmanVulnerable implements IStatePacman{
@@ -390,6 +397,23 @@ class PacmanVulnerable implements IStatePacman{
 	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
 	+ changeStatePacman(time : long) : IStatePacman
 	+ getSprite(spriteStore : SpriteStore) : Sprite
+	+ handleState(game : PacmanGame) : void
+}
+
+class ScoreBonusState extends PacmanVulnerable {
+	- delta : long
+	
+	+ changeStatePacman(time : long) : IStatePacman
+	+ handleState(game : PacmanGame) : void
+}
+
+class PacmanVulnerable implements IStatePacman{
+	- sprite : Sprite
+	
+	+ onCollisionWithGhost(pacman : PacMan) : IStatePacman
+	+ changeStatePacman(time : long) : IStatePacman
+	+ getSprite(spriteStore : SpriteStore) : Sprite
+	+ handleState(game : PacmanGame) : void
 }
 
 class PacGum extends AbstractAnimated {
@@ -399,6 +423,7 @@ class PacGum extends AbstractAnimated {
     + onCollisionWith(other : Ghost) : void
     + onCollisionWith(other : PacGum) : void
     + onCollisionWith(other : MegaGum) : void
+    + onCollisionWith(other : Bonus) : void
 }
 
 class MegaGum extends AbstractAnimated {
@@ -408,6 +433,7 @@ class MegaGum extends AbstractAnimated {
     + onCollisionWith(other : Ghost) : void
     + onCollisionWith(other : PacGum) : void
     + onCollisionWith(other : MegaGum) : void
+    + onCollisionWith(other : Bonus) : void
 }
 
 
@@ -437,6 +463,7 @@ class Ghost extends AbstractAnimated implements IAnimated {
     + onCollisionWith(other : Ghost) : void
     + onCollisionWith(other : PacGum) : void
     + onCollisionWith(other : MegaGum) : void
+    + onCollisionWith(other : Bonus) : void
     + onStep(delta : long) : boolean
 }
 
@@ -539,6 +566,21 @@ class VulnerableStateGhost implements IStateGhost {
     + getSpriteGhost(ghost : Ghost) : void
     + nextState() : IStateGhost
     + handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
+}
+
+abstact class Bonus extends AbstractAnimated {
+	# Bonus()game : PacmanGame, xPosition : double, yPosition : double, Sprite sprites)
+	+ onCollisionWith(other : IAnimated) : void
+	+ onCollisionWith(other : PacMan) : void
+	+ onCollisionWith(other : Ghost) : void
+	+ onCollisionWith(other : PacGum) : void
+	+ onCollisionWith(other : MegaGum) : void
+	+ onCollisionWith(other : Bonus) : void
+}
+
+class ScoreBonus extends Bonus {
+	+ ScoreBonus(game : PacmanGame, xPosition double, yPosition double, sprites Sprite)
+	+ handleBonus() : void
 }
 
 Ghost o-- "1" GhostColor
