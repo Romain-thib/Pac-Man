@@ -20,8 +20,6 @@ import java.io.IOException;
 
 import fr.univartois.butinfo.r304.pacman.controller.PacmanController;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
-import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorEmpty;
-import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorFixed;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
