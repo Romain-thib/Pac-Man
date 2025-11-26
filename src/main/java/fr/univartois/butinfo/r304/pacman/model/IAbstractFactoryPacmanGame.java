@@ -44,8 +44,10 @@ public interface IAbstractFactoryPacmanGame {
     IAnimated createGum(PacmanGame game);
     
     /**
+     * @param width la taille en largeur de la map
+     * @param height la taill en longueur de la map
      * @return Une d'instance de GameMap
      */
-    GameMap createMap();
+    GameMap createMap(int width, int height);
 }
 
