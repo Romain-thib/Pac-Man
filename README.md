@@ -436,8 +436,17 @@ class Ghost extends AbstractAnimated implements IAnimated {
     + onStep(delta : long) : boolean
 }
 
+interface IStateGhost{
+	+ moveState(ghost : Ghost, game : PacmanGame) : void
+	+ handleCollisionWithPacman(Ghost ghost,PacmanGame game) : IStateGhost
+	+ getSpriteGhost(Ghost ghost) : void
+	+ nextState() : IStateGhost
+	+ handleCollisionWithAnimated(Ghost ghost, IAnimated animated) : void
+}    
+
 interface IStrategyGhost {
     + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
+    + setSpeed(speed : double) : void
 }
 
 interface IStateGhostMove {
@@ -446,31 +455,35 @@ interface IStateGhostMove {
 }
 
 class ChaseStrategyGhost implements IStrategyGhost {
-    - {static} SPEED : double
+    - speed : double
+    + setSpeed(speed : double) : void
     + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
     - changeDirection(ghost : Ghost, game : PacmanGame) : void
 }
 
 class DumbStrategyGhost implements IStrategyGhost {
-    - {static} SPEED : double
+    - speed : double
     - temps : double
+    + setSpeed(speed : double) : void
     + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
     - changeDirection(ghost : Ghost) : void
 }
 
 class SurroundStrategyGhost implements IStrategyGhost {
-    - {static} SPEED : double
     - speedOfGhost : double
     - stateGhost : IStateGhost
     + SurroundStrategyGhost(speedOfGhost : int)
     + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
+    + setSpeed(speed : double) : void
 }
 
 class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
     - listeStrategys : IStrategyGhost[]
     - temps : double
     - current : int
+    - speed : double
     + moveStrategy(ghost : Ghost, delta : long, game : PacmanGame) : void
+    + setSpeed(speed : double) : void
 }
 
 class DistantStateGhost implements IStateGhost {
@@ -482,14 +495,6 @@ class DistantStateGhost implements IStateGhost {
 class ClassicStateGhost implements IStateGhost {
     + moveState(ghost : Ghost, delta : long, speedOfGhostState : double, game : PacmanGame) : void
     + nextState() : IStateGhost
-}
-
-interface IStateGhost {
-    + moveState(ghost : Ghost, game : PacmanGame) : void
-    + handleCollisionWithPacman(ghost : Ghost, game : PacmanGame) : IStateGhost
-    + getSpriteGhost(ghost : Ghost) : void
-    + nextState() : IStateGhost
-    + handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
 }
 
 class FleeingStateGhost implements IStateGhost {
@@ -533,6 +538,24 @@ class VulnerableStateGhost implements IStateGhost {
     + nextState() : IStateGhost
     + handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
 }
+
+class SlowStateGhost implements IStateGhost{
+	- time : double = 5000                            
+	- spritesGhost : Sprite
+	- SPEED : double = 50                            
+
+	+ moveState(Ghost ghost, PacmanGame game) : void
+	+ handleCollisionWithPacman(Ghost ghost, PacmanGame game) : IStateGhost
+	+ getSpriteGhost(Ghost ghost) : void
+	+ nextState() : IStateGhost
+	+ handleCollisionWithAnimated(ghost : Ghost, animated : IAnimated) : void
+}
+
+class SlowGhostBonus extends Bonus{
+	# SlowGhostBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites)
+	+ handleCollisionWithAnimated(Ghost ghost, IAnimated animated) : void
+}
+
 
 Ghost o-- "1" GhostColor
 Ghost o-- "1" IStrategyGhost
