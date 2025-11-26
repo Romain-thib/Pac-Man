@@ -52,7 +52,11 @@ public class BonusComposite implements IAnimated {
      */
     protected BonusComposite(PacmanGame game, double xPosition, double yPosition, Sprite sprites) {
         super();
-        bonuses = new Bonus[] {new ScoreBonus(game, xPosition, yPosition, sprites)}; //rajouté les prochains bonus ici
+        bonuses = new Bonus[] {new ScoreBonus(game, xPosition, yPosition, sprites),
+                new PacmanSpeedBonus(game, xPosition, yPosition, sprites),
+                new InvulnerableBonus(game, xPosition, yPosition, sprites)
+                }; //rajouté les prochains bonus ici si on en fait plus pour pacman
+        
         bonusSlowGhost = new SlowGhostBonus(game, xPosition, yPosition, sprites);
     }
 
