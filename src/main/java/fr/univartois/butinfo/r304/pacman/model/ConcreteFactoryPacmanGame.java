@@ -86,17 +86,6 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createGum(fr.univartois.butinfo.r304.pacman.model.PacmanGame)
-     */
-    @Override
-    public IAnimated createGum(PacmanGame game) {
-        // TODO Auto-generated method stub.
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createMap()
      */
     @Override
@@ -108,6 +97,17 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
         int numCols = width / cellSize;
 
         return generator.generate(numRows, numCols);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createGum(fr.univartois.butinfo.r304.pacman.model.PacmanGame, int, int)
+     */
+    @Override
+    public IAnimated createGum(PacmanGame game, int cellColumn, int cellRow) {
+        // TODO Auto-generated method stub.
+        return null;
     }
 }
 
