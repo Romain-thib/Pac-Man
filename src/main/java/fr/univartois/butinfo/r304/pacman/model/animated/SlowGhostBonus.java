@@ -26,7 +26,7 @@ public class SlowGhostBonus extends Bonus{
      * @param yPosition correspondant a la position en y de ce bonus
      * @param sprites les sprites de ce bonus
      */
-    protected SlowGhostBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites) {
+    public SlowGhostBonus(PacmanGame game, double xPosition, double yPosition, Sprite sprites) {
         super(game, xPosition, yPosition, sprites);
     }
 
