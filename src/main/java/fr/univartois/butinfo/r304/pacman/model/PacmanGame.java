@@ -235,6 +235,12 @@ public final class PacmanGame {
         nbGums = emptyCells.size(); // mettre à jour le nombre de pac-gommes
         for (int i = 0; i < emptyCells.size(); i++) {
             Cell cell = emptyCells.get(i);
+            int cellColumn = cell.getColumn();
+            int cellRow = cell.getRow();
+            
+            
+            
+            
             int r = RANDOM.nextInt(100);
             if (r <= 1) {
                MegaGum megagum = new MegaGum(
