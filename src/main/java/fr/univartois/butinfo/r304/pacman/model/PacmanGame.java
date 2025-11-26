@@ -44,7 +44,7 @@ import javafx.animation.AnimationTimer;
  *
  * @version 0.1.0
  */
-@StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.CONTEXT)
+
 @AbstractFactoryDesignPattern(factory = IAbstractFactoryPacmanGame.class, participant = AbstractFactoryParticipant.CONTEXT)
 public final class PacmanGame {
 
@@ -123,11 +123,6 @@ public final class PacmanGame {
     private IPacmanController controller;
 
     /**
-     * Le générateur de cartes
-     */
-    private ICardGenerator generator;
-
-    /**
      * Crée une nouvelle instance de PacmanGame.
      *
      * @param gameWidth La largeur de la carte du jeu.
@@ -198,38 +193,13 @@ public final class PacmanGame {
     public PacMan getPlayer() {
         return player;
     }
-
-    /**
-     * Modifie l'attribut generator de cette instance de PacmanGame.
-     *
-     * @param generator La nouvelle valeur de l'attribut generator pour cette instance de
-     *        PacmanGame.
-     */
-    public void setGenerator(ICardGenerator generator) {
-        this.generator = generator;
-    }
-
+    
     /**
      * Prépare une partie de Pac-Man avant qu'elle ne démarre.
      */
     public void prepare() {
-        gameMap = createMap();
+        gameMap = factory.createMap(width, height); // Changer donner la taille de la map height width
         controller.prepare(gameMap);
-    }
-
-    /**
-     * Crée la carte du jeu, en respectant les dimensions de la fenêtre.
-     *
-     * @return La carte du jeu ayant été créée.
-     */
-    private GameMap createMap() {
-        int cellSize = spriteStore.getSpriteSize();
-
-        // Convertir les dimensions de la carte en nombre de cellules
-        int numRows = height / cellSize;
-        int numCols = width / cellSize;
-
-        return generator.generate(numRows, numCols);
     }
 
     /**
