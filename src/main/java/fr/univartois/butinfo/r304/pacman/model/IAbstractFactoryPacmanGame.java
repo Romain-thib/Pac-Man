@@ -42,8 +42,8 @@ public interface IAbstractFactoryPacmanGame {
     IAnimated createGum(PacmanGame game);
     
     /**
-     * @return Une liste d'instance de GameMap
+     * @return Une d'instance de GameMap
      */
-    List<GameMap> createMap();
+    GameMap createMap();
 }
 
