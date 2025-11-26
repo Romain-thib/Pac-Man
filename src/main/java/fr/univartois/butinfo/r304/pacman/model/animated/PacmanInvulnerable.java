@@ -78,6 +78,7 @@ public class PacmanInvulnerable implements IStatePacman{
     @Override
     public void handleState(PacmanGame game) {
         game.getPlayer().setScoreMult(1);
+        game.setSpeed(PacmanGame.DEFAULT_SPEED);
     }
 }
 
