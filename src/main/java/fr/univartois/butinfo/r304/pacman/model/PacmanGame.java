@@ -51,10 +51,15 @@ public final class PacmanGame {
     public static final Random RANDOM = new Random();
 
     /**
-     * La vitesse de déplacement du joueur (en pixels/s).
+     * La vitesse de déplacement du joueur (en pixels/s). par défaut
      */
     public static final int DEFAULT_SPEED = 150;
 
+    /**
+     * La vitesse de déplacement du joueur (en pixels/s).
+     */
+    private int speed = DEFAULT_SPEED;
+    
     /**
      * La largeur de la carte du jeu (en pixels).
      */
@@ -197,6 +202,14 @@ public final class PacmanGame {
     public void setGenerator(ICardGenerator generator) {
         this.generator = generator;
     }
+    /**
+     * Modifie l'attribut speed de cette instance de PacmanGame.
+     *
+     * @param speed La nouvelle valeur de l'attribut speed pour cette instance de PacmanGame.
+     */
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 
     /**
      * Prépare une partie de Pac-Man avant qu'elle ne démarre.
@@ -314,7 +327,7 @@ public final class PacmanGame {
      */
     public void moveUp() {
         stopMoving();
-        player.setVerticalSpeed(-DEFAULT_SPEED);
+        player.setVerticalSpeed(-speed);
         player.setRotate(270);
     }
 
@@ -323,7 +336,7 @@ public final class PacmanGame {
      */
     public void moveRight() {
         stopMoving();
-        player.setHorizontalSpeed(DEFAULT_SPEED);
+        player.setHorizontalSpeed(speed);
         player.setRotate(0);
     }
 
@@ -332,7 +345,7 @@ public final class PacmanGame {
      */
     public void moveDown() {
         stopMoving();
-        player.setVerticalSpeed(DEFAULT_SPEED);
+        player.setVerticalSpeed(speed);
         player.setRotate(90);
     }
 
@@ -341,7 +354,7 @@ public final class PacmanGame {
      */
     public void moveLeft() {
         stopMoving();
-        player.setHorizontalSpeed(-DEFAULT_SPEED);
+        player.setHorizontalSpeed(-speed);
         player.setRotate(180);
     }
 
