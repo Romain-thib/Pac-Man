@@ -79,6 +79,11 @@ public final class PacmanGame {
      * Le personnage du joueur.
      */
     private PacMan player;
+    
+    /**
+     * L'attribut factory qui créé une instance de ConcreteFactoryPacmanGame
+     */
+    private IAbstractFactoryPacmanGame factory = new ConcreteFactoryPacmanGame();
 
     /**
      * Le nombre de fantômes initialement dans le jeu.
@@ -90,6 +95,9 @@ public final class PacmanGame {
      */
     private int nbGums;
     
+    /**
+     * L'attribut ghostList qui contient la liste des fantômes du jeu.
+     */
     private List<Ghost> ghostList = new ArrayList<>();
 
     /**
@@ -239,8 +247,9 @@ public final class PacmanGame {
         clearAnimated();
 
         // On crée le joueur sur la carte.
-        player = new PacMan(this, 0, 0, spriteStore.getSprite("pacman/closed", "pacman/half-open",
-                "pacman/open", "pacman/half-open"));
+        
+        player = factory.createPacman(this);
+        
         animatedObjects.add(player);
         spawnAnimated(player);
 
