@@ -8,9 +8,11 @@
 package fr.univartois.butinfo.r304.pacman.model;
 
 import java.util.List;
+
 import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
+import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 
 /**
  * Le type ConcreteFactoryPacmanGame
@@ -28,8 +30,8 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      */
     @Override
     public PacMan createPacman(PacmanGame game) {
-        // return new PacMan(game, 0, 0, SpriteStore.getInstance());
-        return null;
+        return new PacMan(game, 0, 0, SpriteStore.getInstance().getSprite("pacman/closed", "pacman/half-open",
+                "pacman/open", "pacman/half-open"));
     }
 
     /*
@@ -70,7 +72,7 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createMap()
      */
     @Override
-    public List<GameMap> createMap() {
+    public GameMap createMap() {
         // TODO Auto-generated method stub.
         return null;
     }
