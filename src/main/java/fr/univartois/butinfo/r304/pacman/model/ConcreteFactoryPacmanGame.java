@@ -13,6 +13,8 @@ import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
+import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryParticipant;
 
 /**
  * Le type ConcreteFactoryPacmanGame
@@ -21,6 +23,7 @@ import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
  *
  * @version 0.1.0
  */
+@AbstractFactoryDesignPattern(factory = ConcreteFactoryPacmanGame.class, participant = AbstractFactoryParticipant.IMPLEMENTATION)
 public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      
     /*

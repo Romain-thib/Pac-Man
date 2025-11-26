@@ -31,6 +31,8 @@ import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryParticipant;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 import javafx.animation.AnimationTimer;
@@ -43,6 +45,7 @@ import javafx.animation.AnimationTimer;
  * @version 0.1.0
  */
 @StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.CONTEXT)
+@AbstractFactoryDesignPattern(factory = IAbstractFactoryPacmanGame.class, participant = AbstractFactoryParticipant.CONTEXT)
 public final class PacmanGame {
 
     /**

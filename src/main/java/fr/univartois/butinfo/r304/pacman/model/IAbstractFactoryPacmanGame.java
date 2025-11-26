@@ -10,9 +10,10 @@ package fr.univartois.butinfo.r304.pacman.model;
 import java.util.List;
 
 import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
-import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
+import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryParticipant;
 
 /**
  * Le type IAbstractFactoryPacmanGame
@@ -21,6 +22,7 @@ import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
  *
  * @version 0.1.0
  */
+@AbstractFactoryDesignPattern(factory = IAbstractFactoryPacmanGame.class, participant = AbstractFactoryParticipant.INTERFACE)
 public interface IAbstractFactoryPacmanGame {
     
     /**
