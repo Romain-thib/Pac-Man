@@ -106,7 +106,6 @@ public final class PacmanGame {
      * L'animation du jeu, qui s'assure que les différents objets évoluent.
      */
     private final AnimationTimer animation = new GameAnimation(movingObjects, animatedObjects);
-
     /**
      * Le contrôleur du jeu.
      */

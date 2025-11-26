@@ -69,7 +69,7 @@ public class FleeingStateGhost implements IStateGhost {
     @Override
     public void getSpriteGhost(Ghost ghost) {
         if (spritesGhost == null) {
-            spritesGhost = new SpriteStore().getSprite("ghosts/afraid/1", "ghosts/afraid/2");
+            spritesGhost = SpriteStore.getInstance().getSprite("ghosts/afraid/1", "ghosts/afraid/2");
         }
         ghost.setSprite(spritesGhost);
     }

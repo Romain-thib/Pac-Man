@@ -20,11 +20,29 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
  */
 @StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.IMPLEMENTATION)
 public class CardGeneratorEmpty implements ICardGenerator {
-    /**
-     * L'attribut spriteStore
-     */
-    private final SpriteStore spriteStore = new SpriteStore();
 
+    /**
+     * L'attribut INSTANCE...
+     */
+    
+    private static final CardGeneratorEmpty INSTANCE = new CardGeneratorEmpty();
+    
+    /**
+     * Crée une nouvelle instance.
+     */
+    private CardGeneratorEmpty() {
+        super();
+    }
+    
+    /**
+     * Donne l'attribut instance de cette instance.
+     *
+     * @return L'attribut instance de cette instance.
+     */
+    public static CardGeneratorEmpty getInstance() {
+        return INSTANCE;
+    }
+    
     /*
      * (non-Javadoc)
      *
@@ -68,7 +86,7 @@ public class CardGeneratorEmpty implements ICardGenerator {
      * @return Une cellule mur.
      */
     private Cell createWallCell() {
-        Wall wall = new Wall(spriteStore.getSprite("wall"));
+        Wall wall = new Wall(SpriteStore.getInstance().getSprite("wall"));
         return new Cell(wall);
     }
 
@@ -78,7 +96,7 @@ public class CardGeneratorEmpty implements ICardGenerator {
      * @return Une cellule mur.
      */
     private Cell createPathCell() {
-        return new Cell(spriteStore.getSprite("path"));
+        return new Cell(SpriteStore.getInstance().getSprite("path"));
     }
 
 }

@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import fr.univartois.dpprocessor.designpatterns.singleton.Instance;
+import fr.univartois.dpprocessor.designpatterns.singleton.SingletonDesignPattern;
 import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 
@@ -42,6 +44,28 @@ public final class SpriteStore implements ISpriteStore {
      * déjà chargées.
      */
     private final Map<String, Sprite> spriteCache = new HashMap<>();
+
+    /**
+     * L'attribut INSTANCE...
+     */
+    
+    private static final SpriteStore INSTANCE = new SpriteStore();
+    
+    /**
+     * Crée une nouvelle instance de SpriteStore.
+     */
+    private SpriteStore() {
+        super();
+    }
+    
+    /**
+     * Donne l'attribut instance de cette instance de SpriteStore.
+     *
+     * @return L'attribut instance de cette instance de SpriteStore.
+     */
+    public static SpriteStore getInstance() {
+        return INSTANCE;
+    }
 
     /*
      * (non-Javadoc)

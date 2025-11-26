@@ -68,7 +68,7 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
     @Override
     public void getSpriteGhost(Ghost ghost) {
         if (spritesGhost == null) {
-            spritesGhost = new SpriteStore().getSprite(
+            spritesGhost = SpriteStore.getInstance().getSprite(
                     "ghosts/hurt/1", "ghosts/hurt/2",
                     "ghosts/afraid/1", "ghosts/afraid/2");
         }
