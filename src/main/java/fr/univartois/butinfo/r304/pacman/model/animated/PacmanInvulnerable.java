@@ -1,5 +1,5 @@
 /**
- * Ce fichier fait partie du projet projet-20SpriteStore spriteStore25-2026.
+ * Ce fichier fait partie du projet projet-2025-2026.
  *
  * (c) 2025 romain.thibaut
  * Tous droits réservés.
