@@ -28,7 +28,7 @@ public enum GhostColor {
     BLUE(new SurroundStrategyGhost(-75)),/**
      * L'attribut ORANGE...
      */
-    ORANGE(new DumbStrategyGhost());
+    ORANGE(new DumbStrategyGhost(75));
     
     /**
      * L'attribut moveStrategy...

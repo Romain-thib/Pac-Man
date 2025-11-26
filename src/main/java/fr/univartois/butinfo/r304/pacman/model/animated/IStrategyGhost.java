@@ -12,7 +12,7 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
 /**
- * Le type StrategyInterface
+ * La classe IStrategyGhost est l'interface pour la stratégie de déplacement des fantômes
  *
  * @author shun.lembrez
  *
@@ -29,5 +29,11 @@ public interface IStrategyGhost {
      * @param game instance correpondant a la game
      */
     void moveStrategy(Ghost ghost, long delta, PacmanGame game);
+    
+    
+    /**
+     * @param speed la nouvelle valeur de l'attribut speed pour cette instance de IStrategyGhost.
+     */
+    void setSpeed(double speed);
 }
 
