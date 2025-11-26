@@ -44,6 +44,7 @@ public class ScoreBonusState extends PacmanVulnerable {
      */
     @Override
     public void handleState(PacmanGame game) {
+        game.setSpeed(PacmanGame.DEFAULT_SPEED);
         game.getPlayer().setScoreMult(2);
     }
 }
