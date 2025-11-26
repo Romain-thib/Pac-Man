@@ -12,6 +12,7 @@ import java.util.List;
 import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
+import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 
 /**
  * Le type IAbstractFactoryPacmanGame
@@ -40,7 +41,9 @@ public interface IAbstractFactoryPacmanGame {
      */
     IAnimated createGum(PacmanGame game);
     
-    
-
+    /**
+     * @return Une liste d'instance de GameMap
+     */
+    List<GameMap> createMap();
 }
 
