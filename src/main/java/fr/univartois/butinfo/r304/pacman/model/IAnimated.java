@@ -16,6 +16,7 @@
 
 package fr.univartois.butinfo.r304.pacman.model;
 
+import fr.univartois.butinfo.r304.pacman.model.animated.Bonus;
 import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacGum;
@@ -295,6 +296,19 @@ public interface IAnimated {
      * @param other L'objet avec lequel cet objet est entré en collision.
      */
     void onCollisionWith(MegaGum other);
+    
+    /**
+     * Modifie l'état de cet objet lorsque celui-ci est entré en collision avec un autre
+     * objet.
+     * Lors de l'appel à cette méthode, il est garanti que les deux objets sont entrés en
+     * collision.
+     * Il n'est en particulier pas nécessaire d'utiliser {@link #isCollidingWith(IAnimated)}
+     * pour s'en assurer.
+     *
+     * @param other L'objet avec lequel cet objet est entré en collision.
+     */
+    void onCollisionWith(Bonus other);
+    
     
     /**
      * Réinitialise ou libère certaines ressources lorsque cet objet animé est retiré de

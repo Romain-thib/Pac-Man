@@ -55,7 +55,7 @@ public class PacMan extends AbstractAnimated{
         super(game, xPosition, yPosition, sprite);
         hp = new SimpleIntegerProperty(3);
         score = new SimpleIntegerProperty(0);
-        spriteStore = new SpriteStore();
+        spriteStore = SpriteStore.getInstance();
     }
     
     /**
@@ -156,6 +156,16 @@ public class PacMan extends AbstractAnimated{
     public void onCollisionWith(MegaGum other) {
         score.set(score.get()+50); 
         game.megaGumEaten(other);
+    }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.Bonus)
+     */
+    @Override
+    public void onCollisionWith(Bonus other) {
+        // TODO
     }
 }
 

@@ -16,6 +16,7 @@
 
 package fr.univartois.butinfo.r304.pacman.controller;
 
+import fr.univartois.butinfo.r304.pacman.PacmanApplication;
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.IPacmanController;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;

@@ -21,6 +21,27 @@ import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 @StateDesignPattern(state = IStateGhostMove.class, participant = StateParticipant.IMPLEMENTATION)
 public class ClassicStateGhost implements IStateGhostMove{
 
+    /**
+     * L'attribut INSTANCE...
+     */
+    private static final ClassicStateGhost INSTANCE = new ClassicStateGhost();
+    
+    /**
+     * Crée une nouvelle instance.
+     */
+    private ClassicStateGhost() {
+        super();
+    }
+    
+    /**
+     * Donne l'attribut instance de cette instance.
+     *
+     * @return L'attribut instance de cette instance.
+     */
+    public static ClassicStateGhost getInstance() {
+        return INSTANCE;
+    }
+    
     /*
      * (non-Javadoc)
      *
