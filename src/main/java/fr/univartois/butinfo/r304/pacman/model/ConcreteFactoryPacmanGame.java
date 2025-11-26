@@ -9,12 +9,17 @@ package fr.univartois.butinfo.r304.pacman.model;
 
 import java.util.List;
 
-import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
+import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
+import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorEmpty;
+import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorFixed;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
+import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryParticipant;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
 /**
  * Le type ConcreteFactoryPacmanGame
@@ -23,8 +28,15 @@ import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryP
  *
  * @version 0.1.0
  */
+
+@StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.CONTEXT)
 @AbstractFactoryDesignPattern(factory = ConcreteFactoryPacmanGame.class, participant = AbstractFactoryParticipant.IMPLEMENTATION)
 public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
+    
+    /**
+     * Le générateur de cartes
+     */
+    private ICardGenerator generator = new CardGeneratorFixed(CardGeneratorEmpty.getInstance());
      
     /*
      * (non-Javadoc)
@@ -43,17 +55,7 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createGhost(fr.univartois.butinfo.r304.pacman.model.PacmanGame)
      */
     @Override
-    public List createGhost(PacmanGame game) {
-        // TODO Auto-generated method stub.
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createMegaGum(fr.univartois.butinfo.r304.pacman.model.PacmanGame)
-     */
-    public MegaGum createMegaGum(PacmanGame game) {
+    public List<Ghost> createGhost(PacmanGame game) {
         // TODO Auto-generated method stub.
         return null;
     }
@@ -75,10 +77,14 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createMap()
      */
     @Override
-    public GameMap createMap() {
-        // TODO Auto-generated method stub.
-        return null;
-    }
+    public GameMap createMap(int width, int height) {
+        int cellSize = SpriteStore.getInstance().getSpriteSize();
 
+        // Convertir les dimensions de la carte en nombre de cellules
+        int numRows = height / cellSize;
+        int numCols = width / cellSize;
+
+        return generator.generate(numRows, numCols);
+    }
 }
 
