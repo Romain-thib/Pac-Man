@@ -25,7 +25,7 @@ public class InvulnerableBonus extends Bonus {
      * @param yPosition : la position y du bonus
      * @param sprites : le sprite du bonus
      */
-    protected InvulnerableBonus(PacmanGame game, double xPosition, double yPosition,
+    public InvulnerableBonus(PacmanGame game, double xPosition, double yPosition,
             Sprite sprites) {
         super(game, xPosition, yPosition, sprites);
     }

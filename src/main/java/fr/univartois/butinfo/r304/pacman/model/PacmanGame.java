@@ -24,6 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import fr.univartois.butinfo.r304.pacman.model.animated.Bonus;
 import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.GhostColor;
+import fr.univartois.butinfo.r304.pacman.model.animated.InvulnerableBonus;
 import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
@@ -283,27 +284,34 @@ public final class PacmanGame {
         for (int i = 0; i < emptyCells.size(); i++) {
             Cell cell = emptyCells.get(i);
             int r = RANDOM.nextInt(1000);
-            if (r <= 4) {
+            if (r <= 2) {
                 ScoreBonus scorebonus = new ScoreBonus(
                         this,
                         cell.getColumn() * spriteStore.getSpriteSize(),
                         cell.getRow() * spriteStore.getSpriteSize(),
                         spriteStore.getSprite("bonus/cherries"));
                 addAnimated(scorebonus);
-            } else if (r <= 7) {
+            } else if (r <= 4) {
                 SlowGhostBonus slowghostbonus = new SlowGhostBonus(
                         this,
                         cell.getColumn() * spriteStore.getSpriteSize(),
                         cell.getRow() * spriteStore.getSpriteSize(),
                         spriteStore.getSprite("bonus/melon"));
                 addAnimated(slowghostbonus);
-            } else if (r <= 10) {
+            } else if (r <= 6) {
                 PacmanSpeedBonus pacmanspeedbonus = new PacmanSpeedBonus(
                         this,
                         cell.getColumn() * spriteStore.getSpriteSize(),
                         cell.getRow() * spriteStore.getSpriteSize(),
                         spriteStore.getSprite("bonus/galaxian"));
                 addAnimated(pacmanspeedbonus);
+            } else if (r <= 8) {
+                InvulnerableBonus invulnerablebonus = new InvulnerableBonus(
+                        this,
+                        cell.getColumn() * spriteStore.getSpriteSize(),
+                        cell.getRow() * spriteStore.getSpriteSize(),
+                        spriteStore.getSprite("bonus/orange"));
+                addAnimated(invulnerablebonus);
             } else if (r <= 25) {
                 MegaGum megagum = new MegaGum(
                         this,
