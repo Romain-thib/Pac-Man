@@ -59,6 +59,9 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      */
     private SpriteStore spriteStore = SpriteStore.getInstance();
     
+    /**
+     * Le génarateur de nombres aléatoires utilisé dans le jeu.
+     */
     private Random RANDOM = new Random();
      
     /*
