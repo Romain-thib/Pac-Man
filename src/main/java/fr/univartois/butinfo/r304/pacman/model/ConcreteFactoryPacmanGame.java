@@ -9,9 +9,12 @@ package fr.univartois.butinfo.r304.pacman.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.GhostColor;
+import fr.univartois.butinfo.r304.pacman.model.animated.MegaGum;
+import fr.univartois.butinfo.r304.pacman.model.animated.PacGum;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
 import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorEmpty;
 import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorFixed;
@@ -50,6 +53,8 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      * L'attribut spriteStore les sprites du jeu
      */
     private SpriteStore spriteStore = SpriteStore.getInstance();
+    
+    private Random RANDOM = new Random();
      
     /*
      * (non-Javadoc)
@@ -106,8 +111,24 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      */
     @Override
     public IAnimated createGum(PacmanGame game, int cellColumn, int cellRow) {
-        // TODO Auto-generated method stub.
-        return null;
+        int r = RANDOM.nextInt(100);
+        if (r <= 1) {
+           MegaGum megagum = new MegaGum(
+                   game, 
+                   cellColumn * spriteStore.getSpriteSize(),
+                   cellRow * spriteStore.getSpriteSize(),
+                   spriteStore.getSprite("megagum")
+           );
+           return megagum;
+        } else {
+            PacGum gum = new PacGum(
+                    game,
+                    cellColumn * spriteStore.getSpriteSize(),
+                    cellRow * spriteStore.getSpriteSize(),
+                    spriteStore.getSprite("pacgum") // sprite de la pac-gomme
+            );
+            return gum;
+        }
     }
 }
 
