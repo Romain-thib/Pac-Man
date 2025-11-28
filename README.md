@@ -613,9 +613,7 @@ PacmanController o-- "1" PacmanGame
 | ---------------------------------------------------- | ---------------------- | ---------- | --------------------------------------------- |
 | Définition d'un seul `SpriteStore`                   |                        |            |                                               |
 | Définition d'une seule instance quand c'est possible |                        |            |                                               |
-| Ajout des bonus de vitesse sur Pac-Man               |                        |            |                                               |
-| Ajout des bonus de vitesse sur les fantômes          |                        |            |                                               |
-| Ajout des bonus de score                             |                        |            |                                               |
+| Ajout des bonus (préciser lesquels)                  |                        |            |                                               |
 | Ajout des bonus multiples                            |                        |            |                                               |
 | Gestion des différents niveaux                       |                        |            |                                               |
 
