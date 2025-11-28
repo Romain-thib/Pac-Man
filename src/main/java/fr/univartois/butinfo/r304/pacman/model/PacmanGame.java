@@ -27,6 +27,8 @@ import fr.univartois.butinfo.r304.pacman.model.map.Cell;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryParticipant;
 import javafx.animation.AnimationTimer;
 
 /**
