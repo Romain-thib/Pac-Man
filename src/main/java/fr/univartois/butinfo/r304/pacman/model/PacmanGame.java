@@ -238,27 +238,7 @@ public final class PacmanGame {
             int cellColumn = cell.getColumn();
             int cellRow = cell.getRow();
             
-            
-            
-            
-            int r = RANDOM.nextInt(100);
-            if (r <= 1) {
-               MegaGum megagum = new MegaGum(
-                       this, 
-                       cell.getColumn() * spriteStore.getSpriteSize(),
-                       cell.getRow() * spriteStore.getSpriteSize(),
-                       spriteStore.getSprite("megagum")
-               );
-               addAnimated(megagum);
-            } else {
-                PacGum gum = new PacGum(
-                        this,
-                        cell.getColumn() * spriteStore.getSpriteSize(),
-                        cell.getRow() * spriteStore.getSpriteSize(),
-                        spriteStore.getSprite("pacgum") // sprite de la pac-gomme
-                );
-                addAnimated(gum);
-            }
+            addAnimated(factory.createGum(this, cellColumn, cellRow));
         }
     }
 
