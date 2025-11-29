@@ -119,58 +119,60 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      */
     @Override
     public IAnimated createGum(PacmanGame game, int cellColumn, int cellRow) {
+        Level currentLevel = game.getCurrentLevel();
+        int megaGumProb = currentLevel.getMegaGumProbability();
+        int bonusProb = currentLevel.getBonusProbability();
+
         int r = RANDOM.nextInt(1000);
-        if (r <= 2) {
-            ScoreBonus scorebonus = new ScoreBonus(
-                    game, 
-                    cellColumn * spriteStore.getSpriteSize(),
-                    cellRow * spriteStore.getSpriteSize(),
-                    spriteStore.getSprite("bonus/cherries"));
-            return scorebonus;
-        } else if (r <= 4) {
-            SlowGhostBonus slowghostbonus = new SlowGhostBonus(
-                    game, 
-                    cellColumn * spriteStore.getSpriteSize(),
-                    cellRow * spriteStore.getSpriteSize(),
-                    spriteStore.getSprite("bonus/melon"));
-            return slowghostbonus;
-        } else if (r <= 6) {
-            PacmanSpeedBonus pacmanspeedbonus = new PacmanSpeedBonus(
-                    game, 
-                    cellColumn * spriteStore.getSpriteSize(),
-                    cellRow * spriteStore.getSpriteSize(),
-                    spriteStore.getSprite("bonus/galaxian"));
-            return pacmanspeedbonus;
-        } else if (r <= 8) {
-            InvulnerableBonus invulnerablebonus = new InvulnerableBonus(
-                    game, 
-                    cellColumn * spriteStore.getSpriteSize(),
-                    cellRow * spriteStore.getSpriteSize(),
-                    spriteStore.getSprite("bonus/orange"));
-            return invulnerablebonus;
-        } else if (r <= 10) {
-            BonusComposite bonuscomposite = new BonusComposite(
-                    game, 
-                    cellColumn * spriteStore.getSpriteSize(),
-                    cellRow * spriteStore.getSpriteSize(),
-                    spriteStore.getSprite("bonus/key"));
-            return bonuscomposite;
-        } else if (r <= 25) {
-            MegaGum megagum = new MegaGum(
-                    game, 
+
+        if (r < bonusProb) {
+            int type = RANDOM.nextInt(5);
+            switch (type) {
+                case 0:
+                    return new ScoreBonus(game,
+                            cellColumn * spriteStore.getSpriteSize(),
+                            cellRow * spriteStore.getSpriteSize(),
+                            spriteStore.getSprite("bonus/cherries"));
+                case 1:
+                    return new SlowGhostBonus(game,
+                            cellColumn * spriteStore.getSpriteSize(),
+                            cellRow * spriteStore.getSpriteSize(),
+                            spriteStore.getSprite("bonus/melon"));
+                case 2:
+                    return new PacmanSpeedBonus(game,
+                            cellColumn * spriteStore.getSpriteSize(),
+                            cellRow * spriteStore.getSpriteSize(),
+                            spriteStore.getSprite("bonus/galaxian"));
+                case 3:
+                    return new InvulnerableBonus(game,
+                            cellColumn * spriteStore.getSpriteSize(),
+                            cellRow * spriteStore.getSpriteSize(),
+                            spriteStore.getSprite("bonus/orange"));
+                case 4:
+                    return new BonusComposite(game,
+                            cellColumn * spriteStore.getSpriteSize(),
+                            cellRow * spriteStore.getSpriteSize(),
+                            spriteStore.getSprite("bonus/key"));
+                default:
+                    return new PacGum(game,
+                            cellColumn * spriteStore.getSpriteSize(),
+                            cellRow * spriteStore.getSpriteSize(),
+                            spriteStore.getSprite("pacgum"));
+            }
+        }
+        else if (r < bonusProb + megaGumProb) {
+            return new MegaGum(game,
                     cellColumn * spriteStore.getSpriteSize(),
                     cellRow * spriteStore.getSpriteSize(),
                     spriteStore.getSprite("megagum"));
-            return megagum;
-        } else {
-            PacGum gum = new PacGum(
-                    game, 
-                    cellColumn * spriteStore.getSpriteSize(),
-                    cellRow * spriteStore.getSpriteSize(),
-                    spriteStore.getSprite("pacgum") // sprite de la pac-gomme
-            );
-            return gum;
         }
+
+        return new PacGum(game,
+                cellColumn * spriteStore.getSpriteSize(),
+                cellRow * spriteStore.getSpriteSize(),
+                spriteStore.getSprite("pacgum"));
     }
+
+
 }
 
