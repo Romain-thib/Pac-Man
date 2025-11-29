@@ -9,7 +9,6 @@ package fr.univartois.butinfo.r304.pacman.model;
 
 
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
-import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
 
 /**
  * Le type Level
