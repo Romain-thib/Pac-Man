@@ -49,7 +49,30 @@ public class LevelFactory {
 
         GameMap map = generator.generate(numRows, numCols);
 
-        return new Level(levelNumber, map);
+
+        int megaGumProbability;
+        int bonusProbability;
+
+        switch (levelNumber) {
+            case 1:
+                megaGumProbability = 1000;   // 100% chance
+                bonusProbability = 0;     // 0% chance
+                break;
+            case 2:
+                megaGumProbability = 0;   // 0% chance
+                bonusProbability = 0;     // 0% chance
+                break;
+            case 3:
+                megaGumProbability = 8;    // 0.8% chance
+                bonusProbability = 5;      // 0.5% chance
+                break;    
+            default: // Niveau difficile → très peu de bonus
+                megaGumProbability = 8;    // 0.8% chance
+                bonusProbability = 5;      // 0.5% chance
+                break;
+        }
+
+        return new Level(levelNumber, map, megaGumProbability, bonusProbability);
     }    
 }
 
