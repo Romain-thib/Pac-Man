@@ -14,7 +14,7 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
 /**
- * Le type DumbStrategy
+ * La classe DumbStrategyGhost pour la stratégie de poursuite des fantômes en mode random
  *
  * @author shun.lembrez
  *
@@ -24,9 +24,27 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 public class DumbStrategyGhost implements IStrategyGhost {
 
     /**
-     * L'attribut SPEED pour gerer la vitesse des famtôme quand il change de direction
+     * L'attribut SPEED pour gerer la vitesse des famtômes quand il change de direction
      */
-    private static final double SPEED = 75;
+    private double speed;
+
+    /**
+     * Crée une nouvelle instance de ChaseStrategyGhost. 
+     * @param speed : La vitesse de déplacement, peut être négative pour fuir
+     */
+    public DumbStrategyGhost(double speed) {
+        this.speed = speed;
+    }
+    
+    /**
+     * Modifie l'attribut speed de cette instance de DumbStrategyGhost.
+     *
+     * @param speed La nouvelle valeur de l'attribut speed pour cette instance de DumbStrategyGhost.
+     */
+    @Override
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 
     /**
      * L'attribut temps pour actualisée le déplacement
@@ -62,19 +80,19 @@ public class DumbStrategyGhost implements IStrategyGhost {
         int random = r.nextInt(4);
         switch (random) {
             case 0:
-                ghost.setHorizontalSpeed(-SPEED);
+                ghost.setHorizontalSpeed(-speed);
                 ghost.setVerticalSpeed(0);
                 break;
             case 1:
-                ghost.setHorizontalSpeed(SPEED);
+                ghost.setHorizontalSpeed(speed);
                 ghost.setVerticalSpeed(0);
                 break;
             case 2:
-                ghost.setVerticalSpeed(-SPEED);
+                ghost.setVerticalSpeed(-speed);
                 ghost.setHorizontalSpeed(0);
                 break;
             case 3:
-                ghost.setVerticalSpeed(SPEED);
+                ghost.setVerticalSpeed(speed);
                 ghost.setHorizontalSpeed(0);
                 break;
             default:

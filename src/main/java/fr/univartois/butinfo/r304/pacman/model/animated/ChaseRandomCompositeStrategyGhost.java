@@ -11,7 +11,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.dpprocessor.designpatterns.composite.CompositeDesignPattern;
 
 /**
- * Le type ChaseRandomComponentGhost
+ * la classe ChaseRandomComponentGhost qui alterne entre une stratégie de poursuite et une stratégie aléatoire pour les fantômes
  *
  * @author shun.lembrez
  *
@@ -23,7 +23,7 @@ public class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
     /**
      * Liste des strategie a alternée pour les fantômes
      */
-    private IStrategyGhost[] listeStrategys  = {new ChaseStrategyGhost(75), new DumbStrategyGhost()};
+    private IStrategyGhost[] listeStrategys  = {new ChaseStrategyGhost(75), new DumbStrategyGhost(75)};
 
     /**
      * L'attribut temps pour actualise tout les 5 secondes
@@ -34,6 +34,11 @@ public class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
      * L'index de la stratégie courante
      */
     private int current = 0;
+    
+    /**
+     * L'attribut speed pour le fantôme
+     */
+    private double speed;
     
     /*
      * (non-Javadoc)
@@ -51,6 +56,16 @@ public class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
         }
         
         listeStrategys[current].moveStrategy(ghost, delta, game);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStrategyGhost#setSpeed(double)
+     */
+    @Override
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 
 }

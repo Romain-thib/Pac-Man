@@ -52,7 +52,7 @@ public class DistantStateGhost implements IStateGhostMove {
     @Override
     public IStateGhostMove nextState() {
         if (temps <= 0) {
-            return new ClassicStateGhost();
+            return ClassicStateGhost.getInstance();
         } else {
             return this;
         }

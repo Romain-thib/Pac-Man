@@ -43,6 +43,28 @@ public final class SpriteStore implements ISpriteStore {
      */
     private final Map<String, Sprite> spriteCache = new HashMap<>();
 
+    /**
+     * L'attribut INSTANCE...
+     */
+    
+    private static final SpriteStore INSTANCE = new SpriteStore();
+    
+    /**
+     * Crée une nouvelle instance de SpriteStore.
+     */
+    private SpriteStore() {
+        super();
+    }
+    
+    /**
+     * Donne l'attribut instance de cette instance de SpriteStore.
+     *
+     * @return L'attribut instance de cette instance de SpriteStore.
+     */
+    public static SpriteStore getInstance() {
+        return INSTANCE;
+    }
+
     /*
      * (non-Javadoc)
      *

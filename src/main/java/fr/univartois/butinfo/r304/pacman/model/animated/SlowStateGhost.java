@@ -15,20 +15,31 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * La classe InvulnerableStateGhost, l'etat ou le fantôme est invulnerable 
+ * La classe SlowStateGhost permet de rendre les fantômes lents
  *
  * @author shun.lembrez
  *
  * @version 0.1.0
  */
 @StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.IMPLEMENTATION)
-public class InvulnerableStateGhost implements IStateGhost{
+public class SlowStateGhost implements IStateGhost{
     
     /**
-     * Attribut spritesGhost pour geres les sprites du fantôme
+     * L'attribut temps représente le temps que les fantôme reste lent
+     */
+    private double time = 5000;
+    
+    /**
+     * Les sprites du fantômes dans cet état
      */
     private Sprite spritesGhost = null;
-
+    
+    /**
+     * L'attribut SPEED vitesse pour les fantôme lent
+     */
+    private static final double SPEED = 50;
+    
+    
     /*
      * (non-Javadoc)
      *
@@ -36,10 +47,9 @@ public class InvulnerableStateGhost implements IStateGhost{
      */
     @Override
     public void moveState(Ghost ghost, PacmanGame game) {
-        // déplacement de bases
         IStrategyGhost strategy = ghost.getColor().getMoveStrategy();
-        strategy.setSpeed(75);
-        ghost.setStrategyGhost(strategy);
+        strategy.setSpeed(SPEED);
+        time -= 1;
     }
 
     /*
@@ -49,8 +59,8 @@ public class InvulnerableStateGhost implements IStateGhost{
      */
     @Override
     public IStateGhost handleCollisionWithPacman(Ghost ghost, PacmanGame game) {
-      //Volontairement vide, le fantôme ne peut pas être mangé
-        return this;        
+        // Rien, les famtômes sont lents mais pas mangables
+        return this;
     }
 
     /*
@@ -67,7 +77,6 @@ public class InvulnerableStateGhost implements IStateGhost{
                     "ghosts/" + ghost.getColor().name().toLowerCase() + "/2");
         }
         ghost.setSprite(spritesGhost);
-        
     }
 
     /*
@@ -77,7 +86,11 @@ public class InvulnerableStateGhost implements IStateGhost{
      */
     @Override
     public IStateGhost nextState() {
-        return this;
+        if (time <= 0) {
+            return new InvulnerableStateGhost();
+        } else {
+            return this;
+        }
     }
 
     /*

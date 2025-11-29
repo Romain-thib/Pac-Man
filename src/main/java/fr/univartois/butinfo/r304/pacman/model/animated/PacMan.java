@@ -10,6 +10,9 @@ package fr.univartois.butinfo.r304.pacman.model.animated;
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
+import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
+import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -20,6 +23,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  *
  * @version 0.1.0
  */
+@StateDesignPattern(state = IStatePacman.class, participant = StateParticipant.CONTEXT)
 public class PacMan extends AbstractAnimated{
     /**
      * L'attribut hp.
@@ -29,6 +33,22 @@ public class PacMan extends AbstractAnimated{
      * L'attribut score.
      */
     private IntegerProperty score;
+    
+    /**
+     * Le multiplicateur de score de pacman lorsqu'il mange une pacgum
+     */
+    private double scoreMult;
+    
+    /**
+     * L'attribut vulnerabilities.
+     */
+    private IStatePacman state = new PacmanVulnerable();  
+    
+    /**
+     * L'attribut spriteStore pour gérer les sprites de pacman.
+     */
+    private SpriteStore spriteStore; 
+    
     /**
      * Crée une nouvelle instance de PacMan.
      * @param game : instance de jeu 
@@ -40,6 +60,8 @@ public class PacMan extends AbstractAnimated{
         super(game, xPosition, yPosition, sprite);
         hp = new SimpleIntegerProperty(3);
         score = new SimpleIntegerProperty(0);
+        scoreMult = 1;
+        spriteStore = SpriteStore.getInstance();
     }
     
     /**
@@ -60,6 +82,24 @@ public class PacMan extends AbstractAnimated{
         return score;
     }
     
+    /**
+     * Modifie l'attribut scoreMult de cette instance de PacMan.
+     *
+     * @param scoreMult La nouvelle valeur de l'attribut scoreMult pour cette instance de PacMan.
+     */
+    public void setScoreMult(double scoreMult) {
+        this.scoreMult = scoreMult;
+    }
+    
+    /**
+     * Modifie l'attribut state de cette instance de PacMan.
+     *
+     * @param state La nouvelle valeur de l'attribut state pour cette instance de PacMan.
+     */
+    public void setState(IStatePacman state) {
+        this.state = state;
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -87,7 +127,7 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public void onCollisionWith(Ghost other) {
-        hp.set(hp.get()-1);
+        state = state.onCollisionWithGhost(this);
         if (hp.get() <= 0) {
             game.playerIsDead();
         }
@@ -100,9 +140,37 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public void onCollisionWith(PacGum other) {
-        score.set(score.get()+10); 
+        score.set(score.get()+(int)Math.round(10*scoreMult)); 
         game.pacGumEaten(other);
-    }  
+    }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.animated.AbstractAnimated#onStep(long)
+     */
+    @Override
+    public boolean onStep(long delta) {
+        state = state.changeStatePacman(delta);
+        state.handleState(game);
+        this.setSprite(state.getSprite(spriteStore));
+        return super.onStep(delta);
+    }
+    
+    // Getters et Setters, possibilité de les changé car ce sont des IntegerProperty
+    /**
+     * @param hp Le nombre de points de vie à définir
+     */
+    public void setHp(int hp) {
+        this.hp.set(hp);
+    }
+    
+    /**
+     * @return L'attribut hp de cette instance de PacMan.
+     */
+    public IntegerProperty getHp() {
+        return hp;
+    }
     
     /*
      * (non-Javadoc)
@@ -111,8 +179,18 @@ public class PacMan extends AbstractAnimated{
      */
     @Override
     public void onCollisionWith(MegaGum other) {
-        score.set(score.get()+50); 
+        score.set(score.get()+(int)Math.round(50*scoreMult)); 
         game.megaGumEaten(other);
+    }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.Bonus)
+     */
+    @Override
+    public void onCollisionWith(Bonus other) {
+        other.handleBonus();
     }
 }
 

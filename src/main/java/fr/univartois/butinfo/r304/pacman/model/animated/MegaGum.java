@@ -98,4 +98,13 @@ public class MegaGum extends AbstractAnimated {
         // Les megagum ne rentrent pas en collisions les unes avec les autres
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.butinfo.r304.pacman.model.animated.Bonus)
+     */
+    @Override
+    public void onCollisionWith(Bonus other) {
+        // Les megagum ne rentrent pas en collisions lavec les bonus.
+    }
 }

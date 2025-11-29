@@ -68,7 +68,7 @@ public class VulnerableStateGhost implements IStateGhost {
     @Override
     public void getSpriteGhost(Ghost ghost) {
         if (spritesGhost == null) {
-            spritesGhost = new SpriteStore().getSprite("ghosts/hurt/1", "ghosts/hurt/2");
+            spritesGhost = SpriteStore.getInstance().getSprite("ghosts/hurt/1", "ghosts/hurt/2");
         }
         ghost.setSprite(spritesGhost);
     }

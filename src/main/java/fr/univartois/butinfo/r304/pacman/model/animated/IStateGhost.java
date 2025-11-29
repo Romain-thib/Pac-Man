@@ -50,6 +50,10 @@ public interface IStateGhost {
      */
     IStateGhost nextState();
 
+    /**
+     * @param ghost le fantôme
+     * @param animated l'objet avec lequel il y a collision
+     */
     void handleCollisionWithAnimated(Ghost ghost, IAnimated animated);
 }
 
