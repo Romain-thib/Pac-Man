@@ -20,31 +20,38 @@ import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
  */
 public class Level {
     /**
-     * L'attribut levelNumber, l'identifiant d'un niveau
+     * L'attribut levelNumber, le numéro d'un niveau
      */
     private final int levelNumber;
 
     /**
-     * L'attribut map 
+     * L'attribut map La map du niveau
      */
     private final GameMap map;
     
     /**
-     * L'attribut card va gérer la carte du jeu
-     */
-    private ICardGenerator card;
-    
-    /**
      * Crée une nouvelle instance de Level.
-     * @param levelNumber id du niveau
+     * @param levelNumber le numéro du niveau
      * @param map La map du niveau
-     * @param card La carte du jeu
      */
-    public Level (int levelNumber, GameMap map, ICardGenerator card) {
+    public Level (int levelNumber, GameMap map) {
         this.levelNumber = levelNumber;
         this.map = map;
-        this.card = card;
     }
     
+    
+    /**
+     * @return Le numéro du niveau
+     */
+    public int getLevelNumber() {
+        return levelNumber;
+    }
+
+    /**
+     * @return La map du niveau
+     */
+    public GameMap getMap() {
+        return map;
+    }
 }
 
