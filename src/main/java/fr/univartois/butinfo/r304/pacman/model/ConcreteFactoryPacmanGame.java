@@ -127,6 +127,7 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
 
         if (r < bonusProb) {
             int type = RANDOM.nextInt(5);
+            game.setNbGums(game.getNbGums()-1); // Les bonus ne doivent pas obligatoirement être langé pour gagner
             switch (type) {
                 case 0:
                     return new ScoreBonus(game,

@@ -225,6 +225,24 @@ public final class PacmanGame {
         gameMap = factory.createMap(width, height); // Changer donner la taille de la map height width
         controller.prepare(gameMap);
     }
+    
+    /**
+     * Donne l'attribut nbGums de cette instance de PacmanGame.
+     *
+     * @return L'attribut nbGums de cette instance de PacmanGame.
+     */
+    public int getNbGums() {
+        return nbGums;
+    }
+
+    /**
+     * Modifie l'attribut nbGums de cette instance de PacmanGame.
+     *
+     * @param nbGums La nouvelle valeur de l'attribut nbGums pour cette instance de PacmanGame.
+     */
+    public void setNbGums(int nbGums) {
+        this.nbGums = nbGums;
+    }
 
     /**
      * Démarre la partie de Pac-Man.
@@ -490,20 +508,6 @@ public final class PacmanGame {
 
         if (nbGums <= 0) {
             levelCleared("YOU WIN!");
-        }
-    }
-    
-    /**
-     * Indique que le joueur a mangé une mega-gomme.
-     *
-     * @param bonus Le bonus qui a été mangée.
-     */
-    public void bonusEaten(IAnimated bonus) {
-        nbGums--;
-        removeAnimated(bonus);
-
-        if (nbGums <= 0) {
-            gameOver("YOU WIN!");
         }
     }
 
