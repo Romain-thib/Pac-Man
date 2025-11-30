@@ -16,7 +16,6 @@
 
 package fr.univartois.butinfo.r304.pacman.controller;
 
-import fr.univartois.butinfo.r304.pacman.PacmanApplication;
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.IPacmanController;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
@@ -118,13 +117,17 @@ public final class PacmanController implements IPacmanController {
         // L'appui (bref) sur une touche permet dans un premier temps de lancer le jeu.
         stage.addEventFilter(KeyEvent.KEY_TYPED, e -> {
             if (!started) {
-                // La partie démarre à la première touche appuyée.
                 started = true;
                 message.setVisible(false);
-                game.start();
+
+                String text = message.getText();
+                if (text.contains("CONTINUE")) {
+                    game.nextLevel();
+                } else {
+                    game.restartCurrentLevel();
+                }
             }
         });
-
         // Lorsque l'utilisateur appuie sur une flèche, on déplace son personnage.
         stage.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (started) {
@@ -229,12 +232,17 @@ public final class PacmanController implements IPacmanController {
      *
      * @see fr.univartois.butinfo.r304.pacman.model.IPacmanController#gameOver(java.lang.
      * String)
-     */
+     */   
     @Override
     public void gameOver(String endMessage) {
-        started = false;
+        started = false; // toujours bloquer les déplacements
         message.setVisible(true);
-        message.setText(endMessage + "\nPRESS ANY KEY TO RESTART...");
+
+        if (endMessage.contains("WIN")) {
+            message.setText(endMessage + "\nPRESS ANY KEY TO CONTINUE...");
+        } else {
+            message.setText(endMessage + "\nPRESS ANY KEY TO RESTART...");
+        }
     }
 
     /*

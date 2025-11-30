@@ -27,7 +27,7 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
     /**
      * L'attribut temps représente le temps restant avant de redevenir vulnerable
      */
-    private double time = 5000;
+    private double time = 3000;
     
     /**
      * Les sprites du fantômes dans cet état

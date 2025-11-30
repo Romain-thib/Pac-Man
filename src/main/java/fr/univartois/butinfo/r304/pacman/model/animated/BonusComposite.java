@@ -71,8 +71,7 @@ public class BonusComposite implements IAnimated {
         int r = rand.nextInt(bonuses.length);
         bonuses[r].onCollisionWith(other);
         bonusSlowGhost.onCollisionWith(other);
-
-    }
+        }
 
     /*
      * (non-Javadoc)
@@ -81,7 +80,8 @@ public class BonusComposite implements IAnimated {
      */
     @Override
     public void onCollisionWith(PacMan other) {
-        other.onDestruction();
+    	this.onCollisionWith((IAnimated) other); 
+        this.onDestruction();
     }
 
     /*
