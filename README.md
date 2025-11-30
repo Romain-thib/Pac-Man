@@ -208,6 +208,9 @@ class PacmanGame {
     - animatedObjects : List<IAnimated>
     - animation : AnimationTimer
     - controller : IPacmanController
+    - factory : IAbstractFactoryPacmanGame
+    - currentLevel : Level
+    
 
     + PacmanGame(gameWidth : int, gameHeight : int, spriteStore : ISpriteStore, nbGhosts : int)
     + setController(controller : IPacmanController) : void
@@ -217,7 +220,6 @@ class PacmanGame {
     + prepare() : void
     + start() : void
     + setSpeed() : void
-    - createMap() : GameMap
     - createAnimated() : void
     - initStatistics() : void
     - spawnAnimated(animated : IAnimated): void
@@ -235,6 +237,11 @@ class PacmanGame {
     + pacGumEaten(gum : IAnimated) : void
     + playerIsDead() : void
     - gameOver(message : String) : void
+    + getCurrentLevel : Level
+    + prepareLevel(levelNumber : int) : void
+    - levelCleared(message : String) : void
+    + restartCurrentLevel() : void
+    + nextLevel() : void
 }
 
 interface IAnimated {
@@ -292,6 +299,40 @@ class GameAnimation {
     + handle(now : long) : void
     - updateObjects(delta : long) : void
     - checkCollisions() : void
+}
+
+interface IAbstractFactoryPacmanGame {
+      + createPacman(PacmanGame game) : PacMan
+      + createGhost(PacmanGame game) : List<Ghost>
+      + createMap(width:int, height:int) : GameMap
+      + createGum(PacmanGame game, cellColumn:int, cellRow:int) : IAnimated
+}
+
+class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
+      - ICardGenerator generator
+      - static final int NB_GHOSTS = 4
+      - SpriteStore spriteStore
+      - Random RANDOM
+      + createPacman(PacmanGame game) : PacMan
+      + createGhost(PacmanGame game) : List<Ghost>
+      + createMap(width:int, height:int) : GameMap
+      + createGum(PacmanGame game, cellColumn:int, cellRow:int) : IAnimated
+}
+
+class Level {
+    - levelNumber : int
+    - map : GameMap
+    - megaGumProbability : int
+    - bonusProbability : int
+    + Level(levelNumber:int, map:GameMap, megaGumProbability:int, bonusProbability:int)
+    + getLevelNumber() : int
+    + getMap() : GameMap
+    + getMegaGumProbability() : int
+    + getBonusProbability() : int
+}
+
+class LevelFactory {
+    + createLevel(levelNumber:int, width:int, height:int) : Level
 }
 
 PacmanGame o-- "1" ISpriteStore
@@ -579,7 +620,7 @@ class InvulnerableStateGhost implements IStateGhost {
 }
 
 class NearlyInvulnerableStateGhost implements IStateGhost {
-    - time : double = 5000
+    - time : double = 3000
     - spritesGhost : Sprite
     - SPEED : double = -60
     + moveState(ghost : Ghost, game : PacmanGame) : void
@@ -590,7 +631,7 @@ class NearlyInvulnerableStateGhost implements IStateGhost {
 }
 
 class VulnerableStateGhost implements IStateGhost {
-    - time : double = 15000
+    - time : double = 10000
     - spritesGhost : Sprite
     - SPEED : double = -60
     + moveState(ghost : Ghost, game : PacmanGame) : void
