@@ -23,7 +23,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
  * @version 0.1.0
  */
 @StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.IMPLEMENTATION)
-public class NearlyInvulnerableStateGhost implements IStateGhost {
+public class NearlyInvulnerableStateGhost extends VulnerableStateGhost {
     /**
      * L'attribut temps représente le temps restant avant de redevenir vulnerable
      */
@@ -34,32 +34,6 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
      */
     private Sprite spritesGhost = null;
     
-    /**
-     * L'attribut SPEED vitesse pour les fantôme presque invulnerable
-     */
-    private static final double SPEED = -60;
-    
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#moveState(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, long, double, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
-     */
-    @Override
-    public void moveState(Ghost ghost, PacmanGame game) {
-        ghost.setStrategyGhost(new ChaseStrategyGhost(SPEED));
-        time -= 1;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#handleCollisionWithPacman(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
-     */
-    @Override
-    public IStateGhost handleCollisionWithPacman(Ghost ghost, PacmanGame game) {
-        return new FleeingStateGhost();
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -88,16 +62,5 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
             return this;
         }
     }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#handleCollisionWithAnimated(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, fr.univartois.butinfo.r304.pacman.model.IAnimated)
-     */
-    @Override
-    public void handleCollisionWithAnimated(Ghost ghost, IAnimated animated) {
-        //
-    }
-
 }
 
