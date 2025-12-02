@@ -20,8 +20,6 @@ import java.io.IOException;
 
 import fr.univartois.butinfo.r304.pacman.controller.PacmanController;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
-import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorEmpty;
-import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorFixed;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -69,7 +67,6 @@ public final class PacmanApplication extends Application {
         // On crée ensuite le jeu, que l'on lie au contrôleur.
         PacmanGame game = new PacmanGame(
                 GAME_WIDTH, GAME_HEIGHT, SpriteStore.getInstance(), NB_GHOSTS);
-        game.setGenerator(new CardGeneratorFixed(CardGeneratorEmpty.getInstance()));
         controller.setGame(game);
         game.setController(controller);
         game.prepare();

@@ -208,6 +208,9 @@ class PacmanGame {
     - animatedObjects : List<IAnimated>
     - animation : AnimationTimer
     - controller : IPacmanController
+    - factory : IAbstractFactoryPacmanGame
+    - currentLevel : Level
+    
 
     + PacmanGame(gameWidth : int, gameHeight : int, spriteStore : ISpriteStore, nbGhosts : int)
     + setController(controller : IPacmanController) : void
@@ -217,6 +220,8 @@ class PacmanGame {
     + prepare() : void
     + start() : void
     + setSpeed() : void
+    + getNbGums() : int
+    + setNbGums(nbGums : int)
     - createMap() : GameMap
     - createAnimated() : void
     - initStatistics() : void
@@ -235,6 +240,11 @@ class PacmanGame {
     + pacGumEaten(gum : IAnimated) : void
     + playerIsDead() : void
     - gameOver(message : String) : void
+    + getCurrentLevel : Level
+    + prepareLevel(levelNumber : int) : void
+    - levelCleared(message : String) : void
+    + restartCurrentLevel() : void
+    + nextLevel() : void
 }
 
 interface IAnimated {
@@ -292,6 +302,40 @@ class GameAnimation {
     + handle(now : long) : void
     - updateObjects(delta : long) : void
     - checkCollisions() : void
+}
+
+interface IAbstractFactoryPacmanGame {
+      + createPacman(PacmanGame game) : PacMan
+      + createGhost(PacmanGame game) : List<Ghost>
+      + createMap(width:int, height:int) : GameMap
+      + createGum(PacmanGame game, cellColumn:int, cellRow:int) : IAnimated
+}
+
+class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
+      - ICardGenerator generator
+      - static final int NB_GHOSTS = 4
+      - SpriteStore spriteStore
+      - Random RANDOM
+      + createPacman(PacmanGame game) : PacMan
+      + createGhost(PacmanGame game) : List<Ghost>
+      + createMap(width:int, height:int) : GameMap
+      + createGum(PacmanGame game, cellColumn:int, cellRow:int) : IAnimated
+}
+
+class Level {
+    - levelNumber : int
+    - map : GameMap
+    - megaGumProbability : int
+    - bonusProbability : int
+    + Level(levelNumber:int, map:GameMap, megaGumProbability:int, bonusProbability:int)
+    + getLevelNumber() : int
+    + getMap() : GameMap
+    + getMegaGumProbability() : int
+    + getBonusProbability() : int
+}
+
+class LevelFactory {
+    + createLevel(levelNumber:int, width:int, height:int) : Level
 }
 
 PacmanGame o-- "1" ISpriteStore
@@ -579,7 +623,7 @@ class InvulnerableStateGhost implements IStateGhost {
 }
 
 class NearlyInvulnerableStateGhost implements IStateGhost {
-    - time : double = 5000
+    - time : double = 3000
     - spritesGhost : Sprite
     - SPEED : double = -60
     + moveState(ghost : Ghost, game : PacmanGame) : void
@@ -590,7 +634,7 @@ class NearlyInvulnerableStateGhost implements IStateGhost {
 }
 
 class VulnerableStateGhost implements IStateGhost {
-    - time : double = 15000
+    - time : double = 10000
     - spritesGhost : Sprite
     - SPEED : double = -60
     + moveState(ghost : Ghost, game : PacmanGame) : void
@@ -731,9 +775,12 @@ PacmanController o-- "1" PacmanGame
 | ---------------------------------------------------- | ---------------------- | ---------- | --------------------------------------------- |
 | Définition d'un seul `SpriteStore`                 | Singleton              | oui        |  Timothée                                     |
 | Définition d'une seule instance quand c'est possible | Singleton              | oui        |  Timothée                                     |
-| Ajout des bonus (préciser lesquels)                  |                        |            |                                               |
-| Ajout des bonus multiples                            |                        |            |                                               |
-| Gestion des différents niveaux                       |                        |            |                                               |
+| Ajout des bonus (score)                              |                        | oui        |  Simon                                        |
+| Ajout des bonus (vitesse)                            |                        | oui        |  Simon                                        |
+| Ajout des bonus (invulnérable)                       |                        | oui        |  Simon                                        |
+| Ajout des bonus (fantomes lents)                     |                        | oui        |  Simon                                        |
+| Ajout des bonus multiples                            |                        | oui        |  Shun                                         |
+| Gestion des différents niveaux                       |                        | oui        |  Romain                                       |
 
 
 ### Jalon n°5 - TP n°7
