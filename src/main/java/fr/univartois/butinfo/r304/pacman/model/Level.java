@@ -13,7 +13,7 @@ import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 /**
  * Le type Level
  *
- * @author UTILISATEUR
+ * @author romain.thibaut
  *
  * @version 0.1.0
  */

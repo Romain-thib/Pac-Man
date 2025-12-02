@@ -25,7 +25,6 @@ import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
 import fr.univartois.butinfo.r304.pacman.model.animated.PacMan;
 import fr.univartois.butinfo.r304.pacman.model.map.Cell;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
-import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
 import fr.univartois.butinfo.r304.pacman.view.ISpriteStore;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import fr.univartois.dpprocessor.designpatterns.abstractfactory.AbstractFactoryDesignPattern;
@@ -325,7 +324,6 @@ public final class PacmanGame {
         }
         
 
-        // List<Cell> emptyCells = gameMap.getEmptyCells();
         List<Cell> emptyCells = currentLevel.getMap().getEmptyCells();
         nbGums = emptyCells.size(); // mettre à jour le nombre de pac-gommes
         for (int i = 0; i < emptyCells.size(); i++) {
@@ -356,8 +354,8 @@ public final class PacmanGame {
         List<Cell> spawnableCells = gameMap.getEmptyCells();
         if (!spawnableCells.isEmpty()) {
             Cell cell = spawnableCells.get(RANDOM.nextInt(spawnableCells.size()));
-            animated.setX(cell.getColumn() * spriteStore.getSpriteSize());
-            animated.setY(cell.getRow() * spriteStore.getSpriteSize());
+            animated.setX(cell.getColumn() * (double)spriteStore.getSpriteSize());
+            animated.setY(cell.getRow() * (double)spriteStore.getSpriteSize());
             addMoving(animated);
         }
     }
@@ -404,21 +402,6 @@ public final class PacmanGame {
     public void stopMoving() {
         player.setVerticalSpeed(0);
         player.setHorizontalSpeed(0);
-    }
-
-    /**
-     * Récupére la cellule correspondant à la position d'un objet mobile.
-     * Il s'agit de la cellule sur laquelle l'objet en question occupe le plus de place.
-     *
-     * @param animated L'objet mobile dont la cellule doit être récupérée.
-     *
-     * @return La cellule occupée par l'objet mobile.
-     */
-    private Cell getCellOf(IAnimated animated) {
-        // On commence par récupérer la position du centre de l'objet.
-        int midX = animated.getX() + (animated.getWidth() / 2);
-        int midY = animated.getY() + (animated.getHeight() / 2);
-        return getCellAt(midX, midY);
     }
 
     /**
