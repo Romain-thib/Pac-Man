@@ -12,7 +12,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type Bonus
+ * La classe Bonus crée un type d'animated représentant les bonus dans le jeu.
  *
  * @author simon.cohet
  *

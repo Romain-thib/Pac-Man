@@ -13,7 +13,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * Le type IStateGhost
+ * La classe IStateGhost interface pour les états des fantômes
  *
  * @author shun.lembrez
  *

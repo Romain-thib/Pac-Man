@@ -16,7 +16,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 
 /**
- * Le type NearlyInvulnerableStateGhost
+ * La classe NearlyInvulnerableStateGhost représente l'état presque invulnerable d'un fantôme.
  *
  * @author simon.cohet
  *

@@ -10,7 +10,7 @@ package fr.univartois.butinfo.r304.pacman.model.animated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 
 /**
- * Le type PacmanSpeedState
+ * La classe PacmanSpeedState représente l'état de Pacman lorsqu'il a un bonus de vitesse.
  *
  * @author simon.cohet
  *

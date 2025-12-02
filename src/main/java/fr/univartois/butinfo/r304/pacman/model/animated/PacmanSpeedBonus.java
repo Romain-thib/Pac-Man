@@ -11,7 +11,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type PacmanSpeedBonus
+ * La classe PacmanSpeedBonus crée un type de bonus augmentant la vitesse de Pacman pendant un certain temps.
  *
  * @author simon.cohet
  *
@@ -20,10 +20,10 @@ import fr.univartois.butinfo.r304.pacman.view.Sprite;
 public class PacmanSpeedBonus extends Bonus {
     /**
      * Crée une nouvelle instance de PacmanSpeedBonus.
-     * @param game : la partie en cours
-     * @param xPosition : la position x du bonus
-     * @param yPosition : la position y du bonus
-     * @param sprites : Le sprite du bonus
+     * @param game la partie en cours
+     * @param xPosition la position x du bonus
+     * @param yPosition la position y du bonus
+     * @param sprites Le sprite du bonus
      */
     public PacmanSpeedBonus(PacmanGame game, double xPosition, double yPosition,
             Sprite sprites) {

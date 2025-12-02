@@ -49,7 +49,7 @@ public class SlowStateGhost implements IStateGhost{
     public void moveState(Ghost ghost, PacmanGame game) {
         IStrategyGhost strategy = ghost.getColor().getMoveStrategy();
         strategy.setSpeed(SPEED);
-        time -= 1;
+        time -= 1; 
     }
 
     /*

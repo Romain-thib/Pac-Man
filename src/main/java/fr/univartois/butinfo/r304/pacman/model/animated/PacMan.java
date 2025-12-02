@@ -17,7 +17,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
- * Le type PacMan
+ * La classe PacMan représente le personnage principal du jeu Pacman.
  *
  * @author timothee.gros
  *
@@ -51,10 +51,10 @@ public class PacMan extends AbstractAnimated{
     
     /**
      * Crée une nouvelle instance de PacMan.
-     * @param game : instance de jeu 
-     * @param xPosition : position sur l'axe horizontal
-     * @param yPosition : position sur l'axe vertical
-     * @param sprite : apparence du personnage
+     * @param game instance de jeu 
+     * @param xPosition position sur l'axe horizontal
+     * @param yPosition position sur l'axe vertical
+     * @param sprite apparence du personnage
      */
     public PacMan(PacmanGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
@@ -168,8 +168,8 @@ public class PacMan extends AbstractAnimated{
     /**
      * @return L'attribut hp de cette instance de PacMan.
      */
-    public IntegerProperty getHp() {
-        return hp;
+    public int getHp() {
+        return hp.get(); 
     }
     
     /*

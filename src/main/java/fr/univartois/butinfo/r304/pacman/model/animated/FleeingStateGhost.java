@@ -15,7 +15,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * Le type FleeingStateGhost
+ * La classe FleeingStateGhost , l'etat ou le fantôme fuit Pacman
  *
  * @author simon.cohet
  *

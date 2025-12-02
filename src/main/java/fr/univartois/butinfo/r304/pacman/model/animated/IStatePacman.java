@@ -14,7 +14,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * Le type IStatePacman
+ * La classe IStatePacman est l'interface pour l'état de Pacman
  *
  * @author romain.thibaut
  *
@@ -43,7 +43,7 @@ public interface IStatePacman {
     
     /**
      * Gêre les modifications de l'états de pac-man
-     * @param game : la partie à laquelle appliquer l'effet
+     * @param game la partie à laquelle appliquer l'effet
      */
     public void handleState(PacmanGame game);
 }

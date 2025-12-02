@@ -27,7 +27,7 @@ public class ChaseStrategyGhost implements IStrategyGhost{
 
     /**
      * Crée une nouvelle instance de ChaseStrategyGhost. 
-     * @param speed : La vitesse de déplacement, peut être négative pour fuir
+     * @param speed La vitesse de déplacement, peut être négative pour fuir
      */
     public ChaseStrategyGhost(double speed) {
         this.speed = speed;

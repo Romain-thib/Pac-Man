@@ -11,7 +11,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type InvulnerableBonus
+ * La classe InvulnerableBonus crée un type de bonus rendant Pacman invulnérable pendant un certain temps.
  *
  * @author simon.cohet
  *
@@ -20,22 +20,17 @@ import fr.univartois.butinfo.r304.pacman.view.Sprite;
 public class InvulnerableBonus extends Bonus {
     /**
      * Crée une nouvelle instance de InvulnerableBonus.
-     * @param game : La partie en cours
-     * @param xPosition : la position x du bonus
-     * @param yPosition : la position y du bonus
-     * @param sprites : le sprite du bonus
+     * @param game La partie en cours
+     * @param xPosition la position x du bonus
+     * @param yPosition la position y du bonus
+     * @param sprites le sprite du bonus
      */
     public InvulnerableBonus(PacmanGame game, double xPosition, double yPosition,
             Sprite sprites) {
         super(game, xPosition, yPosition, sprites);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.animated.Bonus#handleBonus()
-     */
-    @Override
+    @Override 
     public void handleBonus() {
         PacmanInvulnerable state = new PacmanInvulnerable();
         state.setDuree(15000);

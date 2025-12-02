@@ -35,11 +35,6 @@ public class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
      */
     private int current = 0;
     
-    /**
-     * L'attribut speed pour le fantôme
-     */
-    private double speed;
-    
     /*
      * (non-Javadoc)
      *
@@ -65,7 +60,7 @@ public class ChaseRandomCompositeStrategyGhost implements IStrategyGhost {
      */
     @Override
     public void setSpeed(double speed) {
-        this.speed = speed;
+        //
     }
 
 }
