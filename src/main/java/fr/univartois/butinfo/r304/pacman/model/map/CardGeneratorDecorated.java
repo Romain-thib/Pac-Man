@@ -76,8 +76,5 @@ public class CardGeneratorDecorated implements ICardGenerator {
         return new Cell(wall);
     }
 
-//    private Cell createPathCell() {
-//        return new Cell(spriteStore.getSprite("path"));
-//    }
 }
 
