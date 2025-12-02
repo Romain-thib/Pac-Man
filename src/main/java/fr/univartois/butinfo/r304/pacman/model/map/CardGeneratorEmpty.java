@@ -22,10 +22,10 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
  */
 @SingletonDesignPattern
 @StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.IMPLEMENTATION)
-public class CardGeneratorEmpty implements ICardGenerator {
+public final class CardGeneratorEmpty implements ICardGenerator {
 
     /**
-     * L'attribut INSTANCE...
+     * L'attribut INSTANCE contient l'unique instance de cette classe.
      */
     @Instance
     private static final CardGeneratorEmpty INSTANCE = new CardGeneratorEmpty();
