@@ -64,22 +64,12 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
      */
     private Random random = new Random();
      
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createPacman(fr.univartois.butinfo.r304.pacman.model.PacmanGame)
-     */
     @Override
     public PacMan createPacman(PacmanGame game) {
         return new PacMan(game, 0, 0, SpriteStore.getInstance().getSprite("pacman/closed", "pacman/half-open",
                 "pacman/open", "pacman/half-open"));
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createGhost(fr.univartois.butinfo.r304.pacman.model.PacmanGame)
-     */
     @Override
     public List<Ghost> createGhost(PacmanGame game) {
         List <Ghost> ghostList = new ArrayList<>();
@@ -96,11 +86,6 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
         return ghostList;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createMap()
-     */
     @Override
     public GameMap createMap(int width, int height) {
         int cellSize = SpriteStore.getInstance().getSpriteSize();
@@ -112,11 +97,6 @@ public class ConcreteFactoryPacmanGame implements IAbstractFactoryPacmanGame {
         return generator.generate(numRows, numCols);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.IAbstractFactoryPacmanGame#createGum(fr.univartois.butinfo.r304.pacman.model.PacmanGame, int, int)
-     */
     @Override
     public IAnimated createGum(PacmanGame game, int cellColumn, int cellRow) {
         Level currentLevel = game.getCurrentLevel();
