@@ -56,22 +56,12 @@ final class GameAnimation extends AnimationTimer {
         this.animatedObjects = animatedObjects;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javafx.animation.AnimationTimer#start()
-     */
     @Override
     public void start() {
         previousTimestamp = -1;
         super.start();
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javafx.animation.AnimationTimer#handle(long)
-     */
     @Override
     public void handle(long now) {
         // Lors de la première mise à jour, on se contente de conserver le timestamp.
