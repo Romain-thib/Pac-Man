@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import fr.univartois.dpprocessor.designpatterns.singleton.Instance;
+import fr.univartois.dpprocessor.designpatterns.singleton.SingletonDesignPattern;
 import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 
@@ -35,6 +37,7 @@ import javafx.scene.image.Image;
  *
  * @version 0.1.0
  */
+@SingletonDesignPattern
 public final class SpriteStore implements ISpriteStore {
 
     /**
@@ -46,7 +49,7 @@ public final class SpriteStore implements ISpriteStore {
     /**
      * L'attribut INSTANCE...
      */
-    
+    @Instance
     private static final SpriteStore INSTANCE = new SpriteStore();
     
     /**
@@ -61,6 +64,7 @@ public final class SpriteStore implements ISpriteStore {
      *
      * @return L'attribut instance de cette instance de SpriteStore.
      */
+    @Instance
     public static SpriteStore getInstance() {
         return INSTANCE;
     }
