@@ -56,54 +56,6 @@ public abstract class Bonus extends AbstractAnimated {
         super.onDestruction();
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.
-     * butinfo.r304.pacman.model.animated.Ghost)
-     */
-    @Override
-    public void onCollisionWith(Ghost other) {
-        // Les bonus ne rentrent pas en collision avec les fantômes
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.
-     * butinfo.r304.pacman.model.animated.PacGum)
-     */
-    @Override
-    public void onCollisionWith(PacGum other) {
-        // Les bonus ne rentrent pas en collision avec les pacgums
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.
-     * butinfo.r304.pacman.model.animated.MegaGum)
-     */
-    @Override
-    public void onCollisionWith(MegaGum other) {
-        // Les bonus ne rentrent pas en collision avec les megagum
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * fr.univartois.butinfo.r304.pacman.model.IAnimated#onCollisionWith(fr.univartois.
-     * butinfo.r304.pacman.model.animated.Bonus)
-     */
-    @Override
-    public void onCollisionWith(Bonus other) {
-        // Les bonus ne rentrent pas en collision avec les bonus
-    }
-
     /**
      * Gère l'effet des bonus s'ils sont mangés par pac-man.
      */
