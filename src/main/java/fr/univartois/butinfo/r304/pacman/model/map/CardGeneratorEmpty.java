@@ -8,23 +8,26 @@
 package fr.univartois.butinfo.r304.pacman.model.map;
 
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
+import fr.univartois.dpprocessor.designpatterns.singleton.Instance;
+import fr.univartois.dpprocessor.designpatterns.singleton.SingletonDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
 /**
- * Le type CardGeneratorEmpty
+ * La class CardGeneratorEmpty permet de générer une carte de jeu vide.
  *
  * @author timothee.gros
  *
  * @version 0.1.0
  */
+@SingletonDesignPattern
 @StrategyDesignPattern(strategy = ICardGenerator.class, participant = StrategyParticipant.IMPLEMENTATION)
 public class CardGeneratorEmpty implements ICardGenerator {
 
     /**
      * L'attribut INSTANCE...
      */
-    
+    @Instance
     private static final CardGeneratorEmpty INSTANCE = new CardGeneratorEmpty();
     
     /**
@@ -39,6 +42,7 @@ public class CardGeneratorEmpty implements ICardGenerator {
      *
      * @return L'attribut instance de cette instance.
      */
+    @Instance
     public static CardGeneratorEmpty getInstance() {
         return INSTANCE;
     }
