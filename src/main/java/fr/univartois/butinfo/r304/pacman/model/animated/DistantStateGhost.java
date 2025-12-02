@@ -12,7 +12,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * Le type distantStateGhost
+ * La classe distantStateGhost , l'etat ou le fantôme est distant
  *
  * @author shun.lembrez
  *

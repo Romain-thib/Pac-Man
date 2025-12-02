@@ -12,7 +12,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type PacGum
+ * La classe PacGum crée un type d'animated représentant les pacgums dans le jeu.
  *
  * @author simon.cohet
  *

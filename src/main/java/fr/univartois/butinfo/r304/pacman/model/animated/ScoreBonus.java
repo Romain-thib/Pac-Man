@@ -11,7 +11,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type ScoreBonus
+ * La classe ScoreBonus crée un type de bonus augmentant le score de Pacman.
  *
  * @author simon.cohet
  *

@@ -14,7 +14,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * Le type PacmanInvulnerable
+ * La classe PacmanInvulnerable représente l'état invulnérable de Pacman.
  *
  * @author romain.thibaut
  *

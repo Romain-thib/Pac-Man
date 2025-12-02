@@ -14,7 +14,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type MegaGum
+ * La classe MegaGum crée un type d'animated représentant les megagums dans le jeu.
  *
  * @author timothee.gros
  *

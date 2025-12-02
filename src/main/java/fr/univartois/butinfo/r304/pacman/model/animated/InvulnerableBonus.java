@@ -11,7 +11,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type InvulnerableBonus
+ * La classe InvulnerableBonus crée un type de bonus rendant Pacman invulnérable pendant un certain temps.
  *
  * @author simon.cohet
  *

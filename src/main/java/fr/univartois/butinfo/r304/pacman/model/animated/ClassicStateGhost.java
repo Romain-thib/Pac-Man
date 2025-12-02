@@ -14,7 +14,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * Le type ClassicStateGhost
+ * La classe ClassicStateGhost , l'etat classique du fantôme 
  *
  * @author shun.lembrez
  *

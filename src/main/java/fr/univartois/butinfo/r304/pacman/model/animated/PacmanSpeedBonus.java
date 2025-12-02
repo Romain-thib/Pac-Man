@@ -11,7 +11,7 @@ import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**
- * Le type PacmanSpeedBonus
+ * La classe PacmanSpeedBonus crée un type de bonus augmentant la vitesse de Pacman pendant un certain temps.
  *
  * @author simon.cohet
  *

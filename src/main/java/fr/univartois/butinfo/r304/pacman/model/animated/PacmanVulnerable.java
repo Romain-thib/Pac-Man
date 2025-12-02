@@ -14,7 +14,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * Le type PacmanVulnerable
+ * La classe PacmanVulnerable , l'etat ou pacman est vulnérable
  *
  * @author romain.thibaut
  *

@@ -16,7 +16,7 @@ import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
 
 /**
- * Le type Ghost
+ * La classe Ghost qui représente les fantômes du jeu Pacman
  *
  * @author shun.lembrez
  *

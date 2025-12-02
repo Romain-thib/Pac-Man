@@ -14,7 +14,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * Le type IStatePacman
+ * La classe IStatePacman est l'interface pour l'état de Pacman
  *
  * @author romain.thibaut
  *
