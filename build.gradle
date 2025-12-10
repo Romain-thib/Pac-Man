@@ -8,6 +8,7 @@ plugins {
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'org.sonarqube' version '7.0.1.6134'
+    id 'eclipse'
 }
 
 // La version du langage Java utilisée dans le projet.
@@ -30,6 +31,7 @@ dependencies {
 
 // Le nom de la classe contenant la méthode "main".
 application {
+	mainModule = 'fr.univartois.butinfo.r304.pacman'
     mainClass = 'fr.univartois.butinfo.r304.pacman.PacmanApplication'
 }
 
@@ -45,4 +47,11 @@ sonar {
         property 'sonar.host.url', 'https://sonarqube.univ-artois.fr'
     }
 }
+
+eclipse.classpath.file.whenMerged {
+    entries.findAll { it.properties.kind.equals('lib') }.each {
+        it.entryAttributes['module'] = 'true'
+    }
+}
+
 
