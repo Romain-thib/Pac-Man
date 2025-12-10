@@ -5,9 +5,13 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.r304.pacman.model.animated;
+package fr.univartois.butinfo.r304.pacman.model.animated.strategyghost;
 
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
+import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
+import fr.univartois.butinfo.r304.pacman.model.animated.IStateGhostMove;
+import fr.univartois.butinfo.r304.pacman.model.animated.IStrategyGhost;
+import fr.univartois.butinfo.r304.pacman.model.animated.ghoststate.DistantStateGhost;
 import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;

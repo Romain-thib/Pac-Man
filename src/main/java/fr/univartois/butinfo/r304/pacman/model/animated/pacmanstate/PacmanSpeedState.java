@@ -5,9 +5,10 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.r304.pacman.model.animated;
+package fr.univartois.butinfo.r304.pacman.model.animated.pacmanstate;
 
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
+import fr.univartois.butinfo.r304.pacman.model.animated.IStatePacman;
 
 /**
  * La classe PacmanSpeedState représente l'état de Pacman lorsqu'il a un bonus de vitesse.

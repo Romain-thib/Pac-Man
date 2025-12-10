@@ -7,11 +7,11 @@
 
 package fr.univartois.butinfo.r304.pacman.model;
 
-import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorDecorated;
-import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorEmpty;
-import fr.univartois.butinfo.r304.pacman.model.map.CardGeneratorFixed;
 import fr.univartois.butinfo.r304.pacman.model.map.GameMap;
 import fr.univartois.butinfo.r304.pacman.model.map.ICardGenerator;
+import fr.univartois.butinfo.r304.pacman.model.map.generator.CardGeneratorDecorated;
+import fr.univartois.butinfo.r304.pacman.model.map.generator.CardGeneratorEmpty;
+import fr.univartois.butinfo.r304.pacman.model.map.generator.CardGeneratorFixed;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 
 /**

@@ -11,6 +11,10 @@ import java.util.Random;
 
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
+import fr.univartois.butinfo.r304.pacman.model.animated.bonus.InvulnerableBonus;
+import fr.univartois.butinfo.r304.pacman.model.animated.bonus.PacmanSpeedBonus;
+import fr.univartois.butinfo.r304.pacman.model.animated.bonus.ScoreBonus;
+import fr.univartois.butinfo.r304.pacman.model.animated.bonus.SlowGhostBonus;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import fr.univartois.dpprocessor.designpatterns.composite.CompositeDesignPattern;
 import javafx.beans.property.BooleanProperty;

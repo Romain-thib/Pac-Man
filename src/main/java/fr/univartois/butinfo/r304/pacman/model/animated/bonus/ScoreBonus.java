@@ -5,9 +5,11 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.r304.pacman.model.animated;
+package fr.univartois.butinfo.r304.pacman.model.animated.bonus;
 
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
+import fr.univartois.butinfo.r304.pacman.model.animated.Bonus;
+import fr.univartois.butinfo.r304.pacman.model.animated.pacmanstate.ScoreBonusState;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**

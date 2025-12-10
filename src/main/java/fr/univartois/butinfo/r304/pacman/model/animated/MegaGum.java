@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
+import fr.univartois.butinfo.r304.pacman.model.animated.ghoststate.VulnerableStateGhost;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 
 /**

@@ -5,41 +5,33 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.r304.pacman.model.animated;
+package fr.univartois.butinfo.r304.pacman.model.animated.ghoststate;
 
 import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
+import fr.univartois.butinfo.r304.pacman.model.animated.Ghost;
+import fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost;
+import fr.univartois.butinfo.r304.pacman.model.animated.IStrategyGhost;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
 import fr.univartois.dpprocessor.designpatterns.state.StateDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
 
 /**
- * La classe SlowStateGhost permet de rendre les fantômes lents
+ * La classe InvulnerableStateGhost, l'etat ou le fantôme est invulnerable 
  *
  * @author shun.lembrez
  *
  * @version 0.1.0
  */
 @StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.IMPLEMENTATION)
-public class SlowStateGhost implements IStateGhost{
+public class InvulnerableStateGhost implements IStateGhost{
     
     /**
-     * L'attribut temps représente le temps que les fantôme reste lent
-     */
-    private double time = 5000;
-    
-    /**
-     * Les sprites du fantômes dans cet état
+     * Attribut spritesGhost pour geres les sprites du fantôme
      */
     private Sprite spritesGhost = null;
-    
-    /**
-     * L'attribut SPEED vitesse pour les fantôme lent
-     */
-    private static final double SPEED = 50;
-    
-    
+
     /*
      * (non-Javadoc)
      *
@@ -47,9 +39,10 @@ public class SlowStateGhost implements IStateGhost{
      */
     @Override
     public void moveState(Ghost ghost, PacmanGame game) {
+        // déplacement de bases
         IStrategyGhost strategy = ghost.getColor().getMoveStrategy();
-        strategy.setSpeed(SPEED);
-        time -= 1; 
+        strategy.setSpeed(75);
+        ghost.setStrategyGhost(strategy);
     }
 
     /*
@@ -59,8 +52,8 @@ public class SlowStateGhost implements IStateGhost{
      */
     @Override
     public IStateGhost handleCollisionWithPacman(Ghost ghost, PacmanGame game) {
-        // Rien, les famtômes sont lents mais pas mangables
-        return this;
+      //Volontairement vide, le fantôme ne peut pas être mangé
+        return this;        
     }
 
     /*
@@ -77,6 +70,7 @@ public class SlowStateGhost implements IStateGhost{
                     "ghosts/" + ghost.getColor().name().toLowerCase() + "/2");
         }
         ghost.setSprite(spritesGhost);
+        
     }
 
     /*
@@ -86,11 +80,7 @@ public class SlowStateGhost implements IStateGhost{
      */
     @Override
     public IStateGhost nextState() {
-        if (time <= 0) {
-            return new InvulnerableStateGhost();
-        } else {
-            return this;
-        }
+        return this;
     }
 
     /*
