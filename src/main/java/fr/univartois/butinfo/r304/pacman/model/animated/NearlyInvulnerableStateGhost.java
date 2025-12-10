@@ -7,7 +7,6 @@
 
 package fr.univartois.butinfo.r304.pacman.model.animated;
 
-import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
@@ -23,7 +22,7 @@ import fr.univartois.dpprocessor.designpatterns.state.StateParticipant;
  * @version 0.1.0
  */
 @StateDesignPattern(state = IStateGhost.class, participant = StateParticipant.IMPLEMENTATION)
-public class NearlyInvulnerableStateGhost implements IStateGhost {
+public class NearlyInvulnerableStateGhost extends VulnerableStateGhost {
     /**
      * L'attribut temps représente le temps restant avant de redevenir vulnerable
      */
@@ -34,32 +33,12 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
      */
     private Sprite spritesGhost = null;
     
-    /**
-     * L'attribut SPEED vitesse pour les fantôme presque invulnerable
-     */
-    private static final double SPEED = -60;
-    
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#moveState(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, long, double, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
-     */
     @Override
     public void moveState(Ghost ghost, PacmanGame game) {
-        ghost.setStrategyGhost(new ChaseStrategyGhost(SPEED));
+        super.moveState(ghost, game);
         time -= 1;
     }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#handleCollisionWithPacman(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, fr.univartois.butinfo.r304.pacman.model.PacmanGame)
-     */
-    @Override
-    public IStateGhost handleCollisionWithPacman(Ghost ghost, PacmanGame game) {
-        return new FleeingStateGhost();
-    }
-
+    
     /*
      * (non-Javadoc)
      *
@@ -82,22 +61,11 @@ public class NearlyInvulnerableStateGhost implements IStateGhost {
      */
     @Override
     public IStateGhost nextState() {
-        if (time <= 0) {
+        if (this.time <= 0) {
             return new InvulnerableStateGhost();
         } else {
             return this;
         }
     }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.r304.pacman.model.animated.IStateGhost#handleCollisionWithAnimated(fr.univartois.butinfo.r304.pacman.model.animated.Ghost, fr.univartois.butinfo.r304.pacman.model.IAnimated)
-     */
-    @Override
-    public void handleCollisionWithAnimated(Ghost ghost, IAnimated animated) {
-        //
-    }
-
 }
 
