@@ -7,6 +7,7 @@ plugins {
     id 'application'
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.sonarqube' version '7.0.1.6134'
 }
 
 // La version du langage Java utilisée dans le projet.
@@ -37,3 +38,11 @@ javafx {
     version = '21.0.1'
     modules = ['javafx.controls', 'javafx.fxml']
 }
+
+sonar {
+    properties {
+        property 'sonar.projectKey', 'pacman_SL'
+        property 'sonar.host.url', 'https://sonarqube.univ-artois.fr'
+    }
+}
+
