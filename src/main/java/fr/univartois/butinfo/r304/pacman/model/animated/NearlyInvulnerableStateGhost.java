@@ -7,7 +7,6 @@
 
 package fr.univartois.butinfo.r304.pacman.model.animated;
 
-import fr.univartois.butinfo.r304.pacman.model.IAnimated;
 import fr.univartois.butinfo.r304.pacman.model.PacmanGame;
 import fr.univartois.butinfo.r304.pacman.view.Sprite;
 import fr.univartois.butinfo.r304.pacman.view.SpriteStore;
@@ -34,6 +33,12 @@ public class NearlyInvulnerableStateGhost extends VulnerableStateGhost {
      */
     private Sprite spritesGhost = null;
     
+    @Override
+    public void moveState(Ghost ghost, PacmanGame game) {
+        super.moveState(ghost, game);
+        time -= 1;
+    }
+    
     /*
      * (non-Javadoc)
      *
@@ -56,7 +61,7 @@ public class NearlyInvulnerableStateGhost extends VulnerableStateGhost {
      */
     @Override
     public IStateGhost nextState() {
-        if (time <= 0) {
+        if (this.time <= 0) {
             return new InvulnerableStateGhost();
         } else {
             return this;
