@@ -788,7 +788,7 @@ PacmanController o-- "1" PacmanGame
 | ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
 | Correction des avertissements              |                        | oui        | Tous                                          |
 | Correction des défauts sur *SonarQube*     |                        | oui        | Tous                                          |
-| Rangement des classes en paquetages        |                        |            |                                               |
-| Modularisation du projet                   |                        |            |                                               |
+| Rangement des classes en paquetages        |                        | oui        | Tous                                          |
+| Modularisation du projet                   |                        | oui        | Shun                                          |
 _À venir..._
 
