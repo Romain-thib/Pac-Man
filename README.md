@@ -550,8 +550,6 @@ class StaticSprite {
     }
     ChaseStrategyGhost ..|> IStrategyGhost
 
-```mermaid
-classDiagram
     hide empty members
 
     class DumbStrategyGhost {
