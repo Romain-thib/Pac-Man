@@ -40,6 +40,7 @@ Reproduire le gameplay classique de Pac‑Man :
 ## Diagramme de classes
 
 ```mermaid
+classDiagram
 hide empty members
 
 %% ---------------------------------------
