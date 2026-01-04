@@ -550,8 +550,6 @@ class StaticSprite {
     }
     ChaseStrategyGhost ..|> IStrategyGhost
 
-    hide empty members
-
     class DumbStrategyGhost {
         - speed : double
         - temps : double
