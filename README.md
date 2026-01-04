@@ -206,10 +206,6 @@ class StaticSprite {
     ICardGenerator --> GameMap : "crée"
     ICardGenerator --> Cell : "crée"
 
-```mermaid
-classDiagram
-    hide empty members
-
     %% --------------------
     %% Gestion de la partie
     %% --------------------
