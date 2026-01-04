@@ -57,7 +57,7 @@ classDiagram
         + destroy() : void
     }
 
-class StaticSprite {
+    class StaticSprite {
         - StaticSprite(imageProperty : ObjectBinding<Image>)
         + newInstance(image : Image) : Sprite
         + destroy() : void
