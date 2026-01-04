@@ -43,9 +43,11 @@ Reproduire le gameplay classique de Pac‑Man :
 classDiagram
     hide empty members
 
+
     %% ---------------------------------------
     %% Gestion des images du jeu (les sprites)
     %% ---------------------------------------
+
 
     abstract class Sprite {
         - imageProperty : ObjectBinding<Image>
