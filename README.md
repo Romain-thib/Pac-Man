@@ -1,38 +1,50 @@
-# _Pac-Man_ en JavaFX
+# 🎮 Projet _Pac-Man en JavaFX
 
-## Chef de projet :
+⚠️ **Ce dépôt est une copie du projet original (GitLab privé), rendue publique à des fins de présentation dans un portfolio.**
 
-Timothée Gros
+--- 
+## Contexte du projet
 
-## Description
+Ce jeu a été développé dans le cadre d’un projet scolaire en groupe de 4 étudiants.
+Nous avons été accompagnés pour structurer notre code, organiser les classes et utiliser des patrons de conception afin d’assurer la maintenabilité et l’évolutivité du projet.
 
-Ce projet fournit une implémentation de base du jeu _Pac-Man_ en _JavaFX_.
-Pour pouvoir développer votre propre implémentation de ce projet, vous devez
-en créer une **divergence** en cliquant sur le bouton `Fork` en haut à droite
-de cette page.
+Une version exécutable .jar peut être générée pour lancer le jeu.
 
-Lorsque ce sera fait, vous pourrez inviter les membres de votre groupe en tant
-que _Developer_ pour vous permettre de travailler ensemble sur ce projet.
 
-## Consignes
+## Objectif du jeu
 
-Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
-dans le développement de votre projet :
+Reproduire le gameplay classique de Pac‑Man :
 
-- [Lancement du projet](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP03)
-- [Des patrons de conception dans *Pac-Man* (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP04)
-- [Des patrons de conception dans *Pac-Man* (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP05)
-- [Des patrons de conception dans *Pac-Man* (3)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP06)
-- [Bonnes pratiques de la POO dans le projet *Pac-Man*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP07)
+- contrôler Pac‑Man dans un labyrinthe
+- collecter toutes les pastilles
+- éviter les fantômes
+- gérer les niveaux et la difficulté croissante
+- 
+---
+
+## Stack technique
+
+- **Java**
+- **JavaFX**
+- Git (travail collaboratif)
+
+---
+
+## Travail réalisé
+
+- Développement du **backend** du jeu
+- Mise en place et utilisation de patrons de conception (ex. Strategy, Singleton…)
+- Gestion de niveaux
+- Travail en équipe sous forte de temps
 
 ## Diagramme de classes
 
-```plantuml
+```mermaid
 hide empty members
 
-' --------------------------------------- '
-' Gestion des images du jeu (les sprites) '
-' --------------------------------------- '
+%% ---------------------------------------
+%% Gestion des images du jeu (les sprites)
+%% ---------------------------------------
 
 abstract class Sprite {
     - imageProperty : ObjectBinding<Image>
@@ -82,9 +94,9 @@ class SpriteStore implements ISpriteStore {
 
 ISpriteStore --> Sprite : << crée >>
 
-' -------------------------- '
-' Gestion de la carte du jeu '
-' -------------------------- '
+%% --------------------------
+%% Gestion de la carte du jeu
+%% --------------------------
 
 class GameMap {
     - height : int
@@ -346,9 +358,9 @@ PacmanGame o-- "1" PacMan
 
 GameAnimation o-- "*" IAnimated
 
-' --------------------------------- '
-' Gestion de base des objets animés '
-' --------------------------------- '
+%% ---------------------------------
+%% Gestion de base des objets animés
+%% ---------------------------------
 
 abstract class AbstractAnimated implements IAnimated {
     - {static} MARGIN : int
@@ -702,9 +714,9 @@ ChaseRandomCompositeStrategyGhost o-- "2..*" IStrategyGhost
 GhostColor o-- "1" IStrategyGhost
 
 
-' ----------------- '
-' Contrôleur JavaFX '
-' ----------------- '
+%% ----------------- 
+%% Contrôleur JavaFX 
+%% ----------------- 
 
 class PacmanController implements IPacmanController {
     - game : PacmanGame
@@ -730,65 +742,3 @@ class PacmanController implements IPacmanController {
 
 PacmanController o-- "1" PacmanGame
 ```
-
-## Tâches réalisées
-
-### Jalon n°1 - TP n°3
-
-| Fonctionnalité                          | Terminée ? | Auteur(s)      |
-| --------------------------------------- | ---------- | -------------- |
-| Gestion des collisions spécifiques      | Oui        | Simon Cohet    |
-| Représentation des pac-gommes           | Oui        | Simon cohet    |
-| Représentation de Pac-Man               | Oui        | Timothée Gros  |
-| Intégration de Pac-Man dans la partie   | Oui        | Timothée Gros  |
-| Représentation des fantômes             | Oui        | Shun Lembrez   |
-| Intégration des fantômes dans la partie | Oui        | Shun Lembrez   |
-| Création de la carte du jeu             | Oui        | Romain Thibaut |
-| Ajout des pac-gommes sur la carte       | Oui        | Romain Thibaut |
-
-### Jalon n°2 - TP n°4
-
-| Fonctionnalité                             | Patron de Conception ?    | Terminée ? | Auteur(s) |
-| ------------------------------------------ | ------------------------- | ---------- | --------- |
-| Variantes de génération de labyrinthe      | stratégie                 | oui        | Timothée  |
-| Complétion d'un labyrinthe existant        | décorateur                | oui        | Simon     |
-| Variantes de déplacement pour les fantômes | stratégie, état, composite| oui        | Shun      |
-| Remplissage du readme pour le jalon 1      |                           | oui        | Romain    |
-
-### Jalon n°3 - TP n°5
-
-| Fonctionnalité                       | Patron de Conception ? | Terminée ? | Auteur(s) |
-| ------------------------------------ | ---------------------- | ---------- | --------- |
-| Pac-Man vulnérable                   | état                   |  oui       | romain    |
-| Pac-Man invulnérable                 | état                   |  oui       | romain    |
-| Fantômes vulnérables                 | état                   |  oui       | shun      |
-| Fantômes fuyants                     | état                   |  oui       | simon     |
-| Fantômes presque invulnérables       | état                   |  oui       | simon     |
-| Fantômes invulnérables               | état                   |  oui       | shun      |
-| Réutilisation des fantômes existants |                        |  oui       | shun      |
-| Ajout des méga-gommes                |                        |  oui       | Timothée  |
-
-### Jalon n°4 - TP n°6
-
-| Fonctionnalité                                       | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
-| ---------------------------------------------------- | ---------------------- | ---------- | --------------------------------------------- |
-| Définition d'un seul `SpriteStore`                 | Singleton              | oui        |  Timothée                                     |
-| Définition d'une seule instance quand c'est possible | Singleton              | oui        |  Timothée                                     |
-| Ajout des bonus (score)                              |                        | oui        |  Simon                                        |
-| Ajout des bonus (vitesse)                            |                        | oui        |  Simon                                        |
-| Ajout des bonus (invulnérable)                       |                        | oui        |  Simon                                        |
-| Ajout des bonus (fantomes lents)                     |                        | oui        |  Simon                                        |
-| Ajout des bonus multiples                            |                        | oui        |  Shun                                         |
-| Gestion des différents niveaux                       | AbstractFactory        | oui        |  Romain                                       |
-
-
-### Jalon n°5 - TP n°7
-
-| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
-| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
-| Correction des avertissements              |                        | oui        | Tous                                          |
-| Correction des défauts sur *SonarQube*     |                        | oui        | Tous                                          |
-| Rangement des classes en paquetages        |                        | oui        | Tous                                          |
-| Modularisation du projet                   |                        | oui        | Shun                                          |
-_À venir..._
-
